@@ -1,215 +1,1041 @@
 <!DOCTYPE html>
+<!-- 
+                    `-/osyyyyyyyssyyssoo++/:-.`                                 
+                -+yys+:-`            ``.--:/+ooyyyys+:`                         
+             :yho-                                 .:+syyo:`                    
+           /ds.                                          -+yhs:                 
+         -do`                                                .+hy/`             
+        om-                                                     `+hy-           
+      `hy`                                                         -yh:         
+     -mo                                                             `sd:       
+    -N/                                                                .yh.     
+   .N:                                                                   :m/    
+   d+                                                                     `ds   
+  oh                                                                       `dy  
+ `N-                                                                        `m/ 
+ oh                                      o                                   /N               WHAT ARE YOU LOOKING FOR HERE?
+ N/            ./:.`                    :m                                    N:                 THERE IS NOTHING FOR YOU
+-M`             /h////+os+/-.          :d-                                    d+                       JUST LEAVE
+od              /o      /NMMMMNdo/o++os+                               -+     do
+hs              `h-      `/sso:`/s+-.        .++:.                     o+     d+
+d+                +s+-`    `:+o+.              h//+++oo/:.           `oy      m/
+m+                  `:+++++/-                  o/      sMMMmhyo/:-.:os-      -M.
+N+                                              so.     /hmNNdo-./m/        `m+ 
+ds                                               `/o+:.        :so.        .mo  
+/N`                                                  .:++++++++-          -m+   
+ yy            :o                                                        +m-    
+ `do          +m`                                                      `hy`     
+  `mo        `M-        /o++/:-.`                                     /m/       
+   `m+       :M`       ++``..-:/osssss+:-`                          `yh`        
+    `do       yh.           `:/+++//:..:+ossso/-      s`           +m/          
+     `yh`      `.                   .:+o+:`   -N      y/         .dy`           
+       +m/                                     :     .d.       `om:             
+        `sd/                                       .sy.      `+d+               
+          `odo-                                  .ys-      .od+`                
+             -shs:`                              .      .+hy:                   
+                ./syy+:.                          `-+syyo-                      
+                     -+sdmhysoo+/:-.``    `.-/osyys+:`                          
+                       `m+   `.-:/++osssssso+:.`                                
+                       hy                                                       
+                      /N`                                                       
+                      h/                                                        
+-->
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.2"> <!-- Aumentamos el escalamiento inicial en 20% -->
-  <title>Calculadora de Chance</title>
-  <!-- Añadimos el favicon -->
-  <link rel="icon" href="https://www.hegalot.com/images/store/64/hegal_doll_mini.png" type="image/png">
-  <style>
-    /* Estilo para deshabilitar las flechas de incremento y decremento */
-    input[type=text] {
-      font-size: 1.2em; /* Aumentamos el tamaño de fuente del input */
-      padding: 0.5em; /* Aumentamos el padding para que sea más grande */
-      width: 200px; /* Ancho del campo de entrada */
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.2"> <!-- Aumentamos el escalamiento inicial en 20% -->
+    <title>Multitools By: Rafa</title>
+    <!-- Añadimos el favicon -->
+    <link rel="icon" href="https://www.hegalot.com/images/store/64/hegal_doll_mini.png" type="image/png">
+    <style>
+        /* Estilo para deshabilitar las flechas de incremento y decremento */
+        input[type=text] {
+            font-size: 1.2em; /* Aumentamos el tamaño de fuente del input */
+            padding: 0.5em; /* Aumentamos el padding para que sea más grande */
+            width: 200px; /* Ancho del campo de entrada */
+        }
 
-    input[type=text]:focus {
-      outline: none; /* Eliminamos el contorno al enfocar */
-      border-color: #5b9dd9; /* Cambiamos el color del borde al enfocar */
-    }
+        input[type=text]:focus {
+            outline: none; /* Eliminamos el contorno al enfocar */
+            border-color: #5b9dd9; /* Cambiamos el color del borde al enfocar */
+        }
 
-    body {
-      font-size: 1.2em; /* Aumentamos el tamaño de fuente del cuerpo */
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-position: center;
-      color: white; /* Cambiamos el color del texto para que sea legible en el fondo oscuro */
-    }
+        body {
+            font-size: 1.2em; /* Aumentamos el tamaño de fuente del cuerpo */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            color: white; /* Cambiamos el color del texto para que sea legible en el fondo oscuro */
+            padding-left: 10px; /* Desplaza todo el contenido hacia la derecha */
+        }
 
-    h2, p, button {
-      font-size: 1.2em; /* Aumentamos el tamaño de fuente de los encabezados, párrafos y botones */
-      color: white; /* Cambiamos el color del texto para que sea legible en el fondo oscuro */
-    }
-  </style>
+        h2, p, button {
+            font-size: 1.2em; /* Aumentamos el tamaño de fuente de los encabezados, párrafos y botones */
+            color: white; /* Cambiamos el color del texto para que sea legible en el fondo oscuro */
+        }
+    </style>
 </head>
 <body>
-  <h2>Calculadora de Chance <strong style="color: yellow;">( Tibioso )</strong></h2>
-  <p>Ingresa un número para obtener el porcentaje correspondiente con el chance: <strong style="color: green;">Min 1 (3%)</strong> <strong style="color: red;">Max 30 (100%)</strong></p>
-  <input type="text" id="inputNumero" inputmode="numeric" pattern="[0-9]*" placeholder="Ingrese un número" oninput="validarNumero()">
-  <p id="resultado"></p>
+    <h2> Calculadora de Chance <strong style="color: yellow;">( Tibiosa )</strong></h2>
+    <p> Ingresa un número para obtener el porcentaje correspondiente con el chance<br><strong style="color: green;"><font size="5">Min 1 (3%)</strong> <strong style="color: yellow;">Mid 15 (50%)</strong> <strong style="color: red;">Max 30 (100%)</strong></font></p>
+    <input type="text" id="inputNumero" inputmode="numeric" pattern="[0-9]*" placeholder=" Ingrese un número" oninput="validarNumero()">
+    <p id="resultado"></p>
 
-  <script>
-    // Función para seleccionar un fondo aleatorio
-    function seleccionarFondo() {
-      const fondos = [
-		'https://wallpapercave.com/wp/wp2230708.png',
-		'https://c.wallhere.com/photos/05/32/selective_coloring_black_background_dark_background_simple_background_anime_girls-2130895.jpg!d',
-		'https://c.wallhere.com/photos/fa/89/selective_coloring_dark_background_black_background_simple_background_anime_girls-2127565.jpg!d',
-		'https://c.wallhere.com/photos/de/03/selective_coloring_simple_background_dark_background_black_background_anime_girls-2128765.jpg!d',
-		'https://c.wallhere.com/photos/52/d7/black_background_simple_background_dark_background_selective_coloring_anime_girls-2129733.jpg!d',
-		'https://c.wallhere.com/photos/8e/40/mirror_window_Sleeper_colorful_fish_coat_of_mail_scarf_black_background-2106285.jpg!d',
-		'https://c.wallhere.com/photos/00/0e/selective_coloring_black_background_dark_background_simple_background_anime_girls-2130713.jpg!d',
-		'https://c.wallhere.com/photos/c3/8f/anime_girls_selective_coloring_black_background_dark_background_simple_background_Shakugan_no_Shana_Shana-2187783.jpg!d',
-		'https://c.wallhere.com/photos/8f/9a/selective_coloring_black_background_dark_background_simple_background_anime_girls_Monogatari_Series-2186281.jpg!d',
-		'https://c.wallhere.com/photos/34/7b/selective_coloring_black_background_simple_background_dark_background_anime_girls_Jigoku_Shoujo-2187201.jpg!d',
-		'https://c.wallhere.com/photos/07/41/simple_background_dark_background_black_background_selective_coloring_anime_girls-2127991.jpg!d',
-		'https://c.wallhere.com/photos/47/4d/selective_coloring_black_background_dark_background_simple_background_anime_girls_Date_A_Live_Tokisaki_Kurumi-2130903.jpg!d',
-		'https://c.wallhere.com/photos/0e/a8/black_background_monochrome_selective_coloring_anime_girls_simple_background_Oshi_no_Ko-2252946.jpg!d',
-		'https://c.wallhere.com/photos/bd/fb/s1lent_anime_Chainsaw_Man_Power_Chainsaw_Man_artwork_red_anime_girls_devil_girl-2296184.jpg!d',
-		'https://c.wallhere.com/photos/c6/c2/Jujutsu_Kaisen_Suguru_Geto_hands_low_light_smiling_earring_long_hair_simple_background-2272310.jpg!d',
-		'https://c.wallhere.com/photos/d4/e1/black_background_monochrome_selective_coloring_anime_girls_simple_background_Oshi_no_Ko-2252942.jpg!d',
-		'https://c.wallhere.com/photos/af/de/simple_background_dark_background_Frieren_Sousou_No_Frieren-2297856.jpg!d',
-		'https://c.wallhere.com/photos/f0/7f/Hunter_x_Hunter_Neferpitou_cat_ears_tail_cat_girl_simple_background_glowing_eyes_pink_eyes-2259850.jpg!d',
-		'https://c.wallhere.com/photos/4e/d9/simple_background_dark_background_Vinland_Saga_Canute-2297852.jpg!d',
-		'https://c.wallhere.com/photos/ed/d5/simple_background_dark_background_Vinland_Saga_Thorfinn-2297854.jpg!d',
-		'https://c.wallhere.com/photos/e4/b1/selective_coloring_black_background_simple_background_dark_background_anime_girls_Cyberpunk_Edgerunners_Lucy_Edgerunners-2187199.jpg!d',
-		'https://c.wallhere.com/photos/8e/49/anime_girls_selective_coloring_black_background_simple_background_dark_background-2125243.jpg!d',
-		'https://c.wallhere.com/photos/03/77/black_background_dark_background_simple_background_selective_coloring_anime_girls_Vocaloid_Hatsune_Miku-2125129.jpg!d',
-		'https://c.wallhere.com/photos/af/60/selective_coloring_black_background_dark_background_simple_background_anime_girls-2130079.jpg!d',
-		'https://c.wallhere.com/photos/ed/bc/Sukuna_Ryomen_Sukuna_Jujutsu_Kaisen_dark_background_simple_background-2302004.jpg!d',
-		'https://c.wallhere.com/photos/c2/a3/Fushiguro_Toji_Jujutsu_Kaisen_dark_dark_background_simple_background-2297050.jpg!d',
-        'https://c.wallhere.com/photos/4f/a3/Hu_Tao_Genshin_Impact_Genshin_Impact_simple_background_dark_background_dark-2302104.jpg!d'
-      ];
+    <script>
+        // Función para seleccionar un fondo aleatorio
+        function seleccionarFondo() {
+            const fondos = [
+                'https://wallpapercave.com/wp/wp2230708.png',
+                'https://c.wallhere.com/photos/05/32/selective_coloring_black_background_dark_background_simple_background_anime_girls-2130895.jpg!d',
+                'https://c.wallhere.com/photos/fa/89/selective_coloring_dark_background_black_background_simple_background_anime_girls-2127565.jpg!d',
+                'https://c.wallhere.com/photos/de/03/selective_coloring_simple_background_dark_background_black_background_anime_girls-2128765.jpg!d',
+                'https://c.wallhere.com/photos/52/d7/black_background_simple_background_dark_background_selective_coloring_anime_girls-2129733.jpg!d',
+                'https://c.wallhere.com/photos/8e/40/mirror_window_Sleeper_colorful_fish_coat_of_mail_scarf_black_background-2106285.jpg!d',
+                'https://c.wallhere.com/photos/00/0e/selective_coloring_black_background_dark_background_simple_background_anime_girls-2130713.jpg!d',
+                'https://c.wallhere.com/photos/c3/8f/anime_girls_selective_coloring_black_background_dark_background_simple_background_Shakugan_no_Shana_Shana-2187783.jpg!d',
+                'https://c.wallhere.com/photos/8f/9a/selective_coloring_black_background_dark_background_simple_background_anime_girls_Monogatari_Series-2186281.jpg!d',
+                'https://c.wallhere.com/photos/34/7b/selective_coloring_black_background_simple_background_dark_background_anime_girls_Jigoku_Shoujo-2187201.jpg!d',
+                'https://c.wallhere.com/photos/07/41/simple_background_dark_background_black_background_selective_coloring_anime_girls-2127991.jpg!d',
+                'https://c.wallhere.com/photos/47/4d/selective_coloring_black_background_dark_background_simple_background_anime_girls_Date_A_Live_Tokisaki_Kurumi-2130903.jpg!d',
+                'https://c.wallhere.com/photos/0e/a8/black_background_monochrome_selective_coloring_anime_girls_simple_background_Oshi_no_Ko-2252946.jpg!d',
+                'https://c.wallhere.com/photos/bd/fb/s1lent_anime_Chainsaw_Man_Power_Chainsaw_Man_artwork_red_anime_girls_devil_girl-2296184.jpg!d',
+                'https://c.wallhere.com/photos/c6/c2/Jujutsu_Kaisen_Suguru_Geto_hands_low_light_smiling_earring_long_hair_simple_background-2272310.jpg!d',
+                'https://c.wallhere.com/photos/d4/e1/black_background_monochrome_selective_coloring_anime_girls_simple_background_Oshi_no_Ko-2252942.jpg!d',
+                'https://c.wallhere.com/photos/af/de/simple_background_dark_background_Frieren_Sousou_No_Frieren-2297856.jpg!d',
+                'https://c.wallhere.com/photos/f0/7f/Hunter_x_Hunter_Neferpitou_cat_ears_tail_cat_girl_simple_background_glowing_eyes_pink_eyes-2259850.jpg!d',
+                'https://c.wallhere.com/photos/4e/d9/simple_background_dark_background_Vinland_Saga_Canute-2297852.jpg!d',
+                'https://c.wallhere.com/photos/ed/d5/simple_background_dark_background_Vinland_Saga_Thorfinn-2297854.jpg!d',
+                'https://c.wallhere.com/photos/e4/b1/selective_coloring_black_background_simple_background_dark_background_anime_girls_Cyberpunk_Edgerunners_Lucy_Edgerunners-2187199.jpg!d',
+                'https://c.wallhere.com/photos/8e/49/anime_girls_selective_coloring_black_background_simple_background_dark_background-2125243.jpg!d',
+                'https://c.wallhere.com/photos/03/77/black_background_dark_background_simple_background_selective_coloring_anime_girls_Vocaloid_Hatsune_Miku-2125129.jpg!d',
+                'https://c.wallhere.com/photos/af/60/selective_coloring_black_background_dark_background_simple_background_anime_girls-2130079.jpg!d',
+                'https://c.wallhere.com/photos/ed/bc/Sukuna_Ryomen_Sukuna_Jujutsu_Kaisen_dark_background_simple_background-2302004.jpg!d',
+                'https://c.wallhere.com/photos/c2/a3/Fushiguro_Toji_Jujutsu_Kaisen_dark_dark_background_simple_background-2297050.jpg!d',
+                'https://c.wallhere.com/photos/4f/a3/Hu_Tao_Genshin_Impact_Genshin_Impact_simple_background_dark_background_dark-2302104.jpg!d'
+            ];
 
-      // Seleccionar un fondo aleatorio
-      const fondoAleatorio = fondos[Math.floor(Math.random() * fondos.length)];
-      document.body.style.backgroundImage = `url('${fondoAleatorio}')`;
-    }
-
-    // Llamar a la función para seleccionar un fondo cuando la página se carga
-    window.onload = function() {
-      seleccionarFondo();
-    };
-
-    // Función para validar que solo se ingresen números
-    function validarNumero() {
-      let input = document.getElementById('inputNumero');
-      let value = input.value;
-
-      // Remover caracteres no numéricos
-      input.value = value.replace(/\D/g, '');
-
-      // Llamar a la función para calcular el porcentaje
-      calcularPorcentaje();
-    }
-
-    // Función que calcula el porcentaje
-    function calcularPorcentaje() {
-      // Obtener el valor del input
-      let numero = document.getElementById('inputNumero').value.trim(); // Eliminamos espacios en blanco al inicio y al final
-
-      let porcentaje;
-
-      if (numero === '') {
-        // Si el campo está vacío
-        porcentaje = ''; // No muestra ningún mensaje
-      } else if (/^\d+$/.test(numero)) {
-        // Si el valor es un número válido
-        switch (parseInt(numero)) {
-          case 1:
-            porcentaje = '3.33%';
-            break;
-          case 2:
-            porcentaje = '6.67%';
-            break;
-          case 3:
-            porcentaje = '10%';
-            break;
-          case 4:
-            porcentaje = '13.33%';
-            break;
-          case 5:
-            porcentaje = '16.67%';
-            break;
-          case 6:
-            porcentaje = '20%';
-            break;
-          case 7:
-            porcentaje = '23.33%';
-            break;
-          case 8:
-            porcentaje = '26.67%';
-            break;
-          case 9:
-            porcentaje = '30%';
-            break;
-          case 10:
-            porcentaje = '31.67%';
-            break;
-          case 11:
-            porcentaje = '35%';
-            break;
-          case 12:
-            porcentaje = '40%';
-            break;
-          case 13:
-            porcentaje = '43.33%';
-            break;
-          case 14:
-            porcentaje = '46.67%';
-            break;
-          case 15:
-            porcentaje = '50%';
-            break;
-          case 16:
-            porcentaje = '53.33%';
-            break;
-          case 17:
-            porcentaje = '56.67%';
-            break;
-          case 18:
-            porcentaje = '60%';
-            break;
-          case 19:
-            porcentaje = '63.33%';
-            break;
-          case 20:
-            porcentaje = '66.67%';
-            break;
-          case 21:
-            porcentaje = '70%';
-            break;
-          case 22:
-            porcentaje = '73.33%';
-            break;
-          case 23:
-            porcentaje = '76.67%';
-            break;
-          case 24:
-            porcentaje = '80%';
-            break;
-          case 25:
-            porcentaje = '83.33%';
-            break;
-          case 26:
-            porcentaje = '86.67%';
-            break;
-          case 27:
-            porcentaje = '90%';
-            break;
-          case 28:
-            porcentaje = '93.33%';
-            break;
-          case 29:
-            porcentaje = '96.67%';
-            break;
-          case 30:
-            porcentaje = '100%';
-            break;
-          default:
-            porcentaje = 'Chamoy';
-            break;
+            // Seleccionar un fondo aleatorio
+            const fondoAleatorio = fondos[Math.floor(Math.random() * fondos.length)];
+            document.body.style.backgroundImage = `url('${fondoAleatorio}')`;
         }
-      } else {
-        // Si el valor no es un número válido
-        porcentaje = ''; // No muestra ningún mensaje
-      }
 
-      // Mostrar el resultado en el párrafo 'resultado'
-      document.getElementById('resultado').innerHTML = porcentaje === '' ? '' : `El porcentaje correspondiente es:<strong style="color: red;"> ${porcentaje}</strong>`;
-    }
-  </script>
+        // Llamar a la función para seleccionar un fondo cuando la página se carga
+        window.onload = function() {
+            seleccionarFondo();
+        };
+
+        // Función para validar que solo se ingresen números
+        function validarNumero() {
+            let input = document.getElementById('inputNumero');
+            let value = input.value;
+
+            // Remover caracteres no numéricos
+            input.value = value.replace(/\D/g, '');
+
+            // Llamar a la función para calcular el porcentaje
+            calcularPorcentaje();
+        }
+
+        // Función que calcula el porcentaje
+        function calcularPorcentaje() {
+            // Obtener el valor del input
+            let numero = document.getElementById('inputNumero').value.trim(); // Eliminamos espacios en blanco al inicio y al final
+
+            let porcentaje;
+
+            if (numero === '') {
+                // Si el campo está vacío
+                porcentaje = ''; // No muestra ningún mensaje
+            } else if (/^\d+$/.test(numero)) {
+                // Si el valor es un número válido
+                switch (parseInt(numero)) {
+                    case 1:
+                        porcentaje = '3.33%';
+                        break;
+                    case 2:
+                        porcentaje = '6.67%';
+                        break;
+                    case 3:
+                        porcentaje = '10%';
+                        break;
+                    case 4:
+                        porcentaje = '13.33%';
+                        break;
+                    case 5:
+                        porcentaje = '16.67%';
+                        break;
+                    case 6:
+                        porcentaje = '20%';
+                        break;
+                    case 7:
+                        porcentaje = '23.33%';
+                        break;
+                    case 8:
+                        porcentaje = '26.67%';
+                        break;
+                    case 9:
+                        porcentaje = '30%';
+                        break;
+                    case 10:
+                        porcentaje = '31.67%';
+                        break;
+                    case 11:
+                        porcentaje = '35%';
+                        break;
+                    case 12:
+                        porcentaje = '40%';
+                        break;
+                    case 13:
+                        porcentaje = '43.33%';
+                        break;
+                    case 14:
+                        porcentaje = '46.67%';
+                        break;
+                    case 15:
+                        porcentaje = '50%';
+                        break;
+                    case 16:
+                        porcentaje = '53.33%';
+                        break;
+                    case 17:
+                        porcentaje = '56.67%';
+                        break;
+                    case 18:
+                        porcentaje = '60%';
+                        break;
+                    case 19:
+                        porcentaje = '63.33%';
+                        break;
+                    case 20:
+                        porcentaje = '66.67%';
+                        break;
+                    case 21:
+                        porcentaje = '70%';
+                        break;
+                    case 22:
+                        porcentaje = '73.33%';
+                        break;
+                    case 23:
+                        porcentaje = '76.67%';
+                        break;
+                    case 24:
+                        porcentaje = '80%';
+                        break;
+                    case 25:
+                        porcentaje = '83.33%';
+                        break;
+                    case 26:
+                        porcentaje = '86.67%';
+                        break;
+                    case 27:
+                        porcentaje = '90%';
+                        break;
+                    case 28:
+                        porcentaje = '93.33%';
+                        break;
+                    case 29:
+                        porcentaje = '96.67%';
+                        break;
+                    case 30:
+                        porcentaje = '100%';
+                        break;
+                    default:
+                        porcentaje = 'Chamoy';
+                        break;
+                }
+            } else {
+                // Si el valor no es un número válido
+                porcentaje = ''; // No muestra ningún mensaje
+            }
+
+            // Mostrar el resultado en el párrafo 'resultado'
+            document.getElementById('resultado').innerHTML = porcentaje === '' ? '' : `El porcentaje correspondiente es:<strong style="color: red;"> ${porcentaje}</strong>`;
+        }
+    </script>
+
+</head>
+<body>
+</head>
+<body>
+    <!-- Botones para abrir los cuadros -->
+    <a id="open-btn1"></a>
+    <a id="open-btn2"></a>
+
+    <!-- Primer cuadro que cubre toda la pantalla -->
+    <div class="overlay" id="overlay1">
+        <div class="overlay-content">
+<body>
+ <div class="gif-body">
+    <div class="gif-container">
+		
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/3/3f/Blood_Effect.gif/revision/latest?cb=20150130131025&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_DRAWBLOOD</div><div class="gif-number">1</div>
+        </div>
+		
+		
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/d/d6/Ripple_Effect.gif/revision/latest?cb=20150130131218&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_LOSEENERGY</div><div class="gif-number">2</div>
+        </div>
+		
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/0/04/Poof_Effect.gif/revision/latest?cb=20150130131350&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_POFF</div><div class="gif-number">3</div>
+        </div>		
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/4/43/Sparks_Effect.gif/revision/latest?cb=20150130131603&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_BLOCKHIT</div><div class="gif-number">4</div>
+        </div>	
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/7/78/Explosion_Effect.gif/revision/latest?cb=20150130131805&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_EXPLOSIONAREA</div><div class="gif-number">5</div>
+        </div>	
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/3/32/Blast_Effect.gif/revision/latest?cb=20150130134931&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_EXPLOSIONHIT</div><div class="gif-number">6</div>
+        </div>	
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/0/05/Fireball_Effect.gif/revision/latest?cb=20150130133027&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_FIREAREA</div><div class="gif-number">7</div>
+        </div>	
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/b/ba/Yellow_Poison_Effect.gif/revision/latest?cb=20150130134931&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_YELLOW_RINGS</div><div class="gif-number">8</div>
+        </div>	
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/6/65/Poison_Effect_1.gif/revision/latest?cb=20150130134932&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_GREEN_RINGS</div><div class="gif-number">9</div>
+        </div>	
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/c/cf/Trembling_Effect.gif/revision/latest?cb=20150130134932&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_HITAREA</div><div class="gif-number">10</div>
+        </div>	
+		
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/d/da/Teleport_Effect.gif/revision/latest?cb=20140917205228&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_TELEPORT</div><div class="gif-number">11</div>
+        </div>	
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/6/60/Blue_Electricity_Effect.gif/revision/latest?cb=20150130134933&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_ENERGYHIT</div><div class="gif-number">12</div>
+        </div>	
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/b/b1/Blue_Sparkles_Effect.gif/revision/latest?cb=20150130185244&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_MAGIC_BLUE</div><div class="gif-number">13</div>
+        </div>	
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/8/87/Red_Sparkles_Effect.gif/revision/latest?cb=20150130185416&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_MAGIC_RED</div><div class="gif-number">14</div>
+        </div>	
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/0/04/Green_Sparkles_Effect.gif/revision/latest?cb=20150130185712&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_MAGIC_GREEN</div><div class="gif-number">15</div>
+        </div>	
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/6/6b/Fire_Effect.gif/revision/latest?cb=20150130201241&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_HITBYFIRE</div><div class="gif-number">16</div>
+        </div>	
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/0/06/Poison_Effect_2.gif/revision/latest?cb=20150130201242&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_HITBYPOISON</div><div class="gif-number">17</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/5/5c/Death_Effect.gif/revision/latest?cb=20150130201241&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_MORTAREA</div><div class="gif-number">18</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/1/18/Green_Notes_Effect.gif/revision/latest?cb=20150130201242&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_SOUND_GREEN</div><div class="gif-number">19</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/4/43/Red_Notes_Effect.gif/revision/latest?cb=20150130201243&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_SOUND_RED</div><div class="gif-number">20</div>
+        </div>
+		
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/2/27/Poison_Effect_3.gif/revision/latest?cb=20150130201242&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_POISONAREA</div><div class="gif-number">21</div>
+        </div>		
+		
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/e/ed/Yellow_Notes_Effect.gif/revision/latest?cb=20150130201244&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_SOUND_YELLOW</div><div class="gif-number">22</div>
+        </div>		
+			
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/2/29/Purple_Notes_Effect.gif/revision/latest?cb=20150130201243&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_SOUND_PURPLE</div><div class="gif-number">23</div>
+        </div>		
+		
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/b/b0/Blue_Notes_Effect.gif/revision/latest?cb=20150130201240&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_SOUND_BLUE</div><div class="gif-number">24</div>
+        </div>		
+		
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/4/41/White_Notes_Effect.gif/revision/latest?cb=20150130201243&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_SOUND_WHITE</div><div class="gif-number">25</div>
+        </div>		
+		
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/6/69/Bubbles_Effect.gif/revision/latest?cb=20150130201241&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_BUBBLES</div><div class="gif-number">26</div>
+        </div>		
+		
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/8/87/Die_Effect.gif/revision/latest?cb=20150130205906&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_CRAPS</div><div class="gif-number">27</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/8/82/Confetti_Effect.gif/revision/latest?cb=20150130205906&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_GIFT_WRAPS</div><div class="gif-number">28</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/4/42/Yellow_Confetti_Effect.gif/revision/latest?cb=20150130205908&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_FIREWORK_YELLOW</div><div class="gif-number">29</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/b/be/Red_Confetti_Effect.gif/revision/latest?cb=20150130205907&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_FIREWORK_RED</div><div class="gif-number">30</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/6/65/Blue_Confetti_Effect.gif/revision/latest?cb=20150130205906&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_FIREWORK_BLUE</div><div class="gif-number">31</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/e/e7/Stars_Effect.gif/revision/latest?cb=20150130205908&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_STUN</div><div class="gif-number">32</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/1/1b/Snoring_Effect.gif/revision/latest?cb=20150130205907&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_SLEEP</div><div class="gif-number">33</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/b/b4/Sea_Serpent_Effect.gif/revision/latest?cb=20181024204039&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_WATERCREATURE</div><div class="gif-number">34</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/b/b1/Dust_Effect.gif/revision/latest?cb=20150130211626&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_GROUNDSHAKER</div><div class="gif-number">35</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/7/7f/Hearts_Effect.gif/revision/latest?cb=20150130211627&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_HEARTS</div><div class="gif-number">36</div>
+        </div>
+		
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/7/75/Flame_Effect.gif/revision/latest?cb=20150130220610&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_FIREATTACK</div><div class="gif-number">37</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/c/c8/Energy_Effect.gif/revision/latest?cb=20150130220613&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_ENERGYAREA</div><div class="gif-number">38</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/b/bd/Cloud_Effect.gif/revision/latest?cb=20150131111012&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_SMALLCLOUDS</div><div class="gif-number">39</div>
+        </div>
+
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/1/11/Holy_Effect.gif/revision/latest?cb=20150131111012&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_HOLYDAMAGE</div><div class="gif-number">40</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/2/2a/Thunderstorm_Effect.gif/revision/latest?cb=20171019114007&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_BIGCLOUDS</div><div class="gif-number">41</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/7/79/Icicle_Effect.gif/revision/latest?cb=20150131111013&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_ICEAREA</div><div class="gif-number">42</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/f/f7/Ice_Tornado_Effect.gif/revision/latest?cb=20231223130932&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_ICETORNADO</div><div class="gif-number">43</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/2/23/Ice_Explosion_Effect.gif/revision/latest?cb=20150131111012&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_ICEATTACK</div><div class="gif-number">44</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/3/37/Stone_Shower_Effect.gif/revision/latest?cb=20150131111014&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_STONES</div><div class="gif-number">45</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/7/7e/Plant_Effect.gif/revision/latest?cb=20171019141743&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_SMALLPLANTS</div><div class="gif-number">46</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/9/91/Carnivorous_Plant_Effect.gif/revision/latest?cb=20150131193616&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_CARNIPHILA</div><div class="gif-number">47</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/0/07/Purple_Electricity_Effect.gif/revision/latest?cb=20231121193112&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_PURPLEENERGY</div><div class="gif-number">48</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/2/21/Yellow_Electricity_Effect.gif/revision/latest?cb=20150131193621&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_YELLOWENERGY</div><div class="gif-number">49</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/3/33/Holy_Cross_Effect.gif/revision/latest?cb=20150131193617&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_HOLYAREA</div><div class="gif-number">50</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/5/5f/Large_Plant_Effect.gif/revision/latest?cb=20190508175352&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_BIGPLANTS</div><div class="gif-number">51</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/7/7f/Cream_Cake_Effect.gif/revision/latest?cb=20150131193617&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_CAKE</div><div class="gif-number">52</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/c/c5/Ice_Crystal_Effect.gif/revision/latest?cb=20190508174849&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_GIANTICE</div><div class="gif-number">53</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/c/c4/Water_Splash_Effect.gif/revision/latest?cb=20150131193621&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_WATERSPLASH</div><div class="gif-number">54</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/a/a6/Slicing_Plant_Effect.gif/revision/latest?cb=20150131193619&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_PLANTATTACK</div><div class="gif-number">55</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/a/aa/Tutorial_Arrow_Effect.gif/revision/latest?cb=20190502015525&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_TUTORIALARROW</div><div class="gif-number">56</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/1/14/Tile_Highlight_Effect.gif/revision/latest?cb=20190502015717&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_TUTORIALSQUARE</div><div class="gif-number">57</div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/1/17/Demon_Mirror_Effect.gif/revision/latest?cb=20190502020342&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_MIRRORHORIZONTAL</div><div class="gif-number">58</div>
+        </div>		
+		
+        <div class="gif-box">
+            <img src="https://static.wikia.nocookie.net/tibia/images/1/17/Demon_Mirror_Effect.gif/revision/latest?cb=20190502020342&path-prefix=en&format=original" >
+            <div class="gif-dialog">CONST_ME_MIRRORVERTICAL</div><div class="gif-number">59</div>
+        </div>		
+
+		<div class="gif-box"> 
+			<img src="link" >
+            <div class="gif-dialog">effect</div><div class="gif-number">60</div>
+         </div>
+
+		<div class="gif-box"> 
+			<img src="link" >
+            <div class="gif-dialog">effect</div><div class="gif-number">61</div>
+         </div>
+
+		<div class="gif-box"> 
+			<img src="link" >
+            <div class="gif-dialog">effect</div><div class="gif-number">62</div>
+         </div>
+
+		<div class="gif-box"> 
+			<img src="link" >
+            <div class="gif-dialog">effect</div><div class="gif-number">63</div>
+         </div>
+
+		<div class="gif-box"> 
+			<img src="link" >
+            <div class="gif-dialog">effect</div><div class="gif-number">64</div>
+         </div>
+
+		<div class="gif-box"> 
+			<img src="link" >
+            <div class="gif-dialog">effect</div><div class="gif-number">65</div>
+         </div>
+
+		<div class="gif-box"> 
+			<img src="link" >
+            <div class="gif-dialog">effect</div><div class="gif-number">66</div>
+         </div>
+
+		<div class="gif-box"> 
+			<img src="link" >
+            <div class="gif-dialog">effect</div><div class="gif-number">67</div>
+         </div>
+
+		<div class="gif-box"> 
+			<img src="link" >
+            <div class="gif-dialog">effect</div><div class="gif-number">68</div>
+         </div>
+
+		<div class="gif-box"> 
+			<img src="link" >
+            <div class="gif-dialog">effect</div><div class="gif-number">69</div>
+         </div>
+
+		<div class="gif-box"> 
+			<img src="link" >
+            <div class="gif-dialog">effect</div><div class="gif-number">70</div>
+         </div>
+
+		<div class="gif-box"> 
+			<img src="link" >
+            <div class="gif-dialog">effect</div><div class="gif-number">71</div>
+         </div>
+
+		<div class="gif-box"> 
+			<img src="link" >
+            <div class="gif-dialog">effect</div><div class="gif-number">72</div>
+         </div>
+
+		<div class="gif-box"> 
+			<img src="link" >
+            <div class="gif-dialog">effect</div><div class="gif-number">73</div>
+         </div>
+
+		<div class="gif-box"> 
+			<img src="link" >
+            <div class="gif-dialog">effect</div><div class="gif-number">74</div>
+         </div>
+
+		<div class="gif-box"> 
+			<img src="link" >
+            <div class="gif-dialog">effect</div><div class="gif-number">75</div>
+         </div>
+
+		<div class="gif-box"> 
+			<img src="link" >
+            <div class="gif-dialog">effect</div><div class="gif-number">76</div>
+         </div>
+
+		<div class="gif-box"> 
+			<img src="link" >
+            <div class="gif-dialog">effect</div><div class="gif-number">77</div>
+         </div>
+
+		<div class="gif-box"> 
+			<img src="link" >
+            <div class="gif-dialog">effect</div><div class="gif-number">78</div>
+         </div>
+
+		<div class="gif-box"> 
+			<img src="link" >
+            <div class="gif-dialog">effect</div><div class="gif-number">79</div>
+         </div>
+
+		<div class="gif-box"> 
+			<img src="link" >
+            <div class="gif-dialog">effect</div><div class="gif-number">158</div>
+         </div>
+
+		<div class="gif-box"> 
+			<img src="link" >
+            <div class="gif-dialog">effect</div><div class="gif-number">167</div>
+         </div>
+
+		<div class="gif-box"> 
+			<img src="link" >
+            <div class="gif-dialog">effect</div><div class="gif-number">168</div>
+         </div>
+
+		<div class="gif-box"> 
+			<img src="link" >
+            <div class="gif-dialog">effect</div><div class="gif-number">169</div>
+         </div>
+
+		<div class="gif-box"> 
+			<img src="link" >
+            <div class="gif-dialog">effect</div><div class="gif-number">170</div>
+         </div>
+
+        <!-- 
+	
+		<div class="gif-box"> 
+			<img src="link" >
+            <div class="gif-dialog">effect</div><div class="gif-number">17</div>
+         </div>
+
+		 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		</div>
+	</div>
+</body>
+	<button class="close-btn" id="close-btn1">
+		<img src="https://static.wikia.nocookie.net/tibia/images/f/f7/Rope.gif/revision/latest?cb=20061212181249&path-prefix=en&format=original">
+	</button>
+        </div>
+    </div>
+
+    <!-- Segundo cuadro que cubre toda la pantalla -->
+    <div class="overlay" id="overlay2">
+        <div class="overlay-content">
+            <div class="overlay-text">
+                <p>chamoy12121212121</p>
+            </div>
+	<button class="close-btn" id="close-btn2">
+		<img src="https://static.wikia.nocookie.net/tibia/images/f/f7/Rope.gif/revision/latest?cb=20061212181249&path-prefix=en&format=original">
+	</button>
+        </div>
+    </div>
+
+    <!-- Botones fijos -->
+    <div class="fixed-buttons">
+        <a href="#" id="fixed-open-btn1">
+            <img src="https://otland.net/proxy.php?image=http%3A%2F%2Fi.giphy.com%2F3o85xpmjBuyhLVrEWY.gif&hash=edf064e4c31ff0e2d1b3fd9471045ccf" alt="Effects">
+            <span>Effects</span>
+        </a>
+        <a href="#" id="fixed-open-btn2">
+            <img src="https://static.wikia.nocookie.net/tibia/images/0/03/Throwing_Knife_Missile.gif/revision/latest?cb=20180903191826&path-prefix=en&format=original" alt="Missiles">
+            <span>Missiles</span>
+        </a>
+    </div>
+
+    <script>
+        // Funciones para manejar los cuadros de superposición
+        function showOverlay(overlayId) {
+            const overlay = document.getElementById(overlayId);
+            overlay.style.display = 'flex';
+            overlay.style.justifyContent = 'center'; // Centra verticalmente el contenido
+            overlay.style.alignItems = 'center'; // Centra horizontalmente el contenido
+        }
+
+        function hideOverlay(overlayId) {
+            const overlay = document.getElementById(overlayId);
+            overlay.style.display = 'none';
+        }
+
+        // Obtén los elementos del DOM para los botones iniciales
+        const openBtn1 = document.getElementById('open-btn1');
+        const closeBtn1 = document.getElementById('close-btn1');
+        const openBtn2 = document.getElementById('open-btn2');
+        const closeBtn2 = document.getElementById('close-btn2');
+
+        // Asigna los eventos de clic para los botones iniciales
+        openBtn1.addEventListener('click', () => showOverlay('overlay1'));
+        closeBtn1.addEventListener('click', () => hideOverlay('overlay1'));
+        openBtn2.addEventListener('click', () => showOverlay('overlay2'));
+        closeBtn2.addEventListener('click', () => hideOverlay('overlay2'));
+
+        // Asigna los eventos de clic para los botones fijos
+        const fixedOpenBtn1 = document.getElementById('fixed-open-btn1');
+        const fixedOpenBtn2 = document.getElementById('fixed-open-btn2');
+
+        fixedOpenBtn1.addEventListener('click', (e) => {
+            e.preventDefault(); // Previene el comportamiento por defecto del enlace
+            showOverlay('overlay1');
+        });
+
+        fixedOpenBtn2.addEventListener('click', (e) => {
+            e.preventDefault(); // Previene el comportamiento por defecto del enlace
+            showOverlay('overlay2');
+        });
+    </script>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+    <style>
+        .gif-body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Cambiado de height a min-height */
+            margin: 0;
+        }
+
+        .gif-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center; /* Centra los elementos horizontalmente */
+            align-items: flex-start; /* Alinea los elementos en la parte superior */
+            padding-top: 40px; /* Espacio desde la parte superior */
+            height: 100vh; /* Ajusta la altura según sea necesario */
+            box-sizing: border-box; /* Incluye padding en el cálculo de altura */
+        }
+
+        .gif-box {
+			position: relative; /* Necesario para que el texto se posicione absolutamente dentro del contenedor */
+			width: 295px; /* Ancho fijo */
+			height: 80px; /* Altura fija para asegurar tamaño uniforme */
+			padding: 20px;
+			border: 1px solid #ccc;
+			background-color: #202020; /* Fondo oscuro */
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			overflow: hidden; /* Asegura que el contenido no sobresalga del cuadro */
+			display: flex;
+			flex-direction: column;
+			align-items: center; /* Centra el contenido horizontalmente */
+			justify-content: center; /* Centra el contenido verticalmente */
+			border-radius: 10px; /* Esquinas redondeadas */
+        }
+
+        .gif-number {
+            position: absolute;
+            top: 10px; /* Distancia desde el borde superior */
+            left: 10px; /* Distancia desde el borde izquierdo */
+            background-color: #ADD8E6; /* Fondo para mayor visibilidad */
+            padding: 2px 5px;
+            border-radius: 5px;
+            color: black; /* Color del número */
+            font-weight: bold;
+            font-size: 16px; /* Ajusta el tamaño del número si es necesario */
+            z-index: 10; /* Asegura que el número esté encima del contenido */
+        }
+
+        .gif-box img {
+			max-width: 100%;
+			height: auto;
+			margin-bottom: 50px; /* Espacio entre la imagen y el texto */
+        }
+
+        .gif-dialog {
+			position: absolute; /* Posiciona el texto en la parte inferior del contenedor */
+			bottom: 30px; /* Distancia fija desde el borde inferior */
+			width: calc(100% - 40px); /* Ajusta el ancho para tener en cuenta el padding */
+			text-align: center;
+			color: #008000; /* Color verde para el texto */
+			text-shadow: 
+			1px 1px 0 #000000, 
+			-1px -1px 0 #000000,
+			1px -1px 0 #000000,
+			-1px 1px 0 #000000; /* Borde negro alrededor del texto */
+		}
+		
+		
+		
+		
+        /* Estilos para el cuadro que cubre toda la pantalla */
+.overlay {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 110%;
+    background-color: rgba(0, 0, 0, 1); /* Fondo negro sólido */
+    z-index: 1000; /* Asegura que el overlay esté encima de otros elementos */
+    text-align: center; /* Centra el contenido */
+    overflow: hidden; /* Oculta la barra de desplazamiento */
+}
+
+.overlay-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-height: 90%; /* Altura máxima del contenido */
+    margin: 20px auto; /* Asegura que haya espacio en la parte superior e inferior */
+    padding: 20px; /* Espaciado interno del contenido del modal */
+    color: white; /* Color de texto blanco */
+    overflow-y: auto; /* Permite scroll vertical si el contenido excede el tamaño */
+    scrollbar-width: none; /* Oculta la barra de desplazamiento en navegadores que no son WebKit */
+    -ms-overflow-style: none; /* Oculta la barra de desplazamiento en Internet Explorer 10+ */
+}
+
+.overlay-content::-webkit-scrollbar {
+    display: none; /* Oculta la barra de desplazamiento en navegadores WebKit (Chrome, Safari, etc.) */
+}
+
+/* Esto es para navegadores que no son WebKit (Firefox, Edge, etc.) */
+.overlay-content {
+    scrollbar-width: none; /* Oculta la barra de desplazamiento en navegadores que no son WebKit */
+    -ms-overflow-style: none; /* Oculta la barra de desplazamiento en Internet Explorer 10+ */
+}
+
+.overlay-content {
+    /* Esto es para navegadores que no son webkit (Firefox, Edge, etc.) */
+    scrollbar-width: none; /* Oculta la barra de desplazamiento en navegadores que no son webkit */
+    -ms-overflow-style: none; /* Oculta la barra de desplazamiento en Internet Explorer 10+ */
+}
+
+.close-btn {
+    position: fixed;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0px; /* Ajusta el padding según sea necesario */
+    top: -27px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.close-btn img {
+    margin-right: 10px; /* Ajusta el margen entre el icono y el texto */
+    vertical-align: middle; /* Centra verticalmente el icono con el texto */
+    width: 100px; /* Ajusta el ancho de la imagen según sea necesario */
+    height: 100px; /* Ajusta la altura de la imagen según sea necesario */
+}
+        /* Estilos para el texto */
+        .overlay-text {
+            font-size: 24px;
+            margin-bottom: 509px; /* Espacio abajo del texto */
+        }
+
+	.close-text {
+		color: red; /* Color de texto rojo */
+		font-weight: bold; /* Texto en negrita */
+		margin-right: 10px; /* Ajusta el margen entre el texto y la imagen */
+		margin-left: -15px; /* Mueve el texto 5 píxeles hacia la izquierda */
+}
+
+
+
+
+
+        /* Estilo para los botones fijos */
+        .fixed-buttons {
+            position: fixed;
+            bottom: 20px; /* Distancia desde el fondo */
+            left: 20px; /* Distancia desde la izquierda */
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* Espacio entre los botones */
+        }
+        .fixed-buttons a {
+            display: flex;
+            align-items: center;
+            width: 130px; /* Ancho fijo para el botón */
+            height: 60px; /* Alto fijo para el botón */
+            background-color: rgba(0, 123, 255, 0.5); /* Fondo azul con opacidad */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            overflow: hidden; /* Asegura que el contenido no sobresalga */
+            padding: 10px;
+            box-sizing: border-box;
+            border: 2px solid gray; /* Borde gris */
+            position: relative; /* Necesario para el borde en contenido */
+            transition: background-color 0.3s; /* Transición suave para el hover */
+        }
+        .fixed-buttons a img {
+            width: 40px; /* Ancho del GIF */
+            height: 40px; /* Alto del GIF */
+            object-fit: cover; /* Ajusta la imagen para cubrir el área del botón */
+            margin-right: 7px; /* Espacio entre el GIF y el texto */
+        }
+        .fixed-buttons a span {
+            font-size: 20px; /* Tamaño del texto */
+        }
+        .fixed-buttons a:hover {
+            background-color: rgba(0, 123, 255, 0.7); /* Fondo azul con mayor opacidad al pasar el mouse */
+        }
+
+        /* Estilo para el modal */
+        .modal {
+            display: none; /* Oculta el modal por defecto */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw; /* Ancho de la ventana del navegador */
+            height: 100vh; /* Alto de la ventana del navegador */
+            background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro con opacidad */
+            z-index: 1000; /* Asegura que el modal esté encima del contenido */
+            justify-content: center; /* Centra el contenido horizontalmente */
+            align-items: center; /* Centra el contenido verticalmente */
+        }
+
+        /* Contenido del modal */
+        .modal-content {
+            background: white;
+            padding: 20px; /* Espaciado interno del contenido del modal */
+            border-radius: 5px;
+            max-width: 90%; /* Ancho máximo del modal */
+            max-height: 90%; /* Alto máximo del modal */
+            overflow: auto; /* Asegura que el contenido no se desborde */
+            box-sizing: border-box;
+            position: relative; /* Necesario para posicionar el botón de cerrar */
+        }
+
+        /* Botón de cerrar */
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 </body>
 </html>
