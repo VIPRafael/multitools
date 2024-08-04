@@ -85,40 +85,20 @@ ds                                               `/o+:.        :so.        .mo
     <script>
         // Función para seleccionar un fondo aleatorio
         function seleccionarFondo() {
-            const fondos = [
-                'https://wallpapercave.com/wp/wp2230708.png',
-                'https://c.wallhere.com/photos/05/32/selective_coloring_black_background_dark_background_simple_background_anime_girls-2130895.jpg!d',
-                'https://c.wallhere.com/photos/fa/89/selective_coloring_dark_background_black_background_simple_background_anime_girls-2127565.jpg!d',
-                'https://c.wallhere.com/photos/de/03/selective_coloring_simple_background_dark_background_black_background_anime_girls-2128765.jpg!d',
-                'https://c.wallhere.com/photos/52/d7/black_background_simple_background_dark_background_selective_coloring_anime_girls-2129733.jpg!d',
-                'https://c.wallhere.com/photos/8e/40/mirror_window_Sleeper_colorful_fish_coat_of_mail_scarf_black_background-2106285.jpg!d',
-                'https://c.wallhere.com/photos/00/0e/selective_coloring_black_background_dark_background_simple_background_anime_girls-2130713.jpg!d',
-                'https://c.wallhere.com/photos/c3/8f/anime_girls_selective_coloring_black_background_dark_background_simple_background_Shakugan_no_Shana_Shana-2187783.jpg!d',
-                'https://c.wallhere.com/photos/8f/9a/selective_coloring_black_background_dark_background_simple_background_anime_girls_Monogatari_Series-2186281.jpg!d',
-                'https://c.wallhere.com/photos/34/7b/selective_coloring_black_background_simple_background_dark_background_anime_girls_Jigoku_Shoujo-2187201.jpg!d',
-                'https://c.wallhere.com/photos/07/41/simple_background_dark_background_black_background_selective_coloring_anime_girls-2127991.jpg!d',
-                'https://c.wallhere.com/photos/47/4d/selective_coloring_black_background_dark_background_simple_background_anime_girls_Date_A_Live_Tokisaki_Kurumi-2130903.jpg!d',
-                'https://c.wallhere.com/photos/0e/a8/black_background_monochrome_selective_coloring_anime_girls_simple_background_Oshi_no_Ko-2252946.jpg!d',
-                'https://c.wallhere.com/photos/bd/fb/s1lent_anime_Chainsaw_Man_Power_Chainsaw_Man_artwork_red_anime_girls_devil_girl-2296184.jpg!d',
-                'https://c.wallhere.com/photos/c6/c2/Jujutsu_Kaisen_Suguru_Geto_hands_low_light_smiling_earring_long_hair_simple_background-2272310.jpg!d',
-                'https://c.wallhere.com/photos/d4/e1/black_background_monochrome_selective_coloring_anime_girls_simple_background_Oshi_no_Ko-2252942.jpg!d',
-                'https://c.wallhere.com/photos/af/de/simple_background_dark_background_Frieren_Sousou_No_Frieren-2297856.jpg!d',
-                'https://c.wallhere.com/photos/f0/7f/Hunter_x_Hunter_Neferpitou_cat_ears_tail_cat_girl_simple_background_glowing_eyes_pink_eyes-2259850.jpg!d',
-                'https://c.wallhere.com/photos/4e/d9/simple_background_dark_background_Vinland_Saga_Canute-2297852.jpg!d',
-                'https://c.wallhere.com/photos/ed/d5/simple_background_dark_background_Vinland_Saga_Thorfinn-2297854.jpg!d',
-                'https://c.wallhere.com/photos/e4/b1/selective_coloring_black_background_simple_background_dark_background_anime_girls_Cyberpunk_Edgerunners_Lucy_Edgerunners-2187199.jpg!d',
-                'https://c.wallhere.com/photos/8e/49/anime_girls_selective_coloring_black_background_simple_background_dark_background-2125243.jpg!d',
-                'https://c.wallhere.com/photos/03/77/black_background_dark_background_simple_background_selective_coloring_anime_girls_Vocaloid_Hatsune_Miku-2125129.jpg!d',
-                'https://c.wallhere.com/photos/af/60/selective_coloring_black_background_dark_background_simple_background_anime_girls-2130079.jpg!d',
-                'https://c.wallhere.com/photos/ed/bc/Sukuna_Ryomen_Sukuna_Jujutsu_Kaisen_dark_background_simple_background-2302004.jpg!d',
-                'https://c.wallhere.com/photos/c2/a3/Fushiguro_Toji_Jujutsu_Kaisen_dark_dark_background_simple_background-2297050.jpg!d',
-                'https://c.wallhere.com/photos/4f/a3/Hu_Tao_Genshin_Impact_Genshin_Impact_simple_background_dark_background_dark-2302104.jpg!d'
-            ];
+            const fondos = [];
+            for (let i = 1; i <= 34; i++) {
+                fondos.push(`img/bg/${i}.png`);
+            }
 
-            // Seleccionar un fondo aleatorio
-            const fondoAleatorio = fondos[Math.floor(Math.random() * fondos.length)];
-            document.body.style.backgroundImage = `url('${fondoAleatorio}')`;
+            // Selecciona un índice aleatorio
+            const indiceAleatorio = Math.floor(Math.random() * fondos.length);
+
+            // Establece el fondo del body
+            document.body.style.backgroundImage = `url(${fondos[indiceAleatorio]})`;
         }
+
+        // Llama a la función para seleccionar un fondo al cargar la página
+        window.onload = seleccionarFondo;
 
         // Llamar a la función para seleccionar un fondo cuando la página se carga
         window.onload = function() {
