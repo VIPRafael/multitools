@@ -253,6 +253,7 @@ ds                                               `/o+:.        :so.        .mo
     <!-- Botones para abrir los cuadros -->
     <a id="open-btn1"></a>
     <a id="open-btn2"></a>
+    <a id="open-btn3"></a>
 
     <!-- Primer cuadro que cubre toda la pantalla -->
     <div class="overlay" id="overlay1">
@@ -1449,6 +1450,232 @@ ds                                               `/o+:.        :so.        .mo
         </div>
     </div>
 
+    <div class="overlay" id="overlay3">
+        <div class="overlay-content">
+<body>
+ <div class="gif-body">
+    <div class="gif-container">
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mostrar Imagen</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+        .container {
+            text-align: center;
+        }
+        input[type="text"] {
+            width: 150px;
+            padding: 15px;
+            margin: 15px;
+            text-align: center;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        input::placeholder {
+            color: #888;
+            opacity: 1;
+        }
+        input:focus::placeholder {
+            color: transparent;
+        }
+        img-areas {
+            margin-top: 20px;
+            width: 1000px;
+            height: auto;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .image-section {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="text" id="input1" placeholder="Radius" oninput="clearGroup('group2'); checkInputs()">
+        <input type="text" id="input2" placeholder="Rings" oninput="clearGroup('group2'); checkInputs()">
+        <input type="text" id="input3" placeholder="Length" oninput="clearGroup('group1'); checkInputs()">
+        <input type="text" id="input4" placeholder="Spread" oninput="clearGroup('group1'); checkInputs()">
+        <div class="image-section">
+            <div id="imageContainer1" class="hidden">
+                <img id="dynamicImage1" src="" alt="Imagen 1">
+            </div>
+            <div id="imageContainer2" class="hidden">
+                <img id="dynamicImage2" src="" alt="Imagen 2">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mapa de combinaciones a imágenes para input1 e input2
+        const imageMap1 = {
+            "0-0": "img/areas/xd.png",
+
+            "1-": "img/areas/radius-1.png",
+            "2-": "img/areas/radius-2.png",
+            "3-": "img/areas/radius-3.png",
+            "4-": "img/areas/radius-4.png",
+            "5-": "img/areas/radius-5.png",
+            "6-": "img/areas/radius-6.png",
+            "7-": "img/areas/radius-7.png",
+            "8-": "img/areas/radius-8.png",
+
+            "1-0": "img/areas/radius-1.png",	
+            "1-1": "img/areas/xd.png",			
+
+            "2-0": "img/areas/radius-2.png",
+            "2-1": "img/areas/radius-2-ring-1.png",
+            "2-2": "img/areas/xd.png",
+
+            "3-0": "img/areas/radius-3.png",
+            "3-1": "img/areas/radius-3-ring-1.png",
+            "3-2": "img/areas/radius-3-ring-2.png",
+            "3-3": "img/areas/xd.png",
+
+            "4-0": "img/areas/radius-4.png",
+            "4-1": "img/areas/radius-4-ring-1.png",
+            "4-2": "img/areas/radius-4-ring-2.png",
+            "4-3": "img/areas/radius-4-ring-3.png",
+            "4-4": "img/areas/xd.png",
+
+            "5-0": "img/areas/radius-5.png",
+            "5-1": "img/areas/radius-5-ring-1.png",
+            "5-2": "img/areas/radius-5-ring-2.png",
+            "5-3": "img/areas/radius-5-ring-3.png",
+            "5-4": "img/areas/radius-5-ring-4.png",
+            "5-5": "img/areas/xd.png",
+
+            "6-0": "img/areas/radius-6.png",
+            "6-1": "img/areas/radius-6-ring-1.png",
+            "6-2": "img/areas/radius-6-ring-2.png",
+            "6-3": "img/areas/radius-6-ring-3.png",
+            "6-4": "img/areas/radius-6-ring-4.png",
+            "6-5": "img/areas/radius-6-ring-5.png",
+            "6-6": "img/areas/xd.png",
+
+            "7-0": "img/areas/radius-7.png",
+            "7-1": "img/areas/radius-7-ring-1.png",
+            "7-2": "img/areas/radius-7-ring-2.png",
+            "7-3": "img/areas/radius-7-ring-3.png",
+            "7-4": "img/areas/radius-7-ring-4.png",
+            "7-5": "img/areas/radius-7-ring-5.png",
+            "7-6": "img/areas/radius-7-ring-6.png",
+            "7-7": "img/areas/xd.png",
+
+            "8-0": "img/areas/radius-8.png",
+            "8-1": "img/areas/radius-8-ring-1.png",
+            "8-2": "img/areas/radius-8-ring-2.png",
+            "8-3": "img/areas/radius-8-ring-3.png",
+            "8-4": "img/areas/radius-8-ring-4.png",
+            "8-5": "img/areas/radius-8-ring-5.png",
+            "8-6": "img/areas/radius-8-ring-6.png",
+            "8-7": "img/areas/radius-8-ring-7.png",
+            "8-8": "img/areas/xd.png",
+        };
+
+        // Mapa de combinaciones a imágenes para input3 e input4
+        const imageMap2 = {
+            "1-0": "img/areas/length-1-spread-0.png",
+
+            "2-0": "img/areas/length-2-spread-0.png",
+
+            "3-0": "img/areas/length-3-spread-0.png",
+            "3-1": "img/areas/length-3-spread-1.png",
+            "3-2": "img/areas/length-3-spread-2.png",
+            "3-3": "img/areas/length-3-spread-3.png",
+
+            "4-0": "img/areas/length-4-spread-0.png",
+            "4-1": "img/areas/length-4-spread-1.png",
+            "4-2": "img/areas/length-4-spread-2.png",
+            "4-3": "img/areas/length-4-spread-3.png",
+
+            "5-0": "img/areas/length-5-spread-0.png",
+            "5-1": "img/areas/length-5-spread-1.png",
+            "5-2": "img/areas/length-5-spread-2.png",
+            "5-3": "img/areas/length-5-spread-3.png",
+
+            "6-0": "img/areas/length-6-spread-0.png",
+            "6-1": "img/areas/length-6-spread-1.png",
+            "6-3": "img/areas/length-6-spread-3.png",
+            "6-4": "img/areas/length-6-spread-4.png",
+
+            "7-0": "img/areas/length-7-spread-0.png",
+            "7-2": "img/areas/length-7-spread-2.png",
+            "7-3": "img/areas/length-7-spread-3.png",
+			
+            "8-3": "img/areas/length-8-spread-3.png",
+
+            "10-3": "img/areas/length-10-spread-3.png",
+
+        };
+
+        function checkInputs() {
+            const input1 = document.getElementById('input1');
+            const input2 = document.getElementById('input2');
+            const input3 = document.getElementById('input3');
+            const input4 = document.getElementById('input4');
+
+            const imageContainer1 = document.getElementById('imageContainer1');
+            const dynamicImage1 = document.getElementById('dynamicImage1');
+            const imageContainer2 = document.getElementById('imageContainer2');
+            const dynamicImage2 = document.getElementById('dynamicImage2');
+
+            imageContainer1.classList.add('hidden');
+            imageContainer2.classList.add('hidden');
+
+            let showImage1 = false;
+            let showImage2 = false;
+
+            let key2 = `${input3.value.trim()}-${input4.value.trim()}`;
+            if (imageMap2[key2]) {
+                dynamicImage2.src = imageMap2[key2];
+                imageContainer2.classList.remove('hidden');
+                showImage2 = true;
+            }
+
+            let key1 = `${input1.value.trim()}-${input2.value.trim()}`;
+            if (imageMap1[key1]) {
+                dynamicImage1.src = imageMap1[key1];
+                imageContainer1.classList.remove('hidden');
+                showImage1 = true;
+            }
+
+            if (!showImage1 && !showImage2) {
+                imageContainer1.classList.add('hidden');
+                imageContainer2.classList.add('hidden');
+            }
+        }
+
+        // Función para limpiar el otro grupo de inputs
+        function clearGroup(group) {
+            if (group === 'group1') {
+                document.getElementById('input1').value = '';
+                document.getElementById('input2').value = '';
+            } else if (group === 'group2') {
+                document.getElementById('input3').value = '';
+                document.getElementById('input4').value = '';
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+            </div></div>
+	<button class="close-btn" id="close-btn3">
+		<img src="img/rope.gif">
+	</button>
+        </div>
+    </div>
+
     <!-- Botones fijos -->
     <div class="fixed-buttons">
         <a href="#" id="fixed-open-btn1">
@@ -1459,6 +1686,10 @@ ds                                               `/o+:.        :so.        .mo
             <img src="img/dead_player.gif" alt="Missiles">
             <span>Missiles</span>
         </a>
+        <a href="#" id="fixed-open-btn3">
+            <img src="img/effects/57.gif" alt="Areas">
+            <span>Areas</span>
+        </a>		
     </div>
 
     <script>
@@ -1480,16 +1711,21 @@ ds                                               `/o+:.        :so.        .mo
         const closeBtn1 = document.getElementById('close-btn1');
         const openBtn2 = document.getElementById('open-btn2');
         const closeBtn2 = document.getElementById('close-btn2');
+        const openBtn3 = document.getElementById('open-btn3');
+        const closeBtn3 = document.getElementById('close-btn3');
 
         // Asigna los eventos de clic para los botones iniciales
         openBtn1.addEventListener('click', () => showOverlay('overlay1'));
         closeBtn1.addEventListener('click', () => hideOverlay('overlay1'));
         openBtn2.addEventListener('click', () => showOverlay('overlay2'));
         closeBtn2.addEventListener('click', () => hideOverlay('overlay2'));
+        openBtn3.addEventListener('click', () => showOverlay('overlay3'));
+        closeBtn3.addEventListener('click', () => hideOverlay('overlay3'));
 
         // Asigna los eventos de clic para los botones fijos
         const fixedOpenBtn1 = document.getElementById('fixed-open-btn1');
         const fixedOpenBtn2 = document.getElementById('fixed-open-btn2');
+        const fixedOpenBtn3 = document.getElementById('fixed-open-btn3');
 
         fixedOpenBtn1.addEventListener('click', (e) => {
             e.preventDefault(); // Previene el comportamiento por defecto del enlace
@@ -1499,6 +1735,11 @@ ds                                               `/o+:.        :so.        .mo
         fixedOpenBtn2.addEventListener('click', (e) => {
             e.preventDefault(); // Previene el comportamiento por defecto del enlace
             showOverlay('overlay2');
+        });
+
+        fixedOpenBtn3.addEventListener('click', (e) => {
+            e.preventDefault(); // Previene el comportamiento por defecto del enlace
+            showOverlay('overlay3');
         });
     </script>
  
