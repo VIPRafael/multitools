@@ -1,45 +1,4 @@
 <!DOCTYPE html>
-<!-- 
-                    `-/osyyyyyyyssyyssoo++/:-.`                                 
-                -+yys+:-`            ``.--:/+ooyyyys+:`                         
-             :yho-                                 .:+syyo:`                    
-           /ds.                                          -+yhs:                 
-         -do`                                                .+hy/`             
-        om-                                                     `+hy-           
-      `hy`                                                         -yh:         
-     -mo                                                             `sd:       
-    -N/                                                                .yh.     
-   .N:                                                                   :m/    
-   d+                                                                     `ds   
-  oh                                                                       `dy  
- `N-                                                                        `m/ 
- oh                                      o                                   /N               WHAT ARE YOU LOOKING FOR HERE?
- N/            ./:.`                    :m                                    N:                 THERE IS NOTHING FOR YOU
--M`             /h////+os+/-.          :d-                                    d+                       JUST LEAVE
-od              /o      /NMMMMNdo/o++os+                               -+     do
-hs              `h-      `/sso:`/s+-.        .++:.                     o+     d+
-d+                +s+-`    `:+o+.              h//+++oo/:.           `oy      m/
-m+                  `:+++++/-                  o/      sMMMmhyo/:-.:os-      -M.
-N+                                              so.     /hmNNdo-./m/        `m+ 
-ds                                               `/o+:.        :so.        .mo  
-/N`                                                  .:++++++++-          -m+   
- yy            :o                                                        +m-    
- `do          +m`                                                      `hy`     
-  `mo        `M-        /o++/:-.`                                     /m/       
-   `m+       :M`       ++``..-:/osssss+:-`                          `yh`        
-    `do       yh.           `:/+++//:..:+ossso/-      s`           +m/          
-     `yh`      `.                   .:+o+:`   -N      y/         .dy`           
-       +m/                                     :     .d.       `om:             
-        `sd/                                       .sy.      `+d+               
-          `odo-                                  .ys-      .od+`                
-             -shs:`                              .      .+hy:                   
-                ./syy+:.                          `-+syyo-                      
-                     -+sdmhysoo+/:-.``    `.-/osyys+:`                          
-                       `m+   `.-:/++osssssso+:.`                                
-                       hy                                                       
-                      /N`                                                       
-                      h/                                                        
--->
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -254,6 +213,7 @@ ds                                               `/o+:.        :so.        .mo
     <a id="open-btn1"></a>
     <a id="open-btn2"></a>
     <a id="open-btn3"></a>
+    <a id="open-btn4"></a>
 
     <!-- Primer cuadro que cubre toda la pantalla -->
     <div class="overlay" id="overlay1">
@@ -1676,6 +1636,25 @@ ds                                               `/o+:.        :so.        .mo
         </div>
     </div>
 
+
+
+
+    <div class="overlay" id="overlay4">
+        <div class="overlay-content">
+<body>
+ <div class="gif-body">
+    <div class="gif-container">
+
+            </div></div></div>
+	<button class="close-btn" id="close-btn4">
+		<img src="img/rope.gif">
+	</button>
+        </div>
+    </div>
+
+
+
+
     <!-- Botones fijos -->
     <div class="fixed-buttons">
         <a href="#" id="fixed-open-btn1">
@@ -1689,6 +1668,10 @@ ds                                               `/o+:.        :so.        .mo
         <a href="#" id="fixed-open-btn3">
             <img src="img/effects/57.gif" alt="Areas">
             <span>Areas</span>
+        </a>
+        <a href="calc.html">
+            <img src="img/effects/252.gif" alt="Loot">
+            <span>Loot</span>
         </a>		
     </div>
 
@@ -1713,6 +1696,8 @@ ds                                               `/o+:.        :so.        .mo
         const closeBtn2 = document.getElementById('close-btn2');
         const openBtn3 = document.getElementById('open-btn3');
         const closeBtn3 = document.getElementById('close-btn3');
+        const openBtn4 = document.getElementById('open-btn4');
+        const closeBtn4 = document.getElementById('close-btn4');
 
         // Asigna los eventos de clic para los botones iniciales
         openBtn1.addEventListener('click', () => showOverlay('overlay1'));
@@ -1721,11 +1706,14 @@ ds                                               `/o+:.        :so.        .mo
         closeBtn2.addEventListener('click', () => hideOverlay('overlay2'));
         openBtn3.addEventListener('click', () => showOverlay('overlay3'));
         closeBtn3.addEventListener('click', () => hideOverlay('overlay3'));
+        openBtn4.addEventListener('click', () => showOverlay('overlay4'));
+        closeBtn4.addEventListener('click', () => hideOverlay('overlay4'));
 
         // Asigna los eventos de clic para los botones fijos
         const fixedOpenBtn1 = document.getElementById('fixed-open-btn1');
         const fixedOpenBtn2 = document.getElementById('fixed-open-btn2');
         const fixedOpenBtn3 = document.getElementById('fixed-open-btn3');
+        const fixedOpenBtn4 = document.getElementById('fixed-open-btn4');
 
         fixedOpenBtn1.addEventListener('click', (e) => {
             e.preventDefault(); // Previene el comportamiento por defecto del enlace
@@ -1740,6 +1728,11 @@ ds                                               `/o+:.        :so.        .mo
         fixedOpenBtn3.addEventListener('click', (e) => {
             e.preventDefault(); // Previene el comportamiento por defecto del enlace
             showOverlay('overlay3');
+        });
+
+        fixedOpenBtn4.addEventListener('click', (e) => {
+            e.preventDefault(); // Previene el comportamiento por defecto del enlace
+            showOverlay('overlay4');
         });
     </script>
  

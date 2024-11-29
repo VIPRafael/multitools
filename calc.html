@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Rareza</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Estilo del body principal */
+        .unique-bodycalc {
+            font-family: Arial, sans-serif;
+            background-color: #000; /* Fondo negro fuera de la calculadora */
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        /* Contenedor principal */
+        .unique-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Encabezado */
+        .unique-container h1 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        /* Campo de entrada */
+        .unique-container input[type="number"] {
+            -moz-appearance: textfield;
+            -webkit-appearance: none;
+            appearance: none;
+            width: 90%;
+            padding: 12px;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .unique-container input[type="number"]:focus {
+            outline: none;
+            border-color: #0086ff;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        }
+
+        /* Área de resultados */
+        .unique-result {
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 80px; /* Asegura un tamaño consistente */
+        }
+
+        /* Imágenes de rareza */
+        .unique-result img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilos para cada rareza */
+        .common {
+            background-color: #D0CECE;
+            color: #4a4a4a;
+        }
+
+        .uncommon {
+            background-color: #dfffd6;
+            color: #2a8c27;
+        }
+
+        .semirare {
+            background-color: #d6e8ff;
+            color: #2a4a8c;
+        }
+
+        .rare {
+            background-color: #f3d6ff;
+            color: #722ba1;
+        }
+
+        .veryrare {
+            background-color: #ffe7b2;
+            color: #a66b00;
+        }
+
+		.close-btn {
+			position: fixed;
+			background: none;
+			border: none;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			padding: 0px; /* Ajusta el padding según sea necesario */
+			top: -14px;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+
+    </style>
+</head>
+
+<a href="index.html" class="close-btn">
+    <img src="img/rope.gif" alt="Rope" style="width: 55px; height: auto;">
+</a>
+
+<body class="unique-bodycalc">
+    <div class="unique-container">
+        <h1>Calculadora de LOOT</h1>
+        <input type="number" id="unique-currentValue" placeholder="Ingresa un valor" oninput="UniqueCalculator.calculate()">
+        <div id="unique-result" class="unique-result"></div>
+    </div>
+
+    <script>
+        const UniqueCalculator = {
+            calculate: function () {
+                const maxValue = 100000; // Valor máximo fijo
+                const currentValue = parseFloat(document.getElementById('unique-currentValue').value);
+                const resultDiv = document.getElementById('unique-result');
+
+                if (isNaN(currentValue) || currentValue < 0) {
+                    resultDiv.innerHTML = "Por favor, ingresa un valor válido.";
+                    resultDiv.className = "unique-result";
+                    return;
+                }
+
+                const percentage = ((currentValue / maxValue) * 100).toFixed(2);
+                let rarity = "";
+                let className = "";
+                let imageSrc = "";
+
+                if (currentValue > 24999) {
+                    rarity = "Common";
+                    className = "common";
+                    imageSrc = "img/calc/Helmet1.gif";
+                } else if (currentValue > 4999) {
+                    rarity = "Uncommon";
+                    className = "uncommon";
+                    imageSrc = "img/calc/Helmet2.gif";
+                } else if (currentValue > 1500) {
+                    rarity = "Semi-Rare";
+                    className = "semirare";
+                    imageSrc = "img/calc/Helmet3.gif";
+                } else if (currentValue > 999) {
+                    rarity = "Rare";
+                    className = "rare";
+                    imageSrc = "img/calc/Helmet4.gif";
+                } else {
+                    rarity = "Very Rare";
+                    className = "veryrare";
+                    imageSrc = "img/calc/Helmet5.gif";
+                }
+
+                resultDiv.innerHTML = `
+                    <img src="${imageSrc}" alt="${rarity}">
+                    Porcentaje: ${percentage}% <br>${rarity}
+                `;
+                resultDiv.className = `unique-result ${className}`;
+            }
+        };
+    </script>
+</body>
+</html>
