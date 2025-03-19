@@ -155,27 +155,28 @@
                 let className = "";
                 let imageSrc = "";
 
-                if (currentValue > 24999) {
-                    rarity = "Common";
-                    className = "common";
-                    imageSrc = "img/calc/Helmet1.gif";
-                } else if (currentValue > 4999) {
-                    rarity = "Uncommon";
-                    className = "uncommon";
-                    imageSrc = "img/calc/Helmet2.gif";
-                } else if (currentValue > 1500) {
-                    rarity = "Semi-Rare";
-                    className = "semirare";
-                    imageSrc = "img/calc/Helmet3.gif";
-                } else if (currentValue > 999) {
-                    rarity = "Rare";
-                    className = "rare";
-                    imageSrc = "img/calc/Helmet4.gif";
-                } else {
-                    rarity = "Very Rare";
-                    className = "veryrare";
-                    imageSrc = "img/calc/Helmet5.gif";
-                }
+		if (currentValue >= 25000) {
+		    rarity = "Common";
+		    className = "common";
+		    imageSrc = "img/calc/Helmet1.gif";
+		} else if (currentValue >= 5000) {
+		    rarity = "Uncommon";
+		    className = "uncommon";
+		    imageSrc = "img/calc/Helmet2.gif";
+		} else if (currentValue >= 1000) {
+		    rarity = "Semi-Rare";
+		    className = "semirare";
+		    imageSrc = "img/calc/Helmet3.gif";
+		} else if (currentValue >= 500) {
+		    rarity = "Rare";
+		    className = "rare";
+		    imageSrc = "img/calc/Helmet4.gif";
+		} else { // currentValue <= 499
+		    rarity = "Very Rare";
+		    className = "veryrare";
+		    imageSrc = "img/calc/Helmet5.gif";
+		}
+
 
                 resultDiv.innerHTML = `
                     <img src="${imageSrc}" alt="${rarity}">
