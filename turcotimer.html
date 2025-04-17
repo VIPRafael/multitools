@@ -34,31 +34,33 @@
 
     .button-group {
       display: flex;
-      justify-content: center;
-      gap: 10px;
+      justify-content: space-between;
       margin-top: 15px;
     }
 
     button {
-      width: 120px;
+      flex: 1;
+      margin: 5px;
       padding: 10px;
       font-size: 1.1em;
       color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
-    }
-
-    button:hover {
-      opacity: 0.8;
+      transition: background 0.2s;
     }
 
     .button-x1 {
-      background-color: #808080; /* Gris */
+      background-color: #808080;
     }
 
     .button-x2 {
-      background-color: #4CAF50; /* Verde */
+      background-color: #4CAF50;
+    }
+
+    .active {
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+      transform: scale(0.98);
     }
 
     .result {
@@ -74,11 +76,11 @@
 <div class="calculator">
   <h2>Calculadora de Bits a Tiempo</h2>
   <label for="bits">Ingresa la cantidad de bits:</label>
-  <input type="number" id="bits" placeholder="Ejemplo: 100" oninput="limpiarResultados()">
+  <input type="number" id="bits" placeholder="Ejemplo: 100" oninput="actualizarTiempo()">
 
   <div class="button-group">
-    <button class="button-x1" onclick="calcularTiempo(1)">×1</button>
-    <button class="button-x2" onclick="calcularTiempo(2)">×2</button>
+    <button class="button-x1 active" id="btn-x1" onclick="setMultiplicador(1)">×1</button>
+    <button class="button-x2" id="btn-x2" onclick="setMultiplicador(2)">×2</button>
   </div>
 
   <div class="result" id="resultadoBits">Bits calculados: 0</div>
@@ -88,7 +90,25 @@
 </div>
 
 <script>
-  function calcularTiempo(multiplicador) {
+  let multiplicadorActual = 1;
+
+  function setMultiplicador(valor) {
+    multiplicadorActual = valor;
+
+    // Visualmente marcar el botón activo
+    document.getElementById("btn-x1").classList.remove("active");
+    document.getElementById("btn-x2").classList.remove("active");
+
+    if (valor === 1) {
+      document.getElementById("btn-x1").classList.add("active");
+    } else {
+      document.getElementById("btn-x2").classList.add("active");
+    }
+
+    actualizarTiempo(); // recalcula al cambiar el multiplicador
+  }
+
+  function actualizarTiempo() {
     const bitsInput = parseFloat(document.getElementById("bits").value);
 
     const resultadoBits = document.getElementById("resultadoBits");
@@ -97,7 +117,7 @@
     const resultadoFormato = document.getElementById("resultadoFormato");
 
     if (!isNaN(bitsInput)) {
-      const bitsTotales = bitsInput * multiplicador;
+      const bitsTotales = bitsInput * multiplicadorActual;
       const minutosTotales = (bitsTotales * 4) / 100;
       const segundosTotales = minutosTotales * 60;
 
@@ -114,17 +134,11 @@
       resultadoMinutos.style.display = "block";
       resultadoSegundos.style.display = "block";
       resultadoFormato.style.display = "block";
-    }
-  }
-
-  function limpiarResultados() {
-    const bitsInput = document.getElementById("bits").value;
-
-    if (bitsInput.trim() === "") {
-      document.getElementById("resultadoBits").style.display = "none";
-      document.getElementById("resultadoMinutos").style.display = "none";
-      document.getElementById("resultadoSegundos").style.display = "none";
-      document.getElementById("resultadoFormato").style.display = "none";
+    } else {
+      resultadoBits.style.display = "none";
+      resultadoMinutos.style.display = "none";
+      resultadoSegundos.style.display = "none";
+      resultadoFormato.style.display = "none";
     }
   }
 </script>
