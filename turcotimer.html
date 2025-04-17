@@ -74,14 +74,16 @@
       background-color: #888;
     }
 
-    .bitCalc_resultado {
-      margin-top: 20px;
-      font-size: 0.95em;
-    }
+	.bitCalc_resultado {
+	  margin-top: 20px;
+	  font-size: 1.2em;
+	}
 
-    .bitCalc_resultado p {
-      margin: 5px 0;
-    }
+	.bitCalc_resultado p {
+	  margin: 5px 0;
+	  font-size: 1.2em;
+	}
+
   </style>
 </head>
 <body>
@@ -114,7 +116,7 @@
       "https://media.tenor.com/pT6HQx4wIogAAAAj/twitch-rpx_syria.gif"
     ];
 
-    // Función para seleccionar un GIF aleatorio
+
     function seleccionarGifAleatorio() {
       const randomIndex = Math.floor(Math.random() * gifs.length);
       const gifImage = document.getElementById("gif-image");
@@ -191,7 +193,7 @@
     }
 
     window.addEventListener("DOMContentLoaded", () => {
-      seleccionarGifAleatorio();  // Cambia el gif al cargar la página
+      seleccionarGifAleatorio();
       bitCalc_seleccionarMultiplicador(1);
     });
   </script>
