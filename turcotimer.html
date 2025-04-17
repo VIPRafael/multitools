@@ -25,8 +25,16 @@
     }
 
     #bitCalc_container h2 {
-      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin-bottom: 20px;
+    }
+
+    #bitCalc_container h2 img {
+      margin-left: 10px;
+      width: 30px;
+      height: auto;
     }
 
     #bitCalc_input {
@@ -59,11 +67,11 @@
     }
 
     .bitCalc_btn-group button.active {
-      background-color: #28a745; /* verde */
+      background-color: #28a745;
     }
 
     .bitCalc_btn-group button.inactive {
-      background-color: #888; /* gris */
+      background-color: #888;
     }
 
     .bitCalc_resultado {
@@ -78,7 +86,9 @@
 </head>
 <body>
   <div id="bitCalc_container">
-    <h2>Calculadora de Bits</h2>
+    <h2>Calculadora de Bits
+      <img id="gif-image" src="" alt="Tibia Coins">
+    </h2>
 
     <input type="number" id="bitCalc_input" placeholder="Ingresa número de bits" oninput="bitCalc_limpiarResultados()">
 
@@ -96,6 +106,21 @@
   </div>
 
   <script>
+    const gifs = [
+      "https://media.tenor.com/izJVS6Wb-lYAAAAj/bits.gif",
+      "https://media.tenor.com/cxAQToMOeykAAAAj/twitch-rpx_syria.gif",
+      "https://media.tenor.com/ml0XFsCUgxwAAAAj/twitch-rpx_syria.gif",
+      "https://media.tenor.com/NdtjZXilqeEAAAAj/cheer1-twitch.gif",
+      "https://media.tenor.com/pT6HQx4wIogAAAAj/twitch-rpx_syria.gif"
+    ];
+
+    // Función para seleccionar un GIF aleatorio
+    function seleccionarGifAleatorio() {
+      const randomIndex = Math.floor(Math.random() * gifs.length);
+      const gifImage = document.getElementById("gif-image");
+      gifImage.src = gifs[randomIndex];
+    }
+
     let bitCalc_multiplicadorActual = 1;
 
     function bitCalc_seleccionarMultiplicador(multiplicador) {
@@ -166,6 +191,7 @@
     }
 
     window.addEventListener("DOMContentLoaded", () => {
+      seleccionarGifAleatorio();  // Cambia el gif al cargar la página
       bitCalc_seleccionarMultiplicador(1);
     });
   </script>
