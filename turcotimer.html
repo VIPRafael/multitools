@@ -3,16 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <title>Calculadora de Bits</title>
+  <link rel="icon" type="image/png" href="https://static-cdn.jtvnw.net/jtv_user_pictures/c53a9721-df69-4020-91bf-3668fbff68a7-profile_image-70x70.png">
   <style>
-    /* Contenedor principal */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-image: url('https://preview.redd.it/upscaled-7-4-login-screen-widescreen-without-text-v0-vwhos583l2d91.png?width=1080&crop=smart&auto=webp&s=b397e5e13434c50a28f1316fa49f73baa25703be');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
     #bitCalc_container {
       max-width: 400px;
-      margin: 50px auto;
-      background-color: #fff;
+      margin: 80px auto;
+      background-color: rgba(255, 255, 255, 0.95);
       border-radius: 10px;
       padding: 20px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-      font-family: Arial, sans-serif;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
     }
 
     #bitCalc_container h2 {
@@ -21,11 +30,13 @@
     }
 
     #bitCalc_input {
-      width: 100%;
+      width: 80%;
       padding: 10px;
       font-size: 1em;
       border: 1px solid #ccc;
       border-radius: 5px;
+      margin: 0 auto;
+      display: block;
     }
 
     .bitCalc_btn-group {
@@ -154,7 +165,6 @@
       }
     }
 
-    // Activar x1 por defecto
     window.addEventListener("DOMContentLoaded", () => {
       bitCalc_seleccionarMultiplicador(1);
     });
