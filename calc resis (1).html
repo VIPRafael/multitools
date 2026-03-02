@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  
+<link rel="icon" type="image/png" href="https://static.wikia.nocookie.net/tibia/images/9/97/Low_Blow.png/revision/latest/thumbnail/width/360/height/360?cb=20241122152501&path-prefix=en">
+  
+  
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Daño en Runas</title>
+  <style>
+    :root{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
+    body{display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:linear-gradient(180deg,#0f172a,#071033);color:#e6eef8}
+    .card{background:rgba(255,255,255,0.04);padding:22px;border-radius:12px;box-shadow:0 6px 24px rgba(2,6,23,0.6);width:360px}
+    h1{font-size:18px;margin:0 0 12px}
+    label{display:block;font-size:13px;margin-top:10px;color:#cfe3ff}
+    input[type=number],select{width:95%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);color:inherit;font-size:15px}
+    .row{display:flex;gap:10px}
+    .btn{margin-top:14px;width:100%;padding:10px;border-radius:10px;border:none;background:#2563eb;color:white;font-weight:600;cursor:pointer}
+    .result{margin-top:14px;padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);text-align:center}
+    .small{font-size:13px;color:#9ec2ff;margin-top:8px}
+    footer{font-size:12px;color:#86aefc;margin-top:10px;text-align:center}
+    .controls{display:flex;gap:8px;margin-top:8px}
+    .controls button{flex:1;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;cursor:pointer}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Runas: de vida + Resistencias</h1>
+
+    <label for="hp">Vida máxima (HP)</label>
+    <input id="hp" type="number" min="1" step="1" />
+
+    <label for="basePct">Porcentaje base (% de vida)</label>
+    <input id="basePct" type="number" min="0" step="0.1" />
+
+    <label for="devil">Devilidad (en %)</label>
+    <input id="devil" type="number" min="0" step="0.1" />
+
+    
+
+    <div class="result" id="result" aria-live="polite">
+      Introduce valores.
+    </div>
+
+    <!-- <div class="small">Fórmula usada: <code>dañoBase = HP * 0.05</code> → <code>dañoTotal = dañoBase * (1 + devil/100)</code></div> -->
+
+    <footer>Redondeo: <select id="roundMode"><option value="round">Normal (round)</option><option value="floor">Floor</option><option value="ceil">Ceil</option><option value="none">Sin redondeo</option></select></footer>
+  </div>
+
+  <script>
+    const hpInput = document.getElementById('hp');
+    const basePctInput = document.getElementById('basePct');
+    const devilInput = document.getElementById('devil');
+    const resultEl = document.getElementById('result');
+    
+    const roundMode = document.getElementById('roundMode');
+
+    function formatNumber(n){
+      if(Number.isFinite(n)){
+        return n.toLocaleString(undefined, {maximumFractionDigits:2});
+      }
+      return String(n);
+    }
+
+    function compute(){
+      const hp = parseFloat(hpInput.value);
+      const devil = parseFloat(devilInput.value);
+      if(!isFinite(hp) || hp <= 0){
+        resultEl.textContent = 'Introduce una vida máxima válida (mayor que 0).';
+        return;
+      }
+      const basePct = parseFloat(basePctInput.value) || 0;
+      const base = hp * (basePct / 100);
+      const bonus = base * (devil / 100);
+      let total = base + bonus;
+
+      switch(roundMode.value){
+        case 'round': total = Math.round(total); break;
+        case 'floor': total = Math.floor(total); break;
+        case 'ceil': total = Math.ceil(total); break;
+        case 'none': /* keep decimals */ break;
+      }
+
+      resultEl.innerHTML = `Daño base (${basePct}%): <strong>${formatNumber(base)}</strong><br>Bonus devil (${devil}%): <strong>${formatNumber(bonus)}</strong><hr style="opacity:.08">Daño total: <strong>${formatNumber(total)}</strong>`;
+    }
+
+    
+
+    // calcular con Enter
+    [hpInput, basePctInput, devilInput].forEach(inp => inp.addEventListener('keydown', e => { if(e.key === 'Enter') compute(); }));
+
+    // cálculo instantáneo al cambiar
+    hpInput.addEventListener('input', compute);
+    basePctInput.addEventListener('input', compute);
+    devilInput.addEventListener('input', compute);
+  </script>
+</body>
+</html>
