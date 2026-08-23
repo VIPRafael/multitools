@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monitor de Internet</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #0f172a;
+    color: #f1f5f9;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 98%;
+    max-width: 1400px;
+    margin: 10px auto;
+}
+
+/* =========================
+   CABECERA
+========================= */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.subtitle {
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+/* =========================
+   ESTADO
+========================= */
+
+.status-box {
+    background: #1e293b;
+    border-left: 5px solid #22c55e;
+    border-radius: 8px;
+    padding: 9px 14px;
+    margin-bottom: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.status-box.warning {
+    border-left-color: #eab308;
+}
+
+.status-box.danger {
+    border-left-color: #ef4444;
+}
+
+.status {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.status-text {
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+/* =========================
+   ESTADÍSTICAS
+========================= */
+
+.stats {
+    display: grid;
+    grid-template-columns:
+        repeat(7, 1fr);
+
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.card {
+    background: #1e293b;
+    border-radius: 8px;
+    padding: 8px;
+    text-align: center;
+}
+
+.card-title {
+    color: #94a3b8;
+    font-size: 10px;
+    margin-bottom: 3px;
+}
+
+.card-value {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* =========================
+   CONTROLES
+========================= */
+
+.controls {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+button {
+    border: none;
+    border-radius: 6px;
+    padding: 7px 12px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.start {
+    background: #16a34a;
+}
+
+.stop {
+    background: #dc2626;
+}
+
+.clear {
+    background: #475569;
+}
+
+button:hover {
+    opacity: .85;
+}
+
+/* =========================
+   CONFIGURACIÓN
+========================= */
+
+.settings {
+    background: #1e293b;
+    border-radius: 8px;
+    padding: 7px 10px;
+    margin-bottom: 8px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.settings-title {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.settings label {
+    color: #94a3b8;
+    font-size: 11px;
+}
+
+input {
+    width: 65px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #475569;
+    background: #0f172a;
+    color: white;
+    text-align: center;
+}
+
+/* =========================
+   CONTENIDO PRINCIPAL
+========================= */
+
+.main-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 2.2fr)
+        minmax(260px, 1fr);
+
+    gap: 8px;
+}
+
+/* =========================
+   GRÁFICO
+========================= */
+
+.chart-container {
+    background: #1e293b;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.chart-title {
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 5px;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.chart-info {
+    color: #64748b;
+    font-size: 10px;
+    font-weight: normal;
+}
+
+canvas {
+    width: 100%;
+    height: 300px;
+    display: block;
+}
+
+/* =========================
+   EVENTOS
+========================= */
+
+.events {
+    background: #1e293b;
+    border-radius: 8px;
+
+    display: flex;
+    flex-direction: column;
+
+    min-height: 0;
+}
+
+.events-header {
+    padding: 10px;
+    border-bottom: 1px solid #334155;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.event-count {
+    color: #94a3b8;
+    font-size: 11px;
+}
+
+.event-list {
+    overflow-y: auto;
+    height: 300px;
+}
+
+.event {
+    padding: 6px 9px;
+    border-bottom: 1px solid #293548;
+
+    font-family: Consolas, monospace;
+    font-size: 10px;
+}
+
+.event.warning {
+    color: #facc15;
+}
+
+.event.danger {
+    color: #f87171;
+}
+
+.event.normal {
+    color: #86efac;
+}
+
+.empty {
+    padding: 15px;
+    color: #64748b;
+    font-size: 11px;
+}
+
+/* =========================
+   PANTALLAS PEQUEÑAS
+========================= */
+
+@media (max-width: 1000px) {
+
+    .stats {
+        grid-template-columns:
+            repeat(4, 1fr);
+    }
+
+    .main-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .stats {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .status-box {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .main-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- CABECERA -->
+
+    <div class="header">
+
+        <div>
+            <h1>📡 Monitor de Internet</h1>
+
+            <div class="subtitle">
+                Medición cada X ms • X pruebas por segundo
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- ESTADO -->
+
+    <div id="statusBox" class="status-box">
+
+        <div id="status" class="status">
+            ⚪ DETENIDO
+        </div>
+
+        <div id="statusText" class="status-text">
+            Presiona "Iniciar monitor"
+        </div>
+
+    </div>
+
+
+    <!-- ESTADÍSTICAS -->
+
+    <div class="stats">
+
+        <div class="card">
+
+            <div class="card-title">
+                PING ACTUAL
+            </div>
+
+            <div id="currentPing" class="card-value">
+                --
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-title">
+                PROMEDIO
+            </div>
+
+            <div id="averagePing" class="card-value">
+                --
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-title">
+                MÍNIMO
+            </div>
+
+            <div id="minPing" class="card-value">
+                --
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-title">
+                MÁXIMO
+            </div>
+
+            <div id="maxPing" class="card-value">
+                --
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-title">
+                JITTER
+            </div>
+
+            <div id="jitter" class="card-value">
+                --
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-title">
+                PÉRDIDA
+            </div>
+
+            <div id="packetLoss" class="card-value">
+                0%
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-title">
+                LAG
+            </div>
+
+            <div id="spikes" class="card-value">
+                0
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- CONTROLES -->
+
+    <div class="controls">
+
+        <button
+            class="start"
+            onclick="startMonitor()">
+
+            ▶ INICIAR
+
+        </button>
+
+
+        <button
+            class="stop"
+            onclick="stopMonitor()">
+
+            ■ DETENER
+
+        </button>
+
+
+        <button
+            class="clear"
+            onclick="clearData()">
+
+            🗑 LIMPIAR
+
+        </button>
+
+    </div>
+
+
+    <!-- CONFIGURACIÓN -->
+
+    <div class="settings">
+
+        <div class="settings-title">
+            ⚙️ Umbrales:
+        </div>
+
+
+        <label>
+            Lag:
+        </label>
+
+        <input
+            id="warningThreshold"
+            type="number"
+            value="200"
+            min="1"
+        >
+
+        <span>ms</span>
+
+
+        <label>
+            Grave:
+        </label>
+
+        <input
+            id="dangerThreshold"
+            type="number"
+            value="300"
+            min="1"
+        >
+
+        <span>ms</span>
+
+
+        <label>
+            Timeout:
+        </label>
+
+        <input
+            id="timeoutThreshold"
+            type="number"
+            value="3000"
+            min="100"
+        >
+
+        <span>ms</span>
+
+    </div>
+
+
+    <!-- GRÁFICO + EVENTOS -->
+
+    <div class="main-grid">
+
+
+        <!-- GRÁFICO -->
+
+        <div class="chart-container">
+
+            <div class="chart-title">
+
+                <span>
+                    📈 Latencia en tiempo real
+                </span>
+
+                <span class="chart-info">
+                    Últimas mediciones
+                </span>
+
+            </div>
+
+            <canvas id="chart"></canvas>
+
+        </div>
+
+
+        <!-- EVENTOS -->
+
+        <div class="events">
+
+            <div class="events-header">
+
+                <span>
+                    📋 Lag detectados
+                </span>
+
+                <span
+                    id="eventCount"
+                    class="event-count">
+
+                    0
+
+                </span>
+
+            </div>
+
+
+            <div
+                id="eventList"
+                class="event-list">
+
+                <div class="empty">
+
+                    No se han detectado picos de lag.
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   CONFIGURACIÓN
+===================================================== */
+
+const INTERVAL = 100;
+
+// 300 puntos = 30 segundos
+const MAX_POINTS = 500;
+
+let monitoring = false;
+let interval = null;
+
+let pingValues = [];
+
+let totalTests = 0;
+let failedTests = 0;
+
+let maxPing = 0;
+let minPing = Infinity;
+
+let spikeCount = 0;
+
+let eventCount = 0;
+
+
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
+const statusBox =
+    document.getElementById("statusBox");
+
+const status =
+    document.getElementById("status");
+
+const statusText =
+    document.getElementById("statusText");
+
+const currentPing =
+    document.getElementById("currentPing");
+
+const averagePing =
+    document.getElementById("averagePing");
+
+const minPingElement =
+    document.getElementById("minPing");
+
+const maxPingElement =
+    document.getElementById("maxPing");
+
+const jitterElement =
+    document.getElementById("jitter");
+
+const packetLoss =
+    document.getElementById("packetLoss");
+
+const spikesElement =
+    document.getElementById("spikes");
+
+const eventList =
+    document.getElementById("eventList");
+
+const eventCountElement =
+    document.getElementById("eventCount");
+
+const canvas =
+    document.getElementById("chart");
+
+const ctx =
+    canvas.getContext("2d");
+
+
+/* =====================================================
+   INICIAR
+===================================================== */
+
+function startMonitor() {
+
+    if (monitoring)
+        return;
+
+    monitoring = true;
+
+    status.innerHTML =
+        "🟢 MONITOREANDO";
+
+    statusText.innerHTML =
+        "Realizando pruebas cada 100 ms...";
+
+    statusBox.className =
+        "status-box";
+
+    checkConnection();
+
+    interval =
+        setInterval(
+            checkConnection,
+            INTERVAL
+        );
+}
+
+
+/* =====================================================
+   DETENER
+===================================================== */
+
+function stopMonitor() {
+
+    monitoring = false;
+
+    if (interval) {
+
+        clearInterval(interval);
+
+        interval = null;
+    }
+
+    status.innerHTML =
+        "⚪ DETENIDO";
+
+    statusText.innerHTML =
+        "Monitor detenido.";
+
+    statusBox.className =
+        "status-box";
+}
+
+
+/* =====================================================
+   COMPROBAR CONEXIÓN
+===================================================== */
+
+async function checkConnection() {
+
+    if (!monitoring)
+        return;
+
+    const start =
+        performance.now();
+
+    const timeoutValue =
+        Number(
+            document.getElementById(
+                "timeoutThreshold"
+            ).value
+        );
+
+    const controller =
+        new AbortController();
+
+    const timeout =
+        setTimeout(
+            () => controller.abort(),
+            timeoutValue
+        );
+
+    try {
+
+        /*
+         Cloudflare.
+         El parámetro _ evita utilizar
+         una respuesta almacenada en caché.
+        */
+
+        const url =
+            "https://1.1.1.1/cdn-cgi/trace?_=" +
+            Date.now() +
+            Math.random();
+
+
+        await fetch(
+            url,
+            {
+                method: "GET",
+
+                cache: "no-store",
+
+                mode: "cors",
+
+                signal: controller.signal
+            }
+        );
+
+
+        clearTimeout(timeout);
+
+
+        const ping =
+            performance.now() - start;
+
+
+        registerPing(
+            ping
+        );
+
+
+    } catch (error) {
+
+        clearTimeout(timeout);
+
+        registerFailure();
+
+    }
+
+}
+
+
+/* =====================================================
+   REGISTRAR PING
+===================================================== */
+
+function registerPing(ping) {
+
+    totalTests++;
+
+
+    ping =
+        Math.round(ping);
+
+
+    pingValues.push(
+        ping
+    );
+
+
+    if (
+        pingValues.length >
+        MAX_POINTS
+    ) {
+
+        pingValues.shift();
+
+    }
+
+
+    if (ping > maxPing) {
+
+        maxPing =
+            ping;
+
+    }
+
+
+    if (ping < minPing) {
+
+        minPing =
+            ping;
+
+    }
+
+
+    const average =
+        pingValues.reduce(
+            (a, b) => a + b,
+            0
+        ) /
+        pingValues.length;
+
+
+    /*
+       JITTER:
+       promedio de las diferencias
+       entre mediciones consecutivas.
+    */
+
+    let jitterValue = 0;
+
+
+    if (
+        pingValues.length > 1
+    ) {
+
+        let differences = 0;
+
+        for (
+            let i = 1;
+            i < pingValues.length;
+            i++
+        ) {
+
+            differences +=
+                Math.abs(
+                    pingValues[i] -
+                    pingValues[i - 1]
+                );
+
+        }
+
+
+        jitterValue =
+            differences /
+            (pingValues.length - 1);
+
+    }
+
+
+    const loss =
+        (
+            failedTests /
+            totalTests
+        ) * 100;
+
+
+    /* ACTUALIZAR ESTADÍSTICAS */
+
+    currentPing.innerHTML =
+        ping + " ms";
+
+
+    averagePing.innerHTML =
+        Math.round(
+            average
+        ) + " ms";
+
+
+    minPingElement.innerHTML =
+        minPing + " ms";
+
+
+    maxPingElement.innerHTML =
+        maxPing + " ms";
+
+
+    jitterElement.innerHTML =
+        Math.round(
+            jitterValue
+        ) + " ms";
+
+
+    packetLoss.innerHTML =
+        loss.toFixed(1) + "%";
+
+
+    /* GRÁFICO */
+
+    drawChart();
+
+
+    /* UMBRALES */
+
+    const warning =
+        Number(
+            document.getElementById(
+                "warningThreshold"
+            ).value
+        );
+
+
+    const danger =
+        Number(
+            document.getElementById(
+                "dangerThreshold"
+            ).value
+        );
+
+
+    /* NORMAL */
+
+    if (
+        ping < warning
+    ) {
+
+        status.innerHTML =
+            "🟢 CONEXIÓN ESTABLE";
+
+        statusText.innerHTML =
+            "Ping: " +
+            ping +
+            " ms";
+
+        statusBox.className =
+            "status-box";
+
+    }
+
+
+    /* TIRÓN */
+
+    else if (
+        ping < danger
+    ) {
+
+        status.innerHTML =
+            "🟡 LAG DETECTADO";
+
+        statusText.innerHTML =
+            "Latencia elevada: " +
+            ping +
+            " ms";
+
+        statusBox.className =
+            "status-box warning";
+
+
+        spikeCount++;
+
+        spikesElement.innerHTML =
+            spikeCount;
+
+
+        addEvent(
+            "warning",
+            "⚠️",
+            "Lag — " +
+            ping +
+            " ms"
+        );
+
+    }
+
+
+    /* TIRÓN GRAVE */
+
+    else {
+
+        status.innerHTML =
+            "🔴 LAG GRAVE";
+
+        statusText.innerHTML =
+            "Latencia muy alta: " +
+            ping +
+            " ms";
+
+        statusBox.className =
+            "status-box danger";
+
+
+        spikeCount++;
+
+        spikesElement.innerHTML =
+            spikeCount;
+
+
+        addEvent(
+            "danger",
+            "🔴",
+            "LAG GRAVE — " +
+            ping +
+            " ms"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   PÉRDIDA DE CONEXIÓN
+===================================================== */
+
+function registerFailure() {
+
+    totalTests++;
+
+    failedTests++;
+
+
+    const loss =
+        (
+            failedTests /
+            totalTests
+        ) * 100;
+
+
+    currentPing.innerHTML =
+        "TIMEOUT";
+
+
+    packetLoss.innerHTML =
+        loss.toFixed(1) +
+        "%";
+
+
+    status.innerHTML =
+        "🔴 CONEXIÓN INTERRUMPIDA";
+
+
+    statusText.innerHTML =
+        "No se recibió respuesta.";
+
+
+    statusBox.className =
+        "status-box danger";
+
+
+    spikeCount++;
+
+    spikesElement.innerHTML =
+        spikeCount;
+
+
+    addEvent(
+        "danger",
+        "❌",
+        "Pérdida de conexión / Timeout"
+    );
+
+
+    drawChart();
+
+}
+
+
+/* =====================================================
+   EVENTOS
+===================================================== */
+
+function addEvent(
+    type,
+    icon,
+    text
+) {
+
+    eventCount++;
+
+
+    eventCountElement.innerHTML =
+        eventCount;
+
+
+    const empty =
+        eventList.querySelector(
+            ".empty"
+        );
+
+
+    if (empty) {
+
+        empty.remove();
+
+    }
+
+
+    const event =
+        document.createElement(
+            "div"
+        );
+
+
+    event.className =
+        "event " +
+        type;
+
+
+    const now =
+        new Date()
+        .toLocaleTimeString();
+
+
+    event.innerHTML =
+        now +
+        " — " +
+        icon +
+        " " +
+        text;
+
+
+    eventList.prepend(
+        event
+    );
+
+
+    /*
+       Limitamos los eventos
+       para que la página no crezca
+       indefinidamente.
+    */
+
+    while (
+        eventList.children.length >
+        200
+    ) {
+
+        eventList.removeChild(
+            eventList.lastChild
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   GRÁFICO
+===================================================== */
+
+function drawChart() {
+
+    const rect =
+        canvas.getBoundingClientRect();
+
+
+    const dpr =
+        window.devicePixelRatio ||
+        1;
+
+
+    canvas.width =
+        rect.width * dpr;
+
+
+    canvas.height =
+        300 * dpr;
+
+
+    ctx.setTransform(
+        dpr,
+        0,
+        0,
+        dpr,
+        0,
+        0
+    );
+
+
+    const width =
+        rect.width;
+
+
+    const height =
+        300;
+
+
+    ctx.clearRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+
+    /* FONDO */
+
+    ctx.fillStyle =
+        "#0f172a";
+
+
+    ctx.fillRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+
+    if (
+        pingValues.length === 0
+    ) {
+
+        ctx.fillStyle =
+            "#64748b";
+
+        ctx.font =
+            "13px Arial";
+
+        ctx.fillText(
+            "Esperando datos...",
+            15,
+            25
+        );
+
+        return;
+
+    }
+
+
+    /*
+       El gráfico nunca baja de
+       una escala de 100 ms.
+    */
+
+    const maxValue =
+        Math.max(
+            100,
+            ...pingValues
+        );
+
+
+    /* LÍNEAS */
+
+    ctx.strokeStyle =
+        "#293548";
+
+    ctx.lineWidth = 1;
+
+
+    for (
+        let i = 0;
+        i <= 4;
+        i++
+    ) {
+
+        const y =
+            (height - 25) -
+            (
+                i *
+                (height - 40) /
+                4
+            );
+
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            45,
+            y
+        );
+
+        ctx.lineTo(
+            width - 10,
+            y
+        );
+
+        ctx.stroke();
+
+
+        ctx.fillStyle =
+            "#64748b";
+
+        ctx.font =
+            "10px Arial";
+
+
+        ctx.fillText(
+            Math.round(
+                maxValue *
+                i /
+                4
+            ) +
+            " ms",
+
+            5,
+
+            y + 3
+        );
+
+    }
+
+
+    /* LÍNEA */
+
+    ctx.beginPath();
+
+
+    pingValues.forEach(
+        (value, index) => {
+
+            const x =
+                45 +
+                (
+                    index /
+                    Math.max(
+                        1,
+                        MAX_POINTS - 1
+                    )
+                ) *
+                (
+                    width - 55
+                );
+
+
+            const y =
+                (height - 25) -
+                (
+                    value /
+                    maxValue
+                ) *
+                (
+                    height - 40
+                );
+
+
+            if (
+                index === 0
+            ) {
+
+                ctx.moveTo(
+                    x,
+                    y
+                );
+
+            } else {
+
+                ctx.lineTo(
+                    x,
+                    y
+                );
+
+            }
+
+        }
+    );
+
+
+    ctx.strokeStyle =
+        "#60a5fa";
+
+    ctx.lineWidth = 2;
+
+    ctx.stroke();
+
+
+    /* PUNTOS */
+
+    pingValues.forEach(
+        (value, index) => {
+
+            const x =
+                45 +
+                (
+                    index /
+                    Math.max(
+                        1,
+                        MAX_POINTS - 1
+                    )
+                ) *
+                (
+                    width - 55
+                );
+
+
+            const y =
+                (height - 25) -
+                (
+                    value /
+                    maxValue
+                ) *
+                (
+                    height - 40
+                );
+
+
+            /*
+               Verde = normal
+               Amarillo = tirón
+               Rojo = tirón grave
+            */
+
+            if (
+                value >= 200
+            ) {
+
+                ctx.fillStyle =
+                    "#ef4444";
+
+            }
+
+            else if (
+                value >= 100
+            ) {
+
+                ctx.fillStyle =
+                    "#eab308";
+
+            }
+
+            else {
+
+                ctx.fillStyle =
+                    "#22c55e";
+
+            }
+
+
+            ctx.beginPath();
+
+
+            ctx.arc(
+                x,
+                y,
+                2,
+                0,
+                Math.PI * 2
+            );
+
+
+            ctx.fill();
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   LIMPIAR
+===================================================== */
+
+function clearData() {
+
+    pingValues = [];
+
+    totalTests = 0;
+
+    failedTests = 0;
+
+    maxPing = 0;
+
+    minPing = Infinity;
+
+    spikeCount = 0;
+
+    eventCount = 0;
+
+
+    currentPing.innerHTML =
+        "--";
+
+
+    averagePing.innerHTML =
+        "--";
+
+
+    minPingElement.innerHTML =
+        "--";
+
+
+    maxPingElement.innerHTML =
+        "--";
+
+
+    jitterElement.innerHTML =
+        "--";
+
+
+    packetLoss.innerHTML =
+        "0%";
+
+
+    spikesElement.innerHTML =
+        "0";
+
+
+    eventCountElement.innerHTML =
+        "0";
+
+
+    eventList.innerHTML =
+        '<div class="empty">' +
+        'No se han detectado lag.' +
+        '</div>';
+
+
+    drawChart();
+
+}
+
+
+/* =====================================================
+   REDIMENSIONAR
+===================================================== */
+
+window.addEventListener(
+    "resize",
+    drawChart
+);
+
+
+/* DIBUJO INICIAL */
+
+drawChart();
+
+</script>
+
+</body>
+</html>
