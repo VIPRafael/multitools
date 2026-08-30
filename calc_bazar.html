@@ -1,406 +1,337 @@
+Claro. Te dejo **todo el HTML completo en un solo bloque**, listo para copiar y pegar. Está basado en el código que enviaste. 
+
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Comparador de Ofertas - Oro / RC</title>
 <link rel="icon" type="image/png" href="https://assets.service-exevopan.com/public/calculators/estimator.png">
 
 <style>
+*{box-sizing:border-box}
 
-* {
-    box-sizing: border-box;
+body{
+    margin:0;
+    padding:10px;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#111827;
+    color:#f3f4f6;
+    font-size:13px;
 }
 
-body {
-    margin: 0;
-    padding: 10px;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #111827;
-    color: #f3f4f6;
-    font-size: 13px;
+.container{
+    max-width:1050px;
+    margin:0 auto;
 }
 
-.container {
-    max-width: 1050px;
-    margin: 0 auto;
+h1{
+    text-align:center;
+    font-size:21px;
+    margin:3px 0 9px;
 }
 
-h1 {
-    text-align: center;
-    font-size: 21px;
-    margin: 3px 0 9px;
+/* CONFIGURACIÓN */
+.config{
+    background:#1f2937;
+    border:1px solid #374151;
+    border-radius:8px;
+    padding:8px 12px;
+    margin-bottom:9px;
 }
 
-
-/* =========================
-   CONFIGURACIÓN
-========================= */
-
-.config {
-    background: #1f2937;
-    border: 1px solid #374151;
-    border-radius: 8px;
-    padding: 8px 12px;
-    margin-bottom: 9px;
+.config-row{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
 }
 
-.config-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+.config-title{font-weight:bold}
+
+.nombre-pagina{width:180px}
+.rc-input{width:130px}
+
+/* INPUTS */
+input{
+    background:#111827;
+    color:white;
+    border:1px solid #4b5563;
+    border-radius:5px;
+    padding:7px 8px;
+    height:34px;
+    outline:none;
+    font-size:13px;
 }
 
-.config-title {
-    font-weight: bold;
+input:focus{border-color:#60a5fa}
+
+/* ENCABEZADOS */
+.etiquetas{
+    display:grid;
+    grid-template-columns:1fr 150px 150px 34px;
+    gap:7px;
+    padding:0 8px;
+    margin-bottom:4px;
+    color:#9ca3af;
+    font-size:11px;
 }
 
-.rc-input {
-    width: 130px;
+.etiquetas div:nth-child(2){color:#60a5fa}
+.etiquetas div:nth-child(3){color:#fbbf24}
+
+/* LISTA */
+.comparaciones{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
 }
 
-
-/* =========================
-   INPUTS
-========================= */
-
-input {
-    background: #111827;
-    color: white;
-    border: 1px solid #4b5563;
-    border-radius: 5px;
-    padding: 7px 8px;
-    height: 34px;
-    outline: none;
-    font-size: 13px;
+.comparacion{
+    background:#1f2937;
+    border:1px solid #374151;
+    border-radius:6px;
+    padding:5px 8px;
 }
 
-input:focus {
-    border-color: #60a5fa;
+.fila{
+    display:grid;
+    grid-template-columns:1fr 150px 150px 34px;
+    gap:7px;
+    align-items:center;
 }
 
+.nombre,.valor{width:100%}
 
-/* =========================
-   ENCABEZADOS
-========================= */
-
-.etiquetas {
-    display: grid;
-    grid-template-columns: 1fr 150px 150px 34px;
-    gap: 7px;
-    padding: 0 8px;
-    margin-bottom: 4px;
-    color: #9ca3af;
-    font-size: 11px;
+.btn-eliminar{
+    width:34px;
+    height:34px;
+    border:none;
+    border-radius:5px;
+    background:#dc2626;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
 }
 
-.etiquetas div:nth-child(2) {
-    color: #60a5fa;
+.btn-eliminar:hover{background:#b91c1c}
+
+/* AGREGAR */
+.btn-agregar{
+    width:100%;
+    margin-top:7px;
+    padding:8px;
+    border:none;
+    border-radius:6px;
+    background:#2563eb;
+    color:white;
+    font-size:13px;
+    font-weight:bold;
+    cursor:pointer;
 }
 
-.etiquetas div:nth-child(3) {
-    color: #fbbf24;
+.btn-agregar:hover{background:#1d4ed8}
+
+/* RESULTADOS */
+.resultados{
+    margin-top:10px;
+    background:#1f2937;
+    border:1px solid #374151;
+    border-radius:8px;
+    padding:10px;
 }
 
-
-/* =========================
-   LISTA DE ARTÍCULOS
-========================= */
-
-.comparaciones {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+.resultados h2{
+    text-align:center;
+    font-size:16px;
+    margin:0 0 8px;
 }
 
-.comparacion {
-    background: #1f2937;
-    border: 1px solid #374151;
-    border-radius: 6px;
-    padding: 5px 8px;
+.resultado-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:8px;
 }
 
-.fila {
-    display: grid;
-    grid-template-columns: 1fr 150px 150px 34px;
-    gap: 7px;
-    align-items: center;
+.resultado{
+    background:#111827;
+    border-radius:6px;
+    padding:8px;
+    text-align:center;
 }
 
-.nombre,
-.valor {
-    width: 100%;
+.resultado h3{
+    margin:0 0 4px;
+    font-size:13px;
 }
 
-.btn-eliminar {
-    width: 34px;
-    height: 34px;
-    border: none;
-    border-radius: 5px;
-    background: #dc2626;
-    color: white;
-    font-size: 18px;
-    cursor: pointer;
+.oro{
+    font-size:16px;
+    font-weight:bold;
 }
 
-.btn-eliminar:hover {
-    background: #b91c1c;
+.rc{
+    color:#fbbf24;
+    font-size:14px;
+    font-weight:bold;
+    margin-top:2px;
 }
 
-
-/* =========================
-   BOTÓN AGREGAR
-========================= */
-
-.btn-agregar {
-    width: 100%;
-    margin-top: 7px;
-    padding: 8px;
-    border: none;
-    border-radius: 6px;
-    background: #2563eb;
-    color: white;
-    font-size: 13px;
-    font-weight: bold;
-    cursor: pointer;
+/* RESUMEN */
+.resumen{
+    margin-top:8px;
+    background:#111827;
+    border-radius:6px;
+    padding:8px;
 }
 
-.btn-agregar:hover {
-    background: #1d4ed8;
+.resumen h3{
+    text-align:center;
+    font-size:13px;
+    margin:0 0 6px;
 }
 
-
-/* =========================
-   RESULTADOS
-========================= */
-
-.resultados {
-    margin-top: 10px;
-    background: #1f2937;
-    border: 1px solid #374151;
-    border-radius: 8px;
-    padding: 10px;
+.resumen-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:5px;
 }
 
-.resultados h2 {
-    text-align: center;
-    font-size: 16px;
-    margin: 0 0 8px;
+.resumen-item{
+    background:#1f2937;
+    border-radius:5px;
+    padding:6px;
+    text-align:center;
 }
 
-
-/* =========================
-   OFERTA A / B
-========================= */
-
-.resultado-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+.resumen-item span{
+    display:block;
+    color:#9ca3af;
+    font-size:10px;
 }
 
-.resultado {
-    background: #111827;
-    border-radius: 6px;
-    padding: 8px;
-    text-align: center;
+.resumen-item strong{
+    display:block;
+    margin-top:2px;
+    font-size:13px;
 }
 
-.resultado h3 {
-    margin: 0 0 4px;
-    font-size: 13px;
+/* PÉRDIDA */
+.perdida{
+    margin-top:7px;
+    padding:8px;
+    border-radius:5px;
+    background:#1e3a8a;
+    color:#fff;
+    text-align:center;
 }
 
-.oro {
-    font-size: 16px;
-    font-weight: bold;
+.perdida-titulo{font-size:11px}
+
+.perdida-oro{
+    font-size:17px;
+    font-weight:bold;
+    margin-top:2px;
 }
 
-.rc {
-    color: #fbbf24;
-    font-size: 14px;
-    font-weight: bold;
-    margin-top: 2px;
+.perdida-rc{
+    font-size:13px;
+    margin-top:1px;
 }
 
+/* DETALLE */
+.detalle{margin-top:8px}
 
-/* =========================
-   RESUMEN
-========================= */
-
-.resumen {
-    margin-top: 8px;
-    background: #111827;
-    border-radius: 6px;
-    padding: 8px;
+.detalle h3{
+    text-align:center;
+    font-size:14px;
+    margin:5px 0;
 }
 
-.resumen h3 {
-    text-align: center;
-    font-size: 13px;
-    margin: 0 0 6px;
+.item-detalle{
+    background:#111827;
+    border-radius:5px;
+    padding:6px 8px;
+    margin-bottom:4px;
+    border-left:3px solid #f59e0b;
 }
 
-.resumen-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 5px;
+.item-nombre{
+    font-size:13px;
+    font-weight:bold;
+    margin-bottom:4px;
 }
 
-.resumen-item {
-    background: #1f2937;
-    border-radius: 5px;
-    padding: 6px;
-    text-align: center;
+.item-valores{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:5px;
 }
 
-.resumen-item span {
-    display: block;
-    color: #9ca3af;
-    font-size: 10px;
+.valor-box{
+    background:#1f2937;
+    padding:5px;
+    border-radius:4px;
+    text-align:center;
 }
 
-.resumen-item strong {
-    display: block;
-    margin-top: 2px;
-    font-size: 13px;
+.valor-box small{
+    color:#9ca3af;
+    font-size:9px;
 }
 
-
-/* =========================
-   PÉRDIDA TOTAL
-========================= */
-
-.perdida {
-    margin-top: 7px;
-    padding: 8px;
-    border-radius: 5px;
-    background: #1e3a8a;
-    color: #00000;
-    text-align: center;
+.valor-box strong{
+    display:inline;
+    font-size:11px;
+    margin-left:3px;
 }
 
-.perdida-titulo {
-    font-size: 11px;
+.perdida-item{
+    margin-top:4px;
+    padding:4px;
+    border-radius:4px;
+    text-align:center;
+    background:#1e3a8a;
+    color:#fff;
+    font-size:11px;
+    font-weight:bold;
 }
 
-.perdida-oro {
-    font-size: 17px;
-    font-weight: bold;
-    margin-top: 2px;
-}
+/* MÓVIL */
+@media(max-width:700px){
 
-.perdida-rc {
-    font-size: 13px;
-    margin-top: 1px;
-}
+    body{padding:7px}
 
+    .etiquetas{display:none}
 
-/* =========================
-   DETALLE
-========================= */
-
-.detalle {
-    margin-top: 8px;
-}
-
-.detalle h3 {
-    text-align: center;
-    font-size: 14px;
-    margin: 5px 0;
-}
-
-.item-detalle {
-    background: #111827;
-    border-radius: 5px;
-    padding: 6px 8px;
-    margin-bottom: 4px;
-    border-left: 3px solid #f59e0b;
-}
-
-.item-nombre {
-    font-size: 13px;
-    font-weight: bold;
-    margin-bottom: 4px;
-}
-
-.item-valores {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 5px;
-}
-
-.valor-box {
-    background: #1f2937;
-    padding: 5px;
-    border-radius: 4px;
-    text-align: center;
-}
-
-.valor-box small {
-    color: #9ca3af;
-    font-size: 9px;
-}
-
-.valor-box strong {
-    display: inline;
-    font-size: 11px;
-    margin-left: 3px;
-}
-
-.perdida-item {
-    margin-top: 4px;
-    padding: 4px;
-    border-radius: 4px;
-    text-align: center;
-    background: #1e3a8a;
-    color: #00000;
-    font-size: 11px;
-    font-weight: bold;
-}
-
-
-/* =========================
-   MÓVIL
-========================= */
-
-@media (max-width: 700px) {
-
-    body {
-        padding: 7px;
+    .fila{
+        grid-template-columns:1fr;
     }
 
-    .etiquetas {
-        display: none;
+    .btn-eliminar{
+        width:100%;
     }
 
-    .fila {
-        grid-template-columns: 1fr;
+    .resultado-grid{
+        grid-template-columns:1fr;
     }
 
-    .btn-eliminar {
-        width: 100%;
+    .resumen-grid{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .resultado-grid {
-        grid-template-columns: 1fr;
+    .config-row{
+        flex-wrap:wrap;
     }
 
-    .resumen-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .nombre-pagina,
+    .rc-input{
+        width:100%;
     }
-
-    .config-row {
-        flex-wrap: wrap;
-    }
-
 }
-
 </style>
 </head>
-
 
 <body>
 
@@ -408,80 +339,61 @@ input:focus {
 
 <h1>Comparador de Ofertas</h1>
 
-
-<!-- =========================
-     CONVERSIÓN
-========================= -->
-
+<!-- CONFIGURACIÓN -->
 <div class="config">
-
     <div class="config-row">
 
-        <span class="config-title">
-            1 RC =
-        </span>
+        <span class="config-title">Nombre:</span>
 
         <input
-            type="number"
+            type="text"
+            id="nombrePagina"
+            class="nombre-pagina"
+            placeholder="Nombre"
+            oninput="actualizarTitulo()"
+        >
+
+        <span class="config-title">1 RC =</span>
+
+        <input
+            type="text"
+            inputmode="numeric"
             id="oroPorRC"
             class="rc-input"
             value=""
-            min="0"
-            step="1"
-            oninput="calcular()"
+            placeholder="Oro"
+            oninput="formatearInput(this); calcular()"
         >
 
         <span>Oro</span>
 
     </div>
-
 </div>
 
-
-<!-- =========================
-     ENCABEZADOS
-========================= -->
-
+<!-- ENCABEZADOS -->
 <div class="etiquetas">
-
     <div>Artículo</div>
-
     <div>Oferta arriba (A)</div>
-
     <div>Oferta abajo (B)</div>
-
     <div></div>
-
 </div>
 
-
-<!-- =========================
-     ARTÍCULOS
-========================= -->
-
+<!-- ARTÍCULOS -->
 <div id="comparaciones" class="comparaciones"></div>
-
 
 <button class="btn-agregar" onclick="agregarArticulo()">
     + Agregar artículo
 </button>
 
-
-<!-- =========================
-     RESULTADOS
-========================= -->
-
+<!-- RESULTADOS -->
 <div class="resultados">
 
     <h2>Resultados</h2>
 
-
     <!-- A / B -->
-
     <div class="resultado-grid">
 
         <div class="resultado">
-
             <h3>Oferta arriba — A</h3>
 
             <div class="oro">
@@ -491,12 +403,9 @@ input:focus {
             <div class="rc">
                 <span id="rcA">0</span> RC
             </div>
-
         </div>
 
-
         <div class="resultado">
-
             <h3>Oferta abajo — B</h3>
 
             <div class="oro">
@@ -506,16 +415,11 @@ input:focus {
             <div class="rc">
                 <span id="rcB">0</span> RC
             </div>
-
         </div>
 
     </div>
 
-
-    <!-- =========================
-         RESUMEN
-    ========================= -->
-
+    <!-- RESUMEN -->
     <div class="resumen">
 
         <h3>Resumen de la comparación</h3>
@@ -564,9 +468,7 @@ input:focus {
 
         </div>
 
-
         <!-- PÉRDIDA TOTAL -->
-
         <div class="perdida">
 
             <div class="perdida-titulo">
@@ -585,11 +487,7 @@ input:focus {
 
     </div>
 
-
-    <!-- =========================
-         DETALLE POR ARTÍCULO
-    ========================= -->
-
+    <!-- DETALLE -->
     <div class="detalle">
 
         <h3>Comparación por artículo</h3>
@@ -602,17 +500,63 @@ input:focus {
 
 </div>
 
-
 <script>
 
 let contador = 0;
+
+/* =========================
+   ACTUALIZAR TÍTULO
+========================= */
+
+function actualizarTitulo(){
+
+    const nombre =
+        document.getElementById("nombrePagina").value.trim();
+
+    document.title =
+        nombre || "Comparador de Ofertas - Oro / RC";
+}
+
+
+/* =========================
+   FORMATEAR INPUT
+========================= */
+
+function formatearInput(input){
+
+    let valor =
+        input.value.replace(/\D/g,"");
+
+    if(valor === ""){
+
+        input.value = "";
+        return;
+
+    }
+
+    input.value =
+        Number(valor).toLocaleString("en-US");
+}
+
+
+/* =========================
+   OBTENER NÚMERO
+========================= */
+
+function obtenerNumero(valor){
+
+    return parseFloat(
+        String(valor).replace(/,/g,"")
+    ) || 0;
+
+}
 
 
 /* =========================
    AGREGAR ARTÍCULO
 ========================= */
 
-function agregarArticulo() {
+function agregarArticulo(){
 
     contador++;
 
@@ -621,7 +565,8 @@ function agregarArticulo() {
     const container =
         document.getElementById("comparaciones");
 
-    const div = document.createElement("div");
+    const div =
+        document.createElement("div");
 
     div.className = "comparacion";
 
@@ -639,21 +584,19 @@ function agregarArticulo() {
             >
 
             <input
-                type="number"
+                type="text"
+                inputmode="numeric"
                 class="valor valor-a"
                 placeholder="Oro A"
-                min="0"
-                step="1"
-                oninput="calcular()"
+                oninput="formatearInput(this); calcular()"
             >
 
             <input
-                type="number"
+                type="text"
+                inputmode="numeric"
                 class="valor valor-b"
                 placeholder="Oro B"
-                min="0"
-                step="1"
-                oninput="calcular()"
+                oninput="formatearInput(this); calcular()"
             >
 
             <button
@@ -680,13 +623,17 @@ function agregarArticulo() {
    ELIMINAR ARTÍCULO
 ========================= */
 
-function eliminarArticulo(id) {
+function eliminarArticulo(id){
 
     const elemento =
-        document.getElementById("comparacion-" + id);
+        document.getElementById(
+            "comparacion-" + id
+        );
 
-    if (elemento) {
+    if(elemento){
+
         elemento.remove();
+
     }
 
     calcular();
@@ -697,11 +644,14 @@ function eliminarArticulo(id) {
    FORMATO
 ========================= */
 
-function formato(numero) {
+function formato(numero){
 
-    return numero.toLocaleString("en-US", {
-        maximumFractionDigits: 2
-    });
+    return numero.toLocaleString(
+        "en-US",
+        {
+            maximumFractionDigits:2
+        }
+    );
 
 }
 
@@ -710,21 +660,18 @@ function formato(numero) {
    CALCULAR
 ========================= */
 
-function calcular() {
+function calcular(){
 
     const oroPorRC =
-        parseFloat(
+        obtenerNumero(
             document.getElementById("oroPorRC").value
-        ) || 0;
-
+        );
 
     let totalA = 0;
     let totalB = 0;
 
-
     const articulos =
         document.querySelectorAll(".comparacion");
-
 
     const detalle =
         document.getElementById("detalleItems");
@@ -736,7 +683,7 @@ function calcular() {
        RECORRER ARTÍCULOS
     ========================= */
 
-    articulos.forEach((articulo, index) => {
+    articulos.forEach((articulo,index)=>{
 
         const nombreInput =
             articulo.querySelector(".nombre");
@@ -749,15 +696,15 @@ function calcular() {
 
 
         const nombre =
-            nombreInput.value.trim() ||
-            "Artículo " + (index + 1);
+            nombreInput.value.trim()
+            || "Artículo " + (index + 1);
 
 
         const valorA =
-            parseFloat(inputA.value) || 0;
+            obtenerNumero(inputA.value);
 
         const valorB =
-            parseFloat(inputB.value) || 0;
+            obtenerNumero(inputB.value);
 
 
         totalA += valorA;
@@ -768,27 +715,27 @@ function calcular() {
 
         const rcA =
             oroPorRC > 0
-                ? valorA / oroPorRC
-                : 0;
+            ? valorA / oroPorRC
+            : 0;
 
         const rcB =
             oroPorRC > 0
-                ? valorB / oroPorRC
-                : 0;
+            ? valorB / oroPorRC
+            : 0;
 
 
-        /* Diferencia del artículo */
+        /* DIFERENCIA */
 
         const perdida =
-            Math.max(0, valorA - valorB);
+            Math.max(0,valorA - valorB);
 
         const perdidaRC =
             oroPorRC > 0
-                ? perdida / oroPorRC
-                : 0;
+            ? perdida / oroPorRC
+            : 0;
 
 
-        /* Crear detalle */
+        /* DETALLE */
 
         const detalleDiv =
             document.createElement("div");
@@ -796,13 +743,11 @@ function calcular() {
         detalleDiv.className =
             "item-detalle";
 
-
         detalleDiv.innerHTML = `
 
             <div class="item-nombre">
                 ${escapeHTML(nombre)}
             </div>
-
 
             <div class="item-valores">
 
@@ -837,7 +782,6 @@ function calcular() {
 
             </div>
 
-
             <div class="perdida-item">
 
                 Pérdida al elegir B:
@@ -847,7 +791,6 @@ function calcular() {
             </div>
 
         `;
-
 
         detalle.appendChild(detalleDiv);
 
@@ -860,13 +803,13 @@ function calcular() {
 
     const rcA =
         oroPorRC > 0
-            ? totalA / oroPorRC
-            : 0;
+        ? totalA / oroPorRC
+        : 0;
 
     const rcB =
         oroPorRC > 0
-            ? totalB / oroPorRC
-            : 0;
+        ? totalB / oroPorRC
+        : 0;
 
 
     /* =========================
@@ -874,22 +817,21 @@ function calcular() {
     ========================= */
 
     const diferencia =
-        Math.max(0, totalA - totalB);
-
+        Math.max(0,totalA - totalB);
 
     const diferenciaRC =
         oroPorRC > 0
-            ? diferencia / oroPorRC
-            : 0;
+        ? diferencia / oroPorRC
+        : 0;
 
 
     /* =========================
-       PORCENTAJE DE B
+       PORCENTAJE B
     ========================= */
 
     let porcentajeB = 0;
 
-    if (totalA > 0) {
+    if(totalA > 0){
 
         porcentajeB =
             (totalB / totalA) * 100;
@@ -901,70 +843,62 @@ function calcular() {
        RESULTADOS A
     ========================= */
 
-    document.getElementById("oroA").textContent =
-        formato(totalA);
+    document.getElementById("oroA")
+        .textContent = formato(totalA);
 
-    document.getElementById("rcA").textContent =
-        formato(rcA);
+    document.getElementById("rcA")
+        .textContent = formato(rcA);
 
 
     /* =========================
        RESULTADOS B
     ========================= */
 
-    document.getElementById("oroB").textContent =
-        formato(totalB);
+    document.getElementById("oroB")
+        .textContent = formato(totalB);
 
-    document.getElementById("rcB").textContent =
-        formato(rcB);
+    document.getElementById("rcB")
+        .textContent = formato(rcB);
 
 
     /* =========================
        RESUMEN
     ========================= */
 
-    document.getElementById("cantidadArticulos").textContent =
-        articulos.length;
+    document.getElementById("cantidadArticulos")
+        .textContent = articulos.length;
 
+    document.getElementById("resumenOroA")
+        .textContent = formato(totalA) + " Oro";
 
-    document.getElementById("resumenOroA").textContent =
-        formato(totalA) + " Oro";
+    document.getElementById("resumenOroB")
+        .textContent = formato(totalB) + " Oro";
 
+    document.getElementById("resumenRCA")
+        .textContent = formato(rcA) + " RC";
 
-    document.getElementById("resumenOroB").textContent =
-        formato(totalB) + " Oro";
+    document.getElementById("resumenRCB")
+        .textContent = formato(rcB) + " RC";
 
+    document.getElementById("diferencia")
+        .textContent = formato(diferencia) + " Oro";
 
-    document.getElementById("resumenRCA").textContent =
-        formato(rcA) + " RC";
+    document.getElementById("diferenciaRC")
+        .textContent = formato(diferenciaRC) + " RC";
 
-
-    document.getElementById("resumenRCB").textContent =
-        formato(rcB) + " RC";
-
-
-    document.getElementById("diferencia").textContent =
-        formato(diferencia) + " Oro";
-
-
-    document.getElementById("diferenciaRC").textContent =
-        formato(diferenciaRC) + " RC";
-
-
-    document.getElementById("porcentajeB").textContent =
-        formato(porcentajeB) + "%";
+    document.getElementById("porcentajeB")
+        .textContent = formato(porcentajeB) + "%";
 
 
     /* =========================
        PÉRDIDA
     ========================= */
 
-    document.getElementById("perdidaOro").textContent =
-        formato(diferencia) + " Oro";
+    document.getElementById("perdidaOro")
+        .textContent = formato(diferencia) + " Oro";
 
-
-    document.getElementById("perdidaRC").textContent =
-        formato(diferenciaRC) + " RC";
+    document.getElementById("perdidaRC")
+        .textContent = formato(diferenciaRC) + " RC";
 
 }
 
@@ -973,7 +907,7 @@ function calcular() {
    SEGURIDAD
 ========================= */
 
-function escapeHTML(text) {
+function escapeHTML(text){
 
     const div =
         document.createElement("div");
@@ -995,3 +929,4 @@ agregarArticulo();
 
 </body>
 </html>
+```
