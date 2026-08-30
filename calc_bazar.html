@@ -1,13 +1,20 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Comparador de Ofertas - Oro / RC</title>
-<link rel="icon" type="image/png" href="https://assets.service-exevopan.com/public/calculators/estimator.png">
+
+<link rel="icon" type="image/png"
+href="https://assets.service-exevopan.com/public/calculators/estimator.png">
 
 <style>
-*{box-sizing:border-box}
+
+*{
+    box-sizing:border-box;
+}
 
 body{
     margin:0;
@@ -30,6 +37,7 @@ h1{
 }
 
 /* CONFIGURACIÓN */
+
 .config{
     background:#1f2937;
     border:1px solid #374151;
@@ -45,12 +53,20 @@ h1{
     gap:8px;
 }
 
-.config-title{font-weight:bold}
+.config-title{
+    font-weight:bold;
+}
 
-.nombre-pagina{width:180px}
-.rc-input{width:130px}
+.nombre-pagina{
+    width:180px;
+}
+
+.rc-input{
+    width:130px;
+}
 
 /* INPUTS */
+
 input{
     background:#111827;
     color:white;
@@ -62,9 +78,12 @@ input{
     font-size:13px;
 }
 
-input:focus{border-color:#60a5fa}
+input:focus{
+    border-color:#60a5fa;
+}
 
 /* ENCABEZADOS */
+
 .etiquetas{
     display:grid;
     grid-template-columns:1fr 150px 150px 34px;
@@ -75,10 +94,16 @@ input:focus{border-color:#60a5fa}
     font-size:11px;
 }
 
-.etiquetas div:nth-child(2){color:#60a5fa}
-.etiquetas div:nth-child(3){color:#fbbf24}
+.etiquetas div:nth-child(2){
+    color:#60a5fa;
+}
 
-/* LISTA */
+.etiquetas div:nth-child(3){
+    color:#fbbf24;
+}
+
+/* ARTÍCULOS */
+
 .comparaciones{
     display:flex;
     flex-direction:column;
@@ -99,7 +124,10 @@ input:focus{border-color:#60a5fa}
     align-items:center;
 }
 
-.nombre,.valor{width:100%}
+.nombre,
+.valor{
+    width:100%;
+}
 
 .btn-eliminar{
     width:34px;
@@ -112,9 +140,12 @@ input:focus{border-color:#60a5fa}
     cursor:pointer;
 }
 
-.btn-eliminar:hover{background:#b91c1c}
+.btn-eliminar:hover{
+    background:#b91c1c;
+}
 
 /* AGREGAR */
+
 .btn-agregar{
     width:100%;
     margin-top:7px;
@@ -128,9 +159,12 @@ input:focus{border-color:#60a5fa}
     cursor:pointer;
 }
 
-.btn-agregar:hover{background:#1d4ed8}
+.btn-agregar:hover{
+    background:#1d4ed8;
+}
 
 /* RESULTADOS */
+
 .resultados{
     margin-top:10px;
     background:#1f2937;
@@ -144,6 +178,8 @@ input:focus{border-color:#60a5fa}
     font-size:16px;
     margin:0 0 8px;
 }
+
+/* A / B */
 
 .resultado-grid{
     display:grid;
@@ -176,6 +212,7 @@ input:focus{border-color:#60a5fa}
 }
 
 /* RESUMEN */
+
 .resumen{
     margin-top:8px;
     background:#111827;
@@ -215,16 +252,19 @@ input:focus{border-color:#60a5fa}
 }
 
 /* PÉRDIDA */
+
 .perdida{
     margin-top:7px;
     padding:8px;
     border-radius:5px;
     background:#1e3a8a;
-    color:#fff;
+    color:#ffffff;
     text-align:center;
 }
 
-.perdida-titulo{font-size:11px}
+.perdida-titulo{
+    font-size:11px;
+}
 
 .perdida-oro{
     font-size:17px;
@@ -238,7 +278,10 @@ input:focus{border-color:#60a5fa}
 }
 
 /* DETALLE */
-.detalle{margin-top:8px}
+
+.detalle{
+    margin-top:8px;
+}
 
 .detalle h3{
     text-align:center;
@@ -290,17 +333,22 @@ input:focus{border-color:#60a5fa}
     border-radius:4px;
     text-align:center;
     background:#1e3a8a;
-    color:#fff;
+    color:#ffffff;
     font-size:11px;
     font-weight:bold;
 }
 
 /* MÓVIL */
+
 @media(max-width:700px){
 
-    body{padding:7px}
+    body{
+        padding:7px;
+    }
 
-    .etiquetas{display:none}
+    .etiquetas{
+        display:none;
+    }
 
     .fila{
         grid-template-columns:1fr;
@@ -327,6 +375,7 @@ input:focus{border-color:#60a5fa}
         width:100%;
     }
 }
+
 </style>
 </head>
 
@@ -337,146 +386,293 @@ input:focus{border-color:#60a5fa}
 <h1>Comparador de Ofertas</h1>
 
 <!-- CONFIGURACIÓN -->
+
 <div class="config">
+
     <div class="config-row">
 
-        <span class="config-title">Nombre:</span>
+        <span class="config-title">
+            Nombre:
+        </span>
 
         <input
             type="text"
             id="nombrePagina"
             class="nombre-pagina"
             placeholder="Nombre"
-            oninput="actualizarTitulo()"
+            oninput="actualizarTitulo(); guardarDatos();"
         >
 
-        <span class="config-title">1 RC =</span>
+        <span class="config-title">
+            1 RC =
+        </span>
 
         <input
             type="text"
             inputmode="numeric"
             id="oroPorRC"
             class="rc-input"
-            value=""
             placeholder="Oro"
-            oninput="formatearInput(this); calcular()"
+            oninput="formatearInput(this); calcular(); guardarDatos();"
         >
 
-        <span>Oro</span>
+        <span>
+            Oro
+        </span>
 
     </div>
+
 </div>
+
 
 <!-- ENCABEZADOS -->
+
 <div class="etiquetas">
-    <div>Artículo</div>
-    <div>Oferta arriba (A)</div>
-    <div>Oferta abajo (B)</div>
+
+    <div>
+        Artículo
+    </div>
+
+    <div>
+        Oferta arriba (A)
+    </div>
+
+    <div>
+        Oferta abajo (B)
+    </div>
+
     <div></div>
+
 </div>
 
-<!-- ARTÍCULOS -->
-<div id="comparaciones" class="comparaciones"></div>
 
-<button class="btn-agregar" onclick="agregarArticulo()">
+<!-- ARTÍCULOS -->
+
+<div
+    id="comparaciones"
+    class="comparaciones"
+></div>
+
+
+<button
+    class="btn-agregar"
+    onclick="agregarArticulo()"
+>
     + Agregar artículo
 </button>
 
+
 <!-- RESULTADOS -->
+
 <div class="resultados">
 
-    <h2>Resultados</h2>
+    <h2>
+        Resultados
+    </h2>
+
 
     <!-- A / B -->
+
     <div class="resultado-grid">
 
         <div class="resultado">
-            <h3>Oferta arriba — A</h3>
+
+            <h3>
+                Oferta arriba — A
+            </h3>
 
             <div class="oro">
-                <span id="oroA">0</span> Oro
+
+                <span id="oroA">
+                    0
+                </span>
+
+                Oro
+
             </div>
 
             <div class="rc">
-                <span id="rcA">0</span> RC
+
+                <span id="rcA">
+                    0
+                </span>
+
+                RC
+
             </div>
+
         </div>
 
+
         <div class="resultado">
-            <h3>Oferta abajo — B</h3>
+
+            <h3>
+                Oferta abajo — B
+            </h3>
 
             <div class="oro">
-                <span id="oroB">0</span> Oro
+
+                <span id="oroB">
+                    0
+                </span>
+
+                Oro
+
             </div>
 
             <div class="rc">
-                <span id="rcB">0</span> RC
+
+                <span id="rcB">
+                    0
+                </span>
+
+                RC
+
             </div>
+
         </div>
 
     </div>
 
+
     <!-- RESUMEN -->
+
     <div class="resumen">
 
-        <h3>Resumen de la comparación</h3>
+        <h3>
+            Resumen de la comparación
+        </h3>
+
 
         <div class="resumen-grid">
 
             <div class="resumen-item">
-                <span>Artículos</span>
-                <strong id="cantidadArticulos">0</strong>
+
+                <span>
+                    Artículos
+                </span>
+
+                <strong id="cantidadArticulos">
+                    0
+                </strong>
+
             </div>
 
-            <div class="resumen-item">
-                <span>Total A</span>
-                <strong id="resumenOroA">0 Oro</strong>
-            </div>
 
             <div class="resumen-item">
-                <span>Total B</span>
-                <strong id="resumenOroB">0 Oro</strong>
+
+                <span>
+                    Total A
+                </span>
+
+                <strong id="resumenOroA">
+                    0 Oro
+                </strong>
+
             </div>
 
-            <div class="resumen-item">
-                <span>A en RC</span>
-                <strong id="resumenRCA">0 RC</strong>
-            </div>
 
             <div class="resumen-item">
-                <span>B en RC</span>
-                <strong id="resumenRCB">0 RC</strong>
+
+                <span>
+                    Total B
+                </span>
+
+                <strong id="resumenOroB">
+                    0 Oro
+                </strong>
+
             </div>
 
-            <div class="resumen-item">
-                <span>Diferencia Oro</span>
-                <strong id="diferencia">0 Oro</strong>
-            </div>
 
             <div class="resumen-item">
-                <span>Diferencia RC</span>
-                <strong id="diferenciaRC">0 RC</strong>
+
+                <span>
+                    A en RC
+                </span>
+
+                <strong id="resumenRCA">
+                    0 RC
+                </strong>
+
             </div>
 
+
             <div class="resumen-item">
-                <span>B representa</span>
-                <strong id="porcentajeB">0%</strong>
+
+                <span>
+                    B en RC
+                </span>
+
+                <strong id="resumenRCB">
+                    0 RC
+                </strong>
+
+            </div>
+
+
+            <div class="resumen-item">
+
+                <span>
+                    Diferencia Oro
+                </span>
+
+                <strong id="diferencia">
+                    0 Oro
+                </strong>
+
+            </div>
+
+
+            <div class="resumen-item">
+
+                <span>
+                    Diferencia RC
+                </span>
+
+                <strong id="diferenciaRC">
+                    0 RC
+                </strong>
+
+            </div>
+
+
+            <div class="resumen-item">
+
+                <span>
+                    B representa
+                </span>
+
+                <strong id="porcentajeB">
+                    0%
+                </strong>
+
             </div>
 
         </div>
 
+
         <!-- PÉRDIDA TOTAL -->
+
         <div class="perdida">
 
             <div class="perdida-titulo">
+
                 ORO / RC que pierdes al elegir B en lugar de A
+
             </div>
 
-            <div class="perdida-oro" id="perdidaOro">
+            <div
+                class="perdida-oro"
+                id="perdidaOro"
+            >
                 0 Oro
             </div>
 
-            <div class="perdida-rc" id="perdidaRC">
+            <div
+                class="perdida-rc"
+                id="perdidaRC"
+            >
                 0 RC
             </div>
 
@@ -484,10 +680,14 @@ input:focus{border-color:#60a5fa}
 
     </div>
 
+
     <!-- DETALLE -->
+
     <div class="detalle">
 
-        <h3>Comparación por artículo</h3>
+        <h3>
+            Comparación por artículo
+        </h3>
 
         <div id="detalleItems"></div>
 
@@ -497,77 +697,177 @@ input:focus{border-color:#60a5fa}
 
 </div>
 
+
 <script>
+
+/* =====================================================
+   SISTEMA DE GUARDADO
+===================================================== */
 
 let contador = 0;
 
-/* =========================
+
+/*
+    Cada URL tendrá su propio espacio de guardado.
+
+    Ejemplo:
+
+    comparador.html?id=1
+    comparador.html?id=2
+
+    De esta forma dos pestañas pueden tener
+    datos completamente diferentes.
+*/
+
+function obtenerID(){
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    let id = params.get("id");
+
+
+    /*
+        Si no existe ID, creamos uno.
+    */
+
+    if(!id){
+
+        id =
+            "comparador-" +
+            Date.now() +
+            "-" +
+            Math.random()
+                .toString(36)
+                .substring(2,8);
+
+
+        params.set("id",id);
+
+
+        /*
+            Cambia la URL sin recargar la página.
+        */
+
+        const nuevaURL =
+            window.location.pathname +
+            "?" +
+            params.toString();
+
+
+        window.history.replaceState(
+            {},
+            "",
+            nuevaURL
+        );
+
+    }
+
+    return id;
+}
+
+
+const ID_PESTANA = obtenerID();
+
+
+const CLAVE_GUARDADO =
+    "comparador_ofertas_" +
+    ID_PESTANA;
+
+
+/* =====================================================
    ACTUALIZAR TÍTULO
-========================= */
+===================================================== */
 
 function actualizarTitulo(){
 
     const nombre =
-        document.getElementById("nombrePagina").value.trim();
+        document
+            .getElementById("nombrePagina")
+            .value
+            .trim();
+
 
     document.title =
-        nombre || "Comparador de Ofertas - Oro / RC";
+        nombre ||
+        "Comparador de Ofertas - Oro / RC";
+
 }
 
 
-/* =========================
-   FORMATEAR INPUT
-========================= */
+/* =====================================================
+   FORMATEAR INPUT CON COMAS
+===================================================== */
 
 function formatearInput(input){
 
     let valor =
         input.value.replace(/\D/g,"");
 
+
     if(valor === ""){
 
         input.value = "";
+
         return;
 
     }
 
+
     input.value =
-        Number(valor).toLocaleString("en-US");
+        Number(valor)
+            .toLocaleString("en-US");
+
 }
 
 
-/* =========================
-   OBTENER NÚMERO
-========================= */
+/* =====================================================
+   OBTENER NÚMERO SIN COMAS
+===================================================== */
 
 function obtenerNumero(valor){
 
     return parseFloat(
-        String(valor).replace(/,/g,"")
+        String(valor)
+            .replace(/,/g,"")
     ) || 0;
 
 }
 
 
-/* =========================
+/* =====================================================
    AGREGAR ARTÍCULO
-========================= */
+===================================================== */
 
-function agregarArticulo(){
+function agregarArticulo(
+    datos = null,
+    enfocar = true
+){
 
     contador++;
 
     const id = contador;
 
+
     const container =
-        document.getElementById("comparaciones");
+        document.getElementById(
+            "comparaciones"
+        );
+
 
     const div =
         document.createElement("div");
 
-    div.className = "comparacion";
 
-    div.id = "comparacion-" + id;
+    div.className =
+        "comparacion";
+
+
+    div.id =
+        "comparacion-" + id;
+
 
     div.innerHTML = `
 
@@ -577,7 +877,7 @@ function agregarArticulo(){
                 type="text"
                 class="nombre"
                 placeholder="Nombre del artículo"
-                oninput="calcular()"
+                oninput="calcular(); guardarDatos();"
             >
 
             <input
@@ -585,7 +885,7 @@ function agregarArticulo(){
                 inputmode="numeric"
                 class="valor valor-a"
                 placeholder="Oro A"
-                oninput="formatearInput(this); calcular()"
+                oninput="formatearInput(this); calcular(); guardarDatos();"
             >
 
             <input
@@ -593,7 +893,7 @@ function agregarArticulo(){
                 inputmode="numeric"
                 class="valor valor-b"
                 placeholder="Oro B"
-                oninput="formatearInput(this); calcular()"
+                oninput="formatearInput(this); calcular(); guardarDatos();"
             >
 
             <button
@@ -608,17 +908,58 @@ function agregarArticulo(){
 
     `;
 
+
     container.appendChild(div);
 
-    div.querySelector(".nombre").focus();
+
+    /*
+        Si estamos cargando datos guardados,
+        rellenamos los valores.
+    */
+
+    if(datos){
+
+        const nombre =
+            div.querySelector(".nombre");
+
+        const valorA =
+            div.querySelector(".valor-a");
+
+        const valorB =
+            div.querySelector(".valor-b");
+
+
+        nombre.value =
+            datos.nombre || "";
+
+
+        valorA.value =
+            datos.valorA || "";
+
+
+        valorB.value =
+            datos.valorB || "";
+
+    }
+
+
+    if(enfocar){
+
+        div
+            .querySelector(".nombre")
+            .focus();
+
+    }
+
 
     calcular();
+
 }
 
 
-/* =========================
+/* =====================================================
    ELIMINAR ARTÍCULO
-========================= */
+===================================================== */
 
 function eliminarArticulo(id){
 
@@ -627,19 +968,24 @@ function eliminarArticulo(id){
             "comparacion-" + id
         );
 
+
     if(elemento){
 
         elemento.remove();
 
     }
 
+
     calcular();
+
+    guardarDatos();
+
 }
 
 
-/* =========================
-   FORMATO
-========================= */
+/* =====================================================
+   FORMATO DE RESULTADOS
+===================================================== */
 
 function formato(numero){
 
@@ -653,58 +999,86 @@ function formato(numero){
 }
 
 
-/* =========================
+/* =====================================================
    CALCULAR
-========================= */
+===================================================== */
 
 function calcular(){
 
     const oroPorRC =
         obtenerNumero(
-            document.getElementById("oroPorRC").value
+            document
+                .getElementById("oroPorRC")
+                .value
         );
+
 
     let totalA = 0;
     let totalB = 0;
 
+
     const articulos =
-        document.querySelectorAll(".comparacion");
+        document.querySelectorAll(
+            ".comparacion"
+        );
+
 
     const detalle =
-        document.getElementById("detalleItems");
+        document.getElementById(
+            "detalleItems"
+        );
+
 
     detalle.innerHTML = "";
 
 
-    /* =========================
+    /* ================================================
        RECORRER ARTÍCULOS
-    ========================= */
+    ================================================ */
 
-    articulos.forEach((articulo,index)=>{
+    articulos.forEach(
+        (articulo,index)=>{
+
 
         const nombreInput =
-            articulo.querySelector(".nombre");
+            articulo.querySelector(
+                ".nombre"
+            );
+
 
         const inputA =
-            articulo.querySelector(".valor-a");
+            articulo.querySelector(
+                ".valor-a"
+            );
+
 
         const inputB =
-            articulo.querySelector(".valor-b");
+            articulo.querySelector(
+                ".valor-b"
+            );
 
 
         const nombre =
             nombreInput.value.trim()
-            || "Artículo " + (index + 1);
+            ||
+            "Artículo " +
+            (index + 1);
 
 
         const valorA =
-            obtenerNumero(inputA.value);
+            obtenerNumero(
+                inputA.value
+            );
+
 
         const valorB =
-            obtenerNumero(inputB.value);
+            obtenerNumero(
+                inputB.value
+            );
 
 
         totalA += valorA;
+
         totalB += valorB;
 
 
@@ -715,6 +1089,7 @@ function calcular(){
             ? valorA / oroPorRC
             : 0;
 
+
         const rcB =
             oroPorRC > 0
             ? valorB / oroPorRC
@@ -724,7 +1099,11 @@ function calcular(){
         /* DIFERENCIA */
 
         const perdida =
-            Math.max(0,valorA - valorB);
+            Math.max(
+                0,
+                valorA - valorB
+            );
+
 
         const perdidaRC =
             oroPorRC > 0
@@ -735,25 +1114,35 @@ function calcular(){
         /* DETALLE */
 
         const detalleDiv =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
+
 
         detalleDiv.className =
             "item-detalle";
 
+
         detalleDiv.innerHTML = `
 
             <div class="item-nombre">
+
                 ${escapeHTML(nombre)}
+
             </div>
+
 
             <div class="item-valores">
 
                 <div class="valor-box">
 
-                    <small>A:</small>
+                    <small>
+                        A:
+                    </small>
 
                     <strong>
-                        ${formato(valorA)} Oro
+                        ${formato(valorA)}
+                        Oro
                     </strong>
 
                     <small>
@@ -765,10 +1154,13 @@ function calcular(){
 
                 <div class="valor-box">
 
-                    <small>B:</small>
+                    <small>
+                        B:
+                    </small>
 
                     <strong>
-                        ${formato(valorB)} Oro
+                        ${formato(valorB)}
+                        Oro
                     </strong>
 
                     <small>
@@ -779,29 +1171,37 @@ function calcular(){
 
             </div>
 
+
             <div class="perdida-item">
 
                 Pérdida al elegir B:
-                ${formato(perdida)} Oro
+
+                ${formato(perdida)}
+                Oro
+
                 (${formato(perdidaRC)} RC)
 
             </div>
 
         `;
 
-        detalle.appendChild(detalleDiv);
+
+        detalle.appendChild(
+            detalleDiv
+        );
 
     });
 
 
-    /* =========================
+    /* ================================================
        RC TOTALES
-    ========================= */
+    ================================================ */
 
     const rcA =
         oroPorRC > 0
         ? totalA / oroPorRC
         : 0;
+
 
     const rcB =
         oroPorRC > 0
@@ -809,12 +1209,16 @@ function calcular(){
         : 0;
 
 
-    /* =========================
+    /* ================================================
        DIFERENCIA
-    ========================= */
+    ================================================ */
 
     const diferencia =
-        Math.max(0,totalA - totalB);
+        Math.max(
+            0,
+            totalA - totalB
+        );
+
 
     const diferenciaRC =
         oroPorRC > 0
@@ -822,11 +1226,12 @@ function calcular(){
         : 0;
 
 
-    /* =========================
+    /* ================================================
        PORCENTAJE B
-    ========================= */
+    ================================================ */
 
     let porcentajeB = 0;
+
 
     if(totalA > 0){
 
@@ -836,93 +1241,310 @@ function calcular(){
     }
 
 
-    /* =========================
-       RESULTADOS A
-    ========================= */
+    /* ================================================
+       RESULTADO A
+    ================================================ */
 
     document.getElementById("oroA")
-        .textContent = formato(totalA);
+        .textContent =
+        formato(totalA);
+
 
     document.getElementById("rcA")
-        .textContent = formato(rcA);
+        .textContent =
+        formato(rcA);
 
 
-    /* =========================
-       RESULTADOS B
-    ========================= */
+    /* ================================================
+       RESULTADO B
+    ================================================ */
 
     document.getElementById("oroB")
-        .textContent = formato(totalB);
+        .textContent =
+        formato(totalB);
+
 
     document.getElementById("rcB")
-        .textContent = formato(rcB);
+        .textContent =
+        formato(rcB);
 
 
-    /* =========================
+    /* ================================================
        RESUMEN
-    ========================= */
+    ================================================ */
 
-    document.getElementById("cantidadArticulos")
-        .textContent = articulos.length;
-
-    document.getElementById("resumenOroA")
-        .textContent = formato(totalA) + " Oro";
-
-    document.getElementById("resumenOroB")
-        .textContent = formato(totalB) + " Oro";
-
-    document.getElementById("resumenRCA")
-        .textContent = formato(rcA) + " RC";
-
-    document.getElementById("resumenRCB")
-        .textContent = formato(rcB) + " RC";
-
-    document.getElementById("diferencia")
-        .textContent = formato(diferencia) + " Oro";
-
-    document.getElementById("diferenciaRC")
-        .textContent = formato(diferenciaRC) + " RC";
-
-    document.getElementById("porcentajeB")
-        .textContent = formato(porcentajeB) + "%";
+    document.getElementById(
+        "cantidadArticulos"
+    ).textContent =
+        articulos.length;
 
 
-    /* =========================
-       PÉRDIDA
-    ========================= */
+    document.getElementById(
+        "resumenOroA"
+    ).textContent =
+        formato(totalA) +
+        " Oro";
 
-    document.getElementById("perdidaOro")
-        .textContent = formato(diferencia) + " Oro";
 
-    document.getElementById("perdidaRC")
-        .textContent = formato(diferenciaRC) + " RC";
+    document.getElementById(
+        "resumenOroB"
+    ).textContent =
+        formato(totalB) +
+        " Oro";
+
+
+    document.getElementById(
+        "resumenRCA"
+    ).textContent =
+        formato(rcA) +
+        " RC";
+
+
+    document.getElementById(
+        "resumenRCB"
+    ).textContent =
+        formato(rcB) +
+        " RC";
+
+
+    document.getElementById(
+        "diferencia"
+    ).textContent =
+        formato(diferencia) +
+        " Oro";
+
+
+    document.getElementById(
+        "diferenciaRC"
+    ).textContent =
+        formato(diferenciaRC) +
+        " RC";
+
+
+    document.getElementById(
+        "porcentajeB"
+    ).textContent =
+        formato(porcentajeB) +
+        "%";
+
+
+    /* ================================================
+       PÉRDIDA TOTAL
+    ================================================ */
+
+    document.getElementById(
+        "perdidaOro"
+    ).textContent =
+        formato(diferencia) +
+        " Oro";
+
+
+    document.getElementById(
+        "perdidaRC"
+    ).textContent =
+        formato(diferenciaRC) +
+        " RC";
 
 }
 
 
-/* =========================
-   SEGURIDAD
-========================= */
+/* =====================================================
+   GUARDAR TODOS LOS DATOS
+===================================================== */
+
+function guardarDatos(){
+
+    const articulos =
+        document.querySelectorAll(
+            ".comparacion"
+        );
+
+
+    const datosArticulos = [];
+
+
+    articulos.forEach(
+        articulo => {
+
+        datosArticulos.push({
+
+            nombre:
+                articulo
+                    .querySelector(".nombre")
+                    .value,
+
+            valorA:
+                articulo
+                    .querySelector(".valor-a")
+                    .value,
+
+            valorB:
+                articulo
+                    .querySelector(".valor-b")
+                    .value
+
+        });
+
+    });
+
+
+    const datos = {
+
+        nombrePagina:
+            document
+                .getElementById("nombrePagina")
+                .value,
+
+        oroPorRC:
+            document
+                .getElementById("oroPorRC")
+                .value,
+
+        articulos:
+            datosArticulos
+
+    };
+
+
+    localStorage.setItem(
+        CLAVE_GUARDADO,
+        JSON.stringify(datos)
+    );
+
+}
+
+
+/* =====================================================
+   CARGAR DATOS GUARDADOS
+===================================================== */
+
+function cargarDatos(){
+
+    const guardado =
+        localStorage.getItem(
+            CLAVE_GUARDADO
+        );
+
+
+    /*
+        Si no existe información guardada,
+        creamos un artículo vacío.
+    */
+
+    if(!guardado){
+
+        agregarArticulo(
+            null,
+            true
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const datos =
+            JSON.parse(guardado);
+
+
+        /* NOMBRE */
+
+        document
+            .getElementById("nombrePagina")
+            .value =
+            datos.nombrePagina || "";
+
+
+        /* ORO POR RC */
+
+        document
+            .getElementById("oroPorRC")
+            .value =
+            datos.oroPorRC || "";
+
+
+        actualizarTitulo();
+
+
+        /*
+            Restaurar artículos
+        */
+
+        if(
+            datos.articulos &&
+            datos.articulos.length > 0
+        ){
+
+            datos.articulos.forEach(
+                articulo => {
+
+                agregarArticulo(
+                    articulo,
+                    false
+                );
+
+            });
+
+        }else{
+
+            agregarArticulo(
+                null,
+                true
+            );
+
+        }
+
+
+        calcular();
+
+
+    }catch(error){
+
+        console.error(
+            "Error cargando datos:",
+            error
+        );
+
+
+        agregarArticulo(
+            null,
+            true
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   SEGURIDAD HTML
+===================================================== */
 
 function escapeHTML(text){
 
     const div =
         document.createElement("div");
 
-    div.textContent = text;
+
+    div.textContent =
+        text;
+
 
     return div.innerHTML;
 
 }
 
 
-/* =========================
-   PRIMER ARTÍCULO
-========================= */
+/* =====================================================
+   INICIAR
+===================================================== */
 
-agregarArticulo();
+cargarDatos();
 
 </script>
 
 </body>
 </html>
+```
