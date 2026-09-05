@@ -35,7 +35,9 @@ h1{
     margin:3px 0 9px;
 }
 
-/* CONFIGURACIÓN */
+/* =========================
+   CONFIGURACIÓN
+========================= */
 
 .config{
     background:#1f2937;
@@ -50,6 +52,7 @@ h1{
     align-items:center;
     justify-content:center;
     gap:8px;
+    flex-wrap:wrap;
 }
 
 .config-title{
@@ -64,7 +67,52 @@ h1{
     width:130px;
 }
 
-/* INPUTS */
+/* =========================
+   ENLACE
+========================= */
+
+.enlace-box{
+    margin-top:7px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+.enlace-input{
+    flex:1;
+    min-width:0;
+    height:30px;
+    font-size:11px;
+    color:#9ca3af;
+}
+
+.btn-copiar{
+    height:30px;
+    border:none;
+    border-radius:5px;
+    background:#059669;
+    color:white;
+    padding:0 12px;
+    cursor:pointer;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+.btn-copiar:hover{
+    background:#047857;
+}
+
+.estado-link{
+    text-align:center;
+    color:#6ee7b7;
+    font-size:10px;
+    margin-top:4px;
+    min-height:12px;
+}
+
+/* =========================
+   INPUTS
+========================= */
 
 input{
     background:#111827;
@@ -81,7 +129,9 @@ input:focus{
     border-color:#60a5fa;
 }
 
-/* ENCABEZADOS */
+/* =========================
+   ENCABEZADOS
+========================= */
 
 .etiquetas{
     display:grid;
@@ -101,7 +151,9 @@ input:focus{
     color:#fbbf24;
 }
 
-/* ARTÍCULOS */
+/* =========================
+   ARTÍCULOS
+========================= */
 
 .comparaciones{
     display:flex;
@@ -143,7 +195,9 @@ input:focus{
     background:#b91c1c;
 }
 
-/* AGREGAR */
+/* =========================
+   AGREGAR
+========================= */
 
 .btn-agregar{
     width:100%;
@@ -162,7 +216,9 @@ input:focus{
     background:#1d4ed8;
 }
 
-/* RESULTADOS */
+/* =========================
+   RESULTADOS
+========================= */
 
 .resultados{
     margin-top:10px;
@@ -177,8 +233,6 @@ input:focus{
     font-size:16px;
     margin:0 0 8px;
 }
-
-/* A / B */
 
 .resultado-grid{
     display:grid;
@@ -210,7 +264,9 @@ input:focus{
     margin-top:2px;
 }
 
-/* RESUMEN */
+/* =========================
+   RESUMEN
+========================= */
 
 .resumen{
     margin-top:8px;
@@ -250,7 +306,9 @@ input:focus{
     font-size:13px;
 }
 
-/* PÉRDIDA */
+/* =========================
+   PÉRDIDA
+========================= */
 
 .perdida{
     margin-top:7px;
@@ -276,7 +334,9 @@ input:focus{
     margin-top:1px;
 }
 
-/* DETALLE */
+/* =========================
+   DETALLE
+========================= */
 
 .detalle{
     margin-top:8px;
@@ -337,7 +397,9 @@ input:focus{
     font-weight:bold;
 }
 
-/* MÓVIL */
+/* =========================
+   MÓVIL
+========================= */
 
 @media(max-width:700px){
 
@@ -373,6 +435,18 @@ input:focus{
     .rc-input{
         width:100%;
     }
+
+    .enlace-box{
+        flex-direction:column;
+    }
+
+    .enlace-input{
+        width:100%;
+    }
+
+    .btn-copiar{
+        width:100%;
+    }
 }
 
 </style>
@@ -384,7 +458,10 @@ input:focus{
 
 <h1>Comparador de Ofertas</h1>
 
-<!-- CONFIGURACIÓN -->
+
+<!-- =========================
+     CONFIGURACIÓN
+========================= -->
 
 <div class="config">
 
@@ -399,7 +476,7 @@ input:focus{
             id="nombrePagina"
             class="nombre-pagina"
             placeholder="Nombre"
-            oninput="actualizarTitulo(); guardarDatos();"
+            oninput="cambioAutomatico()"
         >
 
         <span class="config-title">
@@ -412,7 +489,7 @@ input:focus{
             id="oroPorRC"
             class="rc-input"
             placeholder="Oro"
-            oninput="formatearInput(this); calcular(); guardarDatos();"
+            oninput="formatearInput(this); cambioAutomatico()"
         >
 
         <span>
@@ -421,10 +498,39 @@ input:focus{
 
     </div>
 
+
+    <!-- ENLACE COMPARTIBLE -->
+
+    <div class="enlace-box">
+
+        <input
+            type="text"
+            id="enlaceCompartible"
+            class="enlace-input"
+            readonly
+            title="Este enlace contiene todos los datos actuales"
+        >
+
+        <button
+            class="btn-copiar"
+            onclick="copiarEnlace()"
+        >
+            🔗 Copiar enlace
+        </button>
+
+    </div>
+
+    <div
+        id="estadoLink"
+        class="estado-link"
+    ></div>
+
 </div>
 
 
-<!-- ENCABEZADOS -->
+<!-- =========================
+     ENCABEZADOS
+========================= -->
 
 <div class="etiquetas">
 
@@ -445,7 +551,9 @@ input:focus{
 </div>
 
 
-<!-- ARTÍCULOS -->
+<!-- =========================
+     ARTÍCULOS
+========================= -->
 
 <div
     id="comparaciones"
@@ -455,13 +563,15 @@ input:focus{
 
 <button
     class="btn-agregar"
-    onclick="agregarArticulo()"
+    onclick="agregarArticulo(true)"
 >
     + Agregar artículo
 </button>
 
 
-<!-- RESULTADOS -->
+<!-- =========================
+     RESULTADOS
+========================= -->
 
 <div class="resultados">
 
@@ -656,9 +766,7 @@ input:focus{
         <div class="perdida">
 
             <div class="perdida-titulo">
-
                 ORO / RC que pierdes al elegir B en lugar de A
-
             </div>
 
             <div
@@ -700,98 +808,299 @@ input:focus{
 <script>
 
 /* =====================================================
-   SISTEMA DE GUARDADO
+   VARIABLES
 ===================================================== */
 
 let contador = 0;
 
-
 /*
-    Cada URL tendrá su propio espacio de guardado.
-
-    Ejemplo:
-
-    comparador.html?id=1
-    comparador.html?id=2
-
-    De esta forma dos pestañas pueden tener
-    datos completamente diferentes.
+    Evita guardar mientras estamos cargando
+    los datos desde el enlace.
 */
 
-function obtenerID(){
-
-    const params =
-        new URLSearchParams(
-            window.location.search
-        );
-
-    let id = params.get("id");
+let cargandoDatos = false;
 
 
-    /*
-        Si no existe ID, creamos uno.
-    */
+/*
+    Temporizador para evitar actualizar el URL
+    en cada tecla mientras el usuario escribe.
+*/
 
-    if(!id){
-
-        id =
-            "comparador-" +
-            Date.now() +
-            "-" +
-            Math.random()
-                .toString(36)
-                .substring(2,8);
-
-
-        params.set("id",id);
-
-
-        /*
-            Cambia la URL sin recargar la página.
-        */
-
-        const nuevaURL =
-            window.location.pathname +
-            "?" +
-            params.toString();
-
-
-        window.history.replaceState(
-            {},
-            "",
-            nuevaURL
-        );
-
-    }
-
-    return id;
-}
-
-
-const ID_PESTANA = obtenerID();
-
-
-const CLAVE_GUARDADO =
-    "comparador_ofertas_" +
-    ID_PESTANA;
+let temporizadorURL = null;
 
 
 /* =====================================================
-   ACTUALIZAR TÍTULO
+   CODIFICACIÓN UTF-8 → BASE64 URL SAFE
 ===================================================== */
 
-function actualizarTitulo(){
+function codificarBase64(texto){
 
-    const nombre =
-        document
-            .getElementById("nombrePagina")
-            .value
-            .trim();
+    const bytes =
+        new TextEncoder().encode(texto);
+
+    let binario = "";
+
+    for(const byte of bytes){
+
+        binario += String.fromCharCode(byte);
+
+    }
+
+    return btoa(binario)
+        .replace(/\+/g,"-")
+        .replace(/\//g,"_")
+        .replace(/=/g,"");
+
+}
 
 
-    document.title =
-        nombre ||
-        "Comparador de Ofertas - Oro / RC";
+/* =====================================================
+   BASE64 URL SAFE → UTF-8
+===================================================== */
+
+function decodificarBase64(texto){
+
+    texto =
+        texto
+            .replace(/-/g,"+")
+            .replace(/_/g,"/");
+
+    while(texto.length % 4){
+
+        texto += "=";
+
+    }
+
+    const binario =
+        atob(texto);
+
+    const bytes =
+        new Uint8Array(
+            binario.length
+        );
+
+    for(
+        let i = 0;
+        i < binario.length;
+        i++
+    ){
+
+        bytes[i] =
+            binario.charCodeAt(i);
+
+    }
+
+    return new TextDecoder()
+        .decode(bytes);
+
+}
+
+
+/* =====================================================
+   OBTENER DATOS ACTUALES
+===================================================== */
+
+function obtenerDatos(){
+
+    const articulos =
+        document.querySelectorAll(
+            ".comparacion"
+        );
+
+    const datosArticulos = [];
+
+    articulos.forEach(
+        articulo => {
+
+            datosArticulos.push({
+
+                nombre:
+                    articulo
+                        .querySelector(".nombre")
+                        .value,
+
+                valorA:
+                    articulo
+                        .querySelector(".valor-a")
+                        .value,
+
+                valorB:
+                    articulo
+                        .querySelector(".valor-b")
+                        .value
+
+            });
+
+        }
+    );
+
+
+    return {
+
+        nombrePagina:
+            document
+                .getElementById("nombrePagina")
+                .value,
+
+        oroPorRC:
+            document
+                .getElementById("oroPorRC")
+                .value,
+
+        articulos:
+            datosArticulos
+
+    };
+
+}
+
+
+/* =====================================================
+   ACTUALIZAR URL
+===================================================== */
+
+function actualizarURL(){
+
+    if(cargandoDatos){
+
+        return;
+
+    }
+
+
+    const datos =
+        obtenerDatos();
+
+
+    const json =
+        JSON.stringify(datos);
+
+
+    const token =
+        codificarBase64(json);
+
+
+    /*
+        El token contiene directamente
+        todos los datos de la página.
+
+        No se utiliza localStorage.
+    */
+
+    const params =
+        new URLSearchParams();
+
+    params.set(
+        "token",
+        token
+    );
+
+
+    const nuevaURL =
+        window.location.origin +
+        window.location.pathname +
+        "?" +
+        params.toString();
+
+
+    /*
+        Cambiamos el URL sin recargar.
+    */
+
+    window.history.replaceState(
+        {
+            token:token
+        },
+        "",
+        nuevaURL
+    );
+
+
+    /*
+        Actualizar caja del enlace.
+    */
+
+    const enlace =
+        document.getElementById(
+            "enlaceCompartible"
+        );
+
+    if(enlace){
+
+        enlace.value =
+            nuevaURL;
+
+    }
+
+
+    mostrarEstadoLink();
+
+}
+
+
+/* =====================================================
+   MOSTRAR ESTADO
+===================================================== */
+
+function mostrarEstadoLink(){
+
+    const estado =
+        document.getElementById(
+            "estadoLink"
+        );
+
+    if(!estado){
+
+        return;
+
+    }
+
+    estado.textContent =
+        "✓ Enlace actualizado automáticamente";
+
+    clearTimeout(
+        mostrarEstadoLink.timer
+    );
+
+    mostrarEstadoLink.timer =
+        setTimeout(
+            ()=>{
+                estado.textContent = "";
+            },
+            1500
+        );
+
+}
+
+
+/* =====================================================
+   CAMBIO AUTOMÁTICO
+===================================================== */
+
+function cambioAutomatico(){
+
+    actualizarTitulo();
+
+    calcular();
+
+
+    /*
+        Esperamos un poco antes de actualizar
+        el URL para que escribir un nombre
+        no genere un cambio por cada tecla.
+    */
+
+    clearTimeout(
+        temporizadorURL
+    );
+
+    temporizadorURL =
+        setTimeout(
+            ()=>{
+                actualizarURL();
+            },
+            400
+        );
 
 }
 
@@ -803,7 +1112,8 @@ function actualizarTitulo(){
 function formatearInput(input){
 
     let valor =
-        input.value.replace(/\D/g,"");
+        input.value
+            .replace(/\D/g,"");
 
 
     if(valor === ""){
@@ -817,13 +1127,15 @@ function formatearInput(input){
 
     input.value =
         Number(valor)
-            .toLocaleString("en-US");
+            .toLocaleString(
+                "en-US"
+            );
 
 }
 
 
 /* =====================================================
-   OBTENER NÚMERO SIN COMAS
+   OBTENER NÚMERO
 ===================================================== */
 
 function obtenerNumero(valor){
@@ -841,13 +1153,14 @@ function obtenerNumero(valor){
 ===================================================== */
 
 function agregarArticulo(
-    datos = null,
-    enfocar = true
+    enfocar = true,
+    datos = null
 ){
 
     contador++;
 
-    const id = contador;
+    const id =
+        contador;
 
 
     const container =
@@ -857,7 +1170,9 @@ function agregarArticulo(
 
 
     const div =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     div.className =
@@ -865,7 +1180,8 @@ function agregarArticulo(
 
 
     div.id =
-        "comparacion-" + id;
+        "comparacion-" +
+        id;
 
 
     div.innerHTML = `
@@ -876,7 +1192,6 @@ function agregarArticulo(
                 type="text"
                 class="nombre"
                 placeholder="Nombre del artículo"
-                oninput="calcular(); guardarDatos();"
             >
 
             <input
@@ -884,7 +1199,6 @@ function agregarArticulo(
                 inputmode="numeric"
                 class="valor valor-a"
                 placeholder="Oro A"
-                oninput="formatearInput(this); calcular(); guardarDatos();"
             >
 
             <input
@@ -892,7 +1206,6 @@ function agregarArticulo(
                 inputmode="numeric"
                 class="valor valor-b"
                 placeholder="Oro B"
-                oninput="formatearInput(this); calcular(); guardarDatos();"
             >
 
             <button
@@ -908,33 +1221,82 @@ function agregarArticulo(
     `;
 
 
-    container.appendChild(div);
+    container.appendChild(
+        div
+    );
+
+
+    const nombre =
+        div.querySelector(
+            ".nombre"
+        );
+
+    const valorA =
+        div.querySelector(
+            ".valor-a"
+        );
+
+    const valorB =
+        div.querySelector(
+            ".valor-b"
+        );
 
 
     /*
-        Si estamos cargando datos guardados,
-        rellenamos los valores.
+        Eventos de nombre.
+    */
+
+    nombre.addEventListener(
+        "input",
+        ()=>{
+            cambioAutomatico();
+        }
+    );
+
+
+    /*
+        Eventos de Oferta A.
+    */
+
+    valorA.addEventListener(
+        "input",
+        ()=>{
+            formatearInput(
+                valorA
+            );
+
+            cambioAutomatico();
+        }
+    );
+
+
+    /*
+        Eventos de Oferta B.
+    */
+
+    valorB.addEventListener(
+        "input",
+        ()=>{
+            formatearInput(
+                valorB
+            );
+
+            cambioAutomatico();
+        }
+    );
+
+
+    /*
+        Restaurar datos.
     */
 
     if(datos){
 
-        const nombre =
-            div.querySelector(".nombre");
-
-        const valorA =
-            div.querySelector(".valor-a");
-
-        const valorB =
-            div.querySelector(".valor-b");
-
-
         nombre.value =
             datos.nombre || "";
 
-
         valorA.value =
             datos.valorA || "";
-
 
         valorB.value =
             datos.valorB || "";
@@ -944,9 +1306,7 @@ function agregarArticulo(
 
     if(enfocar){
 
-        div
-            .querySelector(".nombre")
-            .focus();
+        nombre.focus();
 
     }
 
@@ -964,7 +1324,8 @@ function eliminarArticulo(id){
 
     const elemento =
         document.getElementById(
-            "comparacion-" + id
+            "comparacion-" +
+            id
         );
 
 
@@ -977,7 +1338,7 @@ function eliminarArticulo(id){
 
     calcular();
 
-    guardarDatos();
+    actualizarURL();
 
 }
 
@@ -1007,12 +1368,15 @@ function calcular(){
     const oroPorRC =
         obtenerNumero(
             document
-                .getElementById("oroPorRC")
+                .getElementById(
+                    "oroPorRC"
+                )
                 .value
         );
 
 
     let totalA = 0;
+
     let totalB = 0;
 
 
@@ -1031,170 +1395,179 @@ function calcular(){
     detalle.innerHTML = "";
 
 
-    /* ================================================
-       RECORRER ARTÍCULOS
-    ================================================ */
+    /*
+        RECORRER ARTÍCULOS
+    */
 
     articulos.forEach(
         (articulo,index)=>{
 
-
-        const nombreInput =
-            articulo.querySelector(
-                ".nombre"
-            );
-
-
-        const inputA =
-            articulo.querySelector(
-                ".valor-a"
-            );
+            const nombreInput =
+                articulo.querySelector(
+                    ".nombre"
+                );
 
 
-        const inputB =
-            articulo.querySelector(
-                ".valor-b"
-            );
+            const inputA =
+                articulo.querySelector(
+                    ".valor-a"
+                );
 
 
-        const nombre =
-            nombreInput.value.trim()
-            ||
-            "Artículo " +
-            (index + 1);
+            const inputB =
+                articulo.querySelector(
+                    ".valor-b"
+                );
 
 
-        const valorA =
-            obtenerNumero(
-                inputA.value
-            );
+            const nombre =
+                nombreInput.value.trim()
+                ||
+                "Artículo " +
+                (index + 1);
 
 
-        const valorB =
-            obtenerNumero(
-                inputB.value
-            );
+            const valorA =
+                obtenerNumero(
+                    inputA.value
+                );
 
 
-        totalA += valorA;
-
-        totalB += valorB;
-
-
-        /* RC */
-
-        const rcA =
-            oroPorRC > 0
-            ? valorA / oroPorRC
-            : 0;
+            const valorB =
+                obtenerNumero(
+                    inputB.value
+                );
 
 
-        const rcB =
-            oroPorRC > 0
-            ? valorB / oroPorRC
-            : 0;
+            totalA +=
+                valorA;
 
 
-        /* DIFERENCIA */
-
-        const perdida =
-            Math.max(
-                0,
-                valorA - valorB
-            );
+            totalB +=
+                valorB;
 
 
-        const perdidaRC =
-            oroPorRC > 0
-            ? perdida / oroPorRC
-            : 0;
+            /*
+                RC
+            */
+
+            const rcA =
+                oroPorRC > 0
+                ? valorA / oroPorRC
+                : 0;
 
 
-        /* DETALLE */
-
-        const detalleDiv =
-            document.createElement(
-                "div"
-            );
+            const rcB =
+                oroPorRC > 0
+                ? valorB / oroPorRC
+                : 0;
 
 
-        detalleDiv.className =
-            "item-detalle";
+            /*
+                DIFERENCIA
+            */
+
+            const perdida =
+                Math.max(
+                    0,
+                    valorA - valorB
+                );
 
 
-        detalleDiv.innerHTML = `
-
-            <div class="item-nombre">
-
-                ${escapeHTML(nombre)}
-
-            </div>
+            const perdidaRC =
+                oroPorRC > 0
+                ? perdida / oroPorRC
+                : 0;
 
 
-            <div class="item-valores">
+            /*
+                DETALLE
+            */
 
-                <div class="valor-box">
+            const detalleDiv =
+                document.createElement(
+                    "div"
+                );
 
-                    <small>
-                        A:
-                    </small>
 
-                    <strong>
-                        ${formato(valorA)}
-                        Oro
-                    </strong>
+            detalleDiv.className =
+                "item-detalle";
 
-                    <small>
-                        (${formato(rcA)} RC)
-                    </small>
+
+            detalleDiv.innerHTML = `
+
+                <div class="item-nombre">
+
+                    ${escapeHTML(nombre)}
 
                 </div>
 
 
-                <div class="valor-box">
+                <div class="item-valores">
 
-                    <small>
-                        B:
-                    </small>
+                    <div class="valor-box">
 
-                    <strong>
-                        ${formato(valorB)}
-                        Oro
-                    </strong>
+                        <small>
+                            A:
+                        </small>
 
-                    <small>
-                        (${formato(rcB)} RC)
-                    </small>
+                        <strong>
+                            ${formato(valorA)}
+                            Oro
+                        </strong>
+
+                        <small>
+                            (${formato(rcA)} RC)
+                        </small>
+
+                    </div>
+
+
+                    <div class="valor-box">
+
+                        <small>
+                            B:
+                        </small>
+
+                        <strong>
+                            ${formato(valorB)}
+                            Oro
+                        </strong>
+
+                        <small>
+                            (${formato(rcB)} RC)
+                        </small>
+
+                    </div>
 
                 </div>
 
-            </div>
+
+                <div class="perdida-item">
+
+                    Pérdida al elegir B:
+
+                    ${formato(perdida)}
+                    Oro
+
+                    (${formato(perdidaRC)} RC)
+
+                </div>
+
+            `;
 
 
-            <div class="perdida-item">
+            detalle.appendChild(
+                detalleDiv
+            );
 
-                Pérdida al elegir B:
-
-                ${formato(perdida)}
-                Oro
-
-                (${formato(perdidaRC)} RC)
-
-            </div>
-
-        `;
+        }
+    );
 
 
-        detalle.appendChild(
-            detalleDiv
-        );
-
-    });
-
-
-    /* ================================================
-       RC TOTALES
-    ================================================ */
+    /*
+        RC TOTALES
+    */
 
     const rcA =
         oroPorRC > 0
@@ -1208,9 +1581,9 @@ function calcular(){
         : 0;
 
 
-    /* ================================================
-       DIFERENCIA
-    ================================================ */
+    /*
+        DIFERENCIA
+    */
 
     const diferencia =
         Math.max(
@@ -1225,9 +1598,9 @@ function calcular(){
         : 0;
 
 
-    /* ================================================
-       PORCENTAJE B
-    ================================================ */
+    /*
+        PORCENTAJE B
+    */
 
     let porcentajeB = 0;
 
@@ -1235,42 +1608,47 @@ function calcular(){
     if(totalA > 0){
 
         porcentajeB =
-            (totalB / totalA) * 100;
+            (totalB / totalA) *
+            100;
 
     }
 
 
-    /* ================================================
-       RESULTADO A
-    ================================================ */
+    /*
+        RESULTADO A
+    */
 
-    document.getElementById("oroA")
-        .textContent =
+    document.getElementById(
+        "oroA"
+    ).textContent =
         formato(totalA);
 
 
-    document.getElementById("rcA")
-        .textContent =
+    document.getElementById(
+        "rcA"
+    ).textContent =
         formato(rcA);
 
 
-    /* ================================================
-       RESULTADO B
-    ================================================ */
+    /*
+        RESULTADO B
+    */
 
-    document.getElementById("oroB")
-        .textContent =
+    document.getElementById(
+        "oroB"
+    ).textContent =
         formato(totalB);
 
 
-    document.getElementById("rcB")
-        .textContent =
+    document.getElementById(
+        "rcB"
+    ).textContent =
         formato(rcB);
 
 
-    /* ================================================
-       RESUMEN
-    ================================================ */
+    /*
+        RESUMEN
+    */
 
     document.getElementById(
         "cantidadArticulos"
@@ -1327,9 +1705,9 @@ function calcular(){
         "%";
 
 
-    /* ================================================
-       PÉRDIDA TOTAL
-    ================================================ */
+    /*
+        PÉRDIDA TOTAL
+    */
 
     document.getElementById(
         "perdidaOro"
@@ -1348,94 +1726,62 @@ function calcular(){
 
 
 /* =====================================================
-   GUARDAR TODOS LOS DATOS
+   ACTUALIZAR TÍTULO
 ===================================================== */
 
-function guardarDatos(){
+function actualizarTitulo(){
 
-    const articulos =
-        document.querySelectorAll(
-            ".comparacion"
-        );
-
-
-    const datosArticulos = [];
-
-
-    articulos.forEach(
-        articulo => {
-
-        datosArticulos.push({
-
-            nombre:
-                articulo
-                    .querySelector(".nombre")
-                    .value,
-
-            valorA:
-                articulo
-                    .querySelector(".valor-a")
-                    .value,
-
-            valorB:
-                articulo
-                    .querySelector(".valor-b")
-                    .value
-
-        });
-
-    });
+    const nombre =
+        document
+            .getElementById(
+                "nombrePagina"
+            )
+            .value
+            .trim();
 
 
-    const datos = {
-
-        nombrePagina:
-            document
-                .getElementById("nombrePagina")
-                .value,
-
-        oroPorRC:
-            document
-                .getElementById("oroPorRC")
-                .value,
-
-        articulos:
-            datosArticulos
-
-    };
-
-
-    localStorage.setItem(
-        CLAVE_GUARDADO,
-        JSON.stringify(datos)
-    );
+    document.title =
+        nombre ||
+        "Comparador de Ofertas - Oro / RC";
 
 }
 
 
 /* =====================================================
-   CARGAR DATOS GUARDADOS
+   CARGAR DESDE URL
 ===================================================== */
 
-function cargarDatos(){
+function cargarDesdeURL(){
 
-    const guardado =
-        localStorage.getItem(
-            CLAVE_GUARDADO
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const token =
+        params.get(
+            "token"
         );
 
 
     /*
-        Si no existe información guardada,
-        creamos un artículo vacío.
+        Si no existe token,
+        empezamos una página nueva.
     */
 
-    if(!guardado){
+    if(!token){
 
         agregarArticulo(
-            null,
             true
         );
+
+        /*
+            Generamos inmediatamente
+            el primer enlace.
+        */
+
+        actualizarURL();
 
         return;
 
@@ -1444,52 +1790,76 @@ function cargarDatos(){
 
     try{
 
+        cargandoDatos = true;
+
+
+        const json =
+            decodificarBase64(
+                token
+            );
+
+
         const datos =
-            JSON.parse(guardado);
+            JSON.parse(
+                json
+            );
 
 
-        /* NOMBRE */
-
-        document
-            .getElementById("nombrePagina")
-            .value =
-            datos.nombrePagina || "";
-
-
-        /* ORO POR RC */
+        /*
+            NOMBRE
+        */
 
         document
-            .getElementById("oroPorRC")
+            .getElementById(
+                "nombrePagina"
+            )
             .value =
-            datos.oroPorRC || "";
+            datos.nombrePagina ||
+            "";
+
+
+        /*
+            ORO POR RC
+        */
+
+        document
+            .getElementById(
+                "oroPorRC"
+            )
+            .value =
+            datos.oroPorRC ||
+            "";
 
 
         actualizarTitulo();
 
 
         /*
-            Restaurar artículos
+            ARTÍCULOS
         */
 
         if(
             datos.articulos &&
+            Array.isArray(
+                datos.articulos
+            ) &&
             datos.articulos.length > 0
         ){
 
             datos.articulos.forEach(
                 articulo => {
 
-                agregarArticulo(
-                    articulo,
-                    false
-                );
+                    agregarArticulo(
+                        false,
+                        articulo
+                    );
 
-            });
+                }
+            );
 
         }else{
 
             agregarArticulo(
-                null,
                 true
             );
 
@@ -1499,18 +1869,54 @@ function cargarDatos(){
         calcular();
 
 
+        /*
+            Mostrar el enlace actual.
+        */
+
+        actualizarCajaEnlace();
+
+
+        cargandoDatos = false;
+
+
     }catch(error){
 
         console.error(
-            "Error cargando datos:",
+            "Error leyendo el enlace:",
             error
         );
 
 
+        cargandoDatos = false;
+
+
+        /*
+            Si el token está corrupto,
+            comenzamos una página nueva.
+        */
+
+        document
+            .getElementById(
+                "nombrePagina"
+            )
+            .value = "";
+
+
+        document
+            .getElementById(
+                "oroPorRC"
+            )
+            .value = "";
+
+
         agregarArticulo(
-            null,
             true
         );
+
+
+        calcular();
+
+        actualizarURL();
 
     }
 
@@ -1518,13 +1924,105 @@ function cargarDatos(){
 
 
 /* =====================================================
-   SEGURIDAD HTML
+   ACTUALIZAR CAJA DEL ENLACE
+===================================================== */
+
+function actualizarCajaEnlace(){
+
+    const caja =
+        document.getElementById(
+            "enlaceCompartible"
+        );
+
+
+    if(caja){
+
+        caja.value =
+            window.location.href;
+
+    }
+
+}
+
+
+/* =====================================================
+   COPIAR ENLACE
+===================================================== */
+
+async function copiarEnlace(){
+
+    const enlace =
+        window.location.href;
+
+
+    try{
+
+        await navigator.clipboard.writeText(
+            enlace
+        );
+
+
+    }catch(error){
+
+        /*
+            Método alternativo
+            para navegadores donde
+            clipboard no esté disponible.
+        */
+
+        const input =
+            document.getElementById(
+                "enlaceCompartible"
+            );
+
+
+        input.focus();
+
+        input.select();
+
+        document.execCommand(
+            "copy"
+        );
+
+    }
+
+
+    const estado =
+        document.getElementById(
+            "estadoLink"
+        );
+
+
+    estado.textContent =
+        "✓ Enlace copiado";
+
+
+    clearTimeout(
+        copiarEnlace.timer
+    );
+
+
+    copiarEnlace.timer =
+        setTimeout(
+            ()=>{
+                estado.textContent = "";
+            },
+            2000
+        );
+
+}
+
+
+/* =====================================================
+   ESCAPAR HTML
 ===================================================== */
 
 function escapeHTML(text){
 
     const div =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     div.textContent =
@@ -1537,10 +2035,15 @@ function escapeHTML(text){
 
 
 /* =====================================================
-   INICIAR
+   INICIALIZAR
 ===================================================== */
 
-cargarDatos();
+document.addEventListener(
+    "DOMContentLoaded",
+    ()=>{
+        cargarDesdeURL();
+    }
+);
 
 </script>
 
