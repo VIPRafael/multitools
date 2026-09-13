@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -172,10 +173,13 @@ input:focus{
     display:grid;
     grid-template-columns:1fr 150px 150px 34px;
     gap:7px;
-    align-items:center;
+    align-items:end;
 }
 
-.nombre,
+.nombre{
+    width:100%;
+}
+
 .valor{
     width:100%;
 }
@@ -193,6 +197,63 @@ input:focus{
 
 .btn-eliminar:hover{
     background:#b91c1c;
+}
+
+/* =========================
+   INFORMACIÓN DE TAXAS
+========================= */
+
+.campo-oferta{
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+}
+
+.info-taxa{
+    min-height:27px;
+    font-size:9px;
+    line-height:12px;
+    color:#9ca3af;
+    text-align:center;
+    padding:1px 2px;
+}
+
+.info-taxa .taxa{
+    color:#f87171;
+    font-weight:bold;
+}
+
+.info-taxa .final{
+    color:#6ee7b7;
+    font-weight:bold;
+}
+
+.info-taxa .perdido{
+    color:#fbbf24;
+    font-weight:bold;
+}
+
+.info-nombre{
+    min-height:27px;
+    font-size:9px;
+    line-height:12px;
+    color:#9ca3af;
+    text-align:left;
+    padding:1px 2px;
+}
+
+.etiqueta-oferta{
+    font-size:10px;
+    font-weight:bold;
+    margin-bottom:1px;
+}
+
+.etiqueta-a{
+    color:#60a5fa;
+}
+
+.etiqueta-b{
+    color:#fbbf24;
 }
 
 /* =========================
@@ -413,6 +474,7 @@ input:focus{
 
     .fila{
         grid-template-columns:1fr;
+        align-items:stretch;
     }
 
     .btn-eliminar{
@@ -447,6 +509,7 @@ input:focus{
     .btn-copiar{
         width:100%;
     }
+
 }
 
 </style>
@@ -457,7 +520,6 @@ input:focus{
 <div class="container">
 
 <h1>Comparador de Ofertas</h1>
-
 
 <!-- =========================
      CONFIGURACIÓN
@@ -498,7 +560,6 @@ input:focus{
 
     </div>
 
-
     <!-- ENLACE COMPARTIBLE -->
 
     <div class="enlace-box">
@@ -527,7 +588,6 @@ input:focus{
 
 </div>
 
-
 <!-- =========================
      ENCABEZADOS
 ========================= -->
@@ -550,7 +610,6 @@ input:focus{
 
 </div>
 
-
 <!-- =========================
      ARTÍCULOS
 ========================= -->
@@ -560,14 +619,12 @@ input:focus{
     class="comparaciones"
 ></div>
 
-
 <button
     class="btn-agregar"
     onclick="agregarArticulo(true)"
 >
     + Agregar artículo
 </button>
-
 
 <!-- =========================
      RESULTADOS
@@ -578,7 +635,6 @@ input:focus{
     <h2>
         Resultados
     </h2>
-
 
     <!-- A / B -->
 
@@ -612,7 +668,6 @@ input:focus{
 
         </div>
 
-
         <div class="resultado">
 
             <h3>
@@ -643,7 +698,6 @@ input:focus{
 
     </div>
 
-
     <!-- RESUMEN -->
 
     <div class="resumen">
@@ -651,7 +705,6 @@ input:focus{
         <h3>
             Resumen de la comparación
         </h3>
-
 
         <div class="resumen-grid">
 
@@ -667,7 +720,6 @@ input:focus{
 
             </div>
 
-
             <div class="resumen-item">
 
                 <span>
@@ -679,7 +731,6 @@ input:focus{
                 </strong>
 
             </div>
-
 
             <div class="resumen-item">
 
@@ -693,7 +744,6 @@ input:focus{
 
             </div>
 
-
             <div class="resumen-item">
 
                 <span>
@@ -705,7 +755,6 @@ input:focus{
                 </strong>
 
             </div>
-
 
             <div class="resumen-item">
 
@@ -719,7 +768,6 @@ input:focus{
 
             </div>
 
-
             <div class="resumen-item">
 
                 <span>
@@ -732,7 +780,6 @@ input:focus{
 
             </div>
 
-
             <div class="resumen-item">
 
                 <span>
@@ -744,7 +791,6 @@ input:focus{
                 </strong>
 
             </div>
-
 
             <div class="resumen-item">
 
@@ -759,7 +805,6 @@ input:focus{
             </div>
 
         </div>
-
 
         <!-- PÉRDIDA TOTAL -->
 
@@ -787,7 +832,6 @@ input:focus{
 
     </div>
 
-
     <!-- DETALLE -->
 
     <div class="detalle">
@@ -804,7 +848,6 @@ input:focus{
 
 </div>
 
-
 <script>
 
 /* =====================================================
@@ -813,20 +856,60 @@ input:focus{
 
 let contador = 0;
 
-/*
-    Evita guardar mientras estamos cargando
-    los datos desde el enlace.
-*/
-
 let cargandoDatos = false;
 
+let temporizadorURL = null;
+
+
+/* =====================================================
+   TAXAS
+===================================================== */
 
 /*
-    Temporizador para evitar actualizar el URL
-    en cada tecla mientras el usuario escribe.
+    Taxa de creación:
+    1% del valor
+    máximo 1.000.000 Oro
+
+    Taxa de venta:
+    3% del valor
+    máximo 5.000.000 Oro
+
+    Ambas se descuentan para obtener
+    el valor final recibido.
 */
 
-let temporizadorURL = null;
+function calcularTaxas(valor){
+
+    const taxaCriacao =
+        Math.min(
+            valor * 0.01,
+            1000000
+        );
+
+    const taxaVenda =
+        Math.min(
+            valor * 0.03,
+            5000000
+        );
+
+    const totalTaxas =
+        taxaCriacao +
+        taxaVenda;
+
+    const valorFinal =
+        Math.max(
+            0,
+            valor - totalTaxas
+        );
+
+    return {
+        criacao: taxaCriacao,
+        venda: taxaVenda,
+        total: totalTaxas,
+        final: valorFinal
+    };
+
+}
 
 
 /* =====================================================
@@ -934,7 +1017,6 @@ function obtenerDatos(){
         }
     );
 
-
     return {
 
         nombrePagina:
@@ -967,25 +1049,14 @@ function actualizarURL(){
 
     }
 
-
     const datos =
         obtenerDatos();
-
 
     const json =
         JSON.stringify(datos);
 
-
     const token =
         codificarBase64(json);
-
-
-    /*
-        El token contiene directamente
-        todos los datos de la página.
-
-        No se utiliza localStorage.
-    */
 
     const params =
         new URLSearchParams();
@@ -995,17 +1066,11 @@ function actualizarURL(){
         token
     );
 
-
     const nuevaURL =
         window.location.origin +
         window.location.pathname +
         "?" +
         params.toString();
-
-
-    /*
-        Cambiamos el URL sin recargar.
-    */
 
     window.history.replaceState(
         {
@@ -1014,11 +1079,6 @@ function actualizarURL(){
         "",
         nuevaURL
     );
-
-
-    /*
-        Actualizar caja del enlace.
-    */
 
     const enlace =
         document.getElementById(
@@ -1031,7 +1091,6 @@ function actualizarURL(){
             nuevaURL;
 
     }
-
 
     mostrarEstadoLink();
 
@@ -1083,13 +1142,6 @@ function cambioAutomatico(){
 
     calcular();
 
-
-    /*
-        Esperamos un poco antes de actualizar
-        el URL para que escribir un nombre
-        no genere un cambio por cada tecla.
-    */
-
     clearTimeout(
         temporizadorURL
     );
@@ -1115,7 +1167,6 @@ function formatearInput(input){
         input.value
             .replace(/\D/g,"");
 
-
     if(valor === ""){
 
         input.value = "";
@@ -1123,7 +1174,6 @@ function formatearInput(input){
         return;
 
     }
-
 
     input.value =
         Number(valor)
@@ -1162,51 +1212,93 @@ function agregarArticulo(
     const id =
         contador;
 
-
     const container =
         document.getElementById(
             "comparaciones"
         );
-
 
     const div =
         document.createElement(
             "div"
         );
 
-
     div.className =
         "comparacion";
-
 
     div.id =
         "comparacion-" +
         id;
 
-
     div.innerHTML = `
 
         <div class="fila">
 
-            <input
-                type="text"
-                class="nombre"
-                placeholder="Nombre del artículo"
-            >
+            <div class="campo-oferta">
 
-            <input
-                type="text"
-                inputmode="numeric"
-                class="valor valor-a"
-                placeholder="Oro A"
-            >
+                <div class="info-nombre">
+                    <span>
+                        Nombre del artículo
+                    </span>
+                </div>
 
-            <input
-                type="text"
-                inputmode="numeric"
-                class="valor valor-b"
-                placeholder="Oro B"
-            >
+                <input
+                    type="text"
+                    class="nombre"
+                    placeholder="Nombre del artículo"
+                >
+
+            </div>
+
+
+            <div class="campo-oferta">
+
+                <div
+                    class="info-taxa"
+                    data-info="a"
+                >
+                    <div>
+                        Taxa: <span class="taxa">0 Oro</span>
+                    </div>
+
+                    <div>
+                        Final: <span class="final">0 Oro</span>
+                    </div>
+                </div>
+
+                <input
+                    type="text"
+                    inputmode="numeric"
+                    class="valor valor-a"
+                    placeholder="Oro A"
+                >
+
+            </div>
+
+
+            <div class="campo-oferta">
+
+                <div
+                    class="info-taxa"
+                    data-info="b"
+                >
+                    <div>
+                        Taxa: <span class="taxa">0 Oro</span>
+                    </div>
+
+                    <div>
+                        Final: <span class="final">0 Oro</span>
+                    </div>
+                </div>
+
+                <input
+                    type="text"
+                    inputmode="numeric"
+                    class="valor valor-b"
+                    placeholder="Oro B"
+                >
+
+            </div>
+
 
             <button
                 class="btn-eliminar"
@@ -1220,11 +1312,9 @@ function agregarArticulo(
 
     `;
 
-
     container.appendChild(
         div
     );
-
 
     const nombre =
         div.querySelector(
@@ -1242,9 +1332,9 @@ function agregarArticulo(
         );
 
 
-    /*
-        Eventos de nombre.
-    */
+    /* =========================
+       EVENTO NOMBRE
+    ========================= */
 
     nombre.addEventListener(
         "input",
@@ -1254,9 +1344,9 @@ function agregarArticulo(
     );
 
 
-    /*
-        Eventos de Oferta A.
-    */
+    /* =========================
+       EVENTO OFERTA A
+    ========================= */
 
     valorA.addEventListener(
         "input",
@@ -1270,9 +1360,9 @@ function agregarArticulo(
     );
 
 
-    /*
-        Eventos de Oferta B.
-    */
+    /* =========================
+       EVENTO OFERTA B
+    ========================= */
 
     valorB.addEventListener(
         "input",
@@ -1286,9 +1376,9 @@ function agregarArticulo(
     );
 
 
-    /*
-        Restaurar datos.
-    */
+    /* =========================
+       RESTAURAR DATOS
+    ========================= */
 
     if(datos){
 
@@ -1310,7 +1400,6 @@ function agregarArticulo(
 
     }
 
-
     calcular();
 
 }
@@ -1328,13 +1417,11 @@ function eliminarArticulo(id){
             id
         );
 
-
     if(elemento){
 
         elemento.remove();
 
     }
-
 
     calcular();
 
@@ -1360,6 +1447,58 @@ function formato(numero){
 
 
 /* =====================================================
+   ACTUALIZAR INFO DE TAXAS
+===================================================== */
+
+function actualizarInfoTaxa(
+    elemento,
+    valor
+){
+
+    const info =
+        elemento.querySelector(
+            ".info-taxa"
+        );
+
+    if(!info){
+
+        return;
+
+    }
+
+    const taxas =
+        calcularTaxas(valor);
+
+    const taxa =
+        info.querySelector(
+            ".taxa"
+        );
+
+    const final =
+        info.querySelector(
+            ".final"
+        );
+
+    if(taxa){
+
+        taxa.textContent =
+            formato(taxas.total) +
+            " Oro";
+
+    }
+
+    if(final){
+
+        final.textContent =
+            formato(taxas.final) +
+            " Oro";
+
+    }
+
+}
+
+
+/* =====================================================
    CALCULAR
 ===================================================== */
 
@@ -1374,23 +1513,19 @@ function calcular(){
                 .value
         );
 
-
     let totalA = 0;
 
     let totalB = 0;
-
 
     const articulos =
         document.querySelectorAll(
             ".comparacion"
         );
 
-
     const detalle =
         document.getElementById(
             "detalleItems"
         );
-
 
     detalle.innerHTML = "";
 
@@ -1407,18 +1542,15 @@ function calcular(){
                     ".nombre"
                 );
 
-
             const inputA =
                 articulo.querySelector(
                     ".valor-a"
                 );
 
-
             const inputB =
                 articulo.querySelector(
                     ".valor-b"
                 );
-
 
             const nombre =
                 nombreInput.value.trim()
@@ -1426,12 +1558,10 @@ function calcular(){
                 "Artículo " +
                 (index + 1);
 
-
             const valorA =
                 obtenerNumero(
                     inputA.value
                 );
-
 
             const valorB =
                 obtenerNumero(
@@ -1439,9 +1569,76 @@ function calcular(){
                 );
 
 
+            /*
+                TAXAS
+            */
+
+            const taxasA =
+                calcularTaxas(valorA);
+
+            const taxasB =
+                calcularTaxas(valorB);
+
+
+            /*
+                ACTUALIZAR TEXTO
+                ENCIMA DE LOS INPUTS
+            */
+
+            actualizarInfoTaxa(
+                articulo,
+                valorA
+            );
+
+            const infoA =
+                articulo.querySelector(
+                    '[data-info="a"]'
+                );
+
+            const infoB =
+                articulo.querySelector(
+                    '[data-info="b"]'
+                );
+
+            if(infoA){
+
+                infoA.querySelector(
+                    ".taxa"
+                ).textContent =
+                    formato(taxasA.total) +
+                    " Oro";
+
+                infoA.querySelector(
+                    ".final"
+                ).textContent =
+                    formato(taxasA.final) +
+                    " Oro";
+
+            }
+
+            if(infoB){
+
+                infoB.querySelector(
+                    ".taxa"
+                ).textContent =
+                    formato(taxasB.total) +
+                    " Oro";
+
+                infoB.querySelector(
+                    ".final"
+                ).textContent =
+                    formato(taxasB.final) +
+                    " Oro";
+
+            }
+
+
+            /*
+                TOTALES BRUTOS
+            */
+
             totalA +=
                 valorA;
-
 
             totalB +=
                 valorB;
@@ -1456,7 +1653,6 @@ function calcular(){
                 ? valorA / oroPorRC
                 : 0;
 
-
             const rcB =
                 oroPorRC > 0
                 ? valorB / oroPorRC
@@ -1464,7 +1660,7 @@ function calcular(){
 
 
             /*
-                DIFERENCIA
+                DIFERENCIA BRUTA
             */
 
             const perdida =
@@ -1472,7 +1668,6 @@ function calcular(){
                     0,
                     valorA - valorB
                 );
-
 
             const perdidaRC =
                 oroPorRC > 0
@@ -1489,10 +1684,8 @@ function calcular(){
                     "div"
                 );
 
-
             detalleDiv.className =
                 "item-detalle";
-
 
             detalleDiv.innerHTML = `
 
@@ -1520,6 +1713,28 @@ function calcular(){
                             (${formato(rcA)} RC)
                         </small>
 
+                        <br>
+
+                        <small>
+                            Taxa:
+                        </small>
+
+                        <strong>
+                            ${formato(taxasA.total)}
+                            Oro
+                        </strong>
+
+                        <br>
+
+                        <small>
+                            Final:
+                        </small>
+
+                        <strong>
+                            ${formato(taxasA.final)}
+                            Oro
+                        </strong>
+
                     </div>
 
 
@@ -1538,6 +1753,28 @@ function calcular(){
                             (${formato(rcB)} RC)
                         </small>
 
+                        <br>
+
+                        <small>
+                            Taxa:
+                        </small>
+
+                        <strong>
+                            ${formato(taxasB.total)}
+                            Oro
+                        </strong>
+
+                        <br>
+
+                        <small>
+                            Final:
+                        </small>
+
+                        <strong>
+                            ${formato(taxasB.final)}
+                            Oro
+                        </strong>
+
                     </div>
 
                 </div>
@@ -1545,17 +1782,30 @@ function calcular(){
 
                 <div class="perdida-item">
 
-                    Pérdida al elegir B:
+                    Diferencia entre A y B:
 
                     ${formato(perdida)}
                     Oro
 
                     (${formato(perdidaRC)} RC)
 
+                    <br>
+
+                    Taxas A:
+
+                    ${formato(taxasA.total)}
+                    Oro
+
+                    ·
+
+                    Taxas B:
+
+                    ${formato(taxasB.total)}
+                    Oro
+
                 </div>
 
             `;
-
 
             detalle.appendChild(
                 detalleDiv
@@ -1574,7 +1824,6 @@ function calcular(){
         ? totalA / oroPorRC
         : 0;
 
-
     const rcB =
         oroPorRC > 0
         ? totalB / oroPorRC
@@ -1591,7 +1840,6 @@ function calcular(){
             totalA - totalB
         );
 
-
     const diferenciaRC =
         oroPorRC > 0
         ? diferencia / oroPorRC
@@ -1603,7 +1851,6 @@ function calcular(){
     */
 
     let porcentajeB = 0;
-
 
     if(totalA > 0){
 
@@ -1623,7 +1870,6 @@ function calcular(){
     ).textContent =
         formato(totalA);
 
-
     document.getElementById(
         "rcA"
     ).textContent =
@@ -1638,7 +1884,6 @@ function calcular(){
         "oroB"
     ).textContent =
         formato(totalB);
-
 
     document.getElementById(
         "rcB"
@@ -1655,13 +1900,11 @@ function calcular(){
     ).textContent =
         articulos.length;
 
-
     document.getElementById(
         "resumenOroA"
     ).textContent =
         formato(totalA) +
         " Oro";
-
 
     document.getElementById(
         "resumenOroB"
@@ -1669,13 +1912,11 @@ function calcular(){
         formato(totalB) +
         " Oro";
 
-
     document.getElementById(
         "resumenRCA"
     ).textContent =
         formato(rcA) +
         " RC";
-
 
     document.getElementById(
         "resumenRCB"
@@ -1683,20 +1924,17 @@ function calcular(){
         formato(rcB) +
         " RC";
 
-
     document.getElementById(
         "diferencia"
     ).textContent =
         formato(diferencia) +
         " Oro";
 
-
     document.getElementById(
         "diferenciaRC"
     ).textContent =
         formato(diferenciaRC) +
         " RC";
-
 
     document.getElementById(
         "porcentajeB"
@@ -1714,7 +1952,6 @@ function calcular(){
     ).textContent =
         formato(diferencia) +
         " Oro";
-
 
     document.getElementById(
         "perdidaRC"
@@ -1739,7 +1976,6 @@ function actualizarTitulo(){
             .value
             .trim();
 
-
     document.title =
         nombre ||
         "Comparador de Ofertas - Oro / RC";
@@ -1758,7 +1994,6 @@ function cargarDesdeURL(){
             window.location.search
         );
 
-
     const token =
         params.get(
             "token"
@@ -1776,11 +2011,6 @@ function cargarDesdeURL(){
             true
         );
 
-        /*
-            Generamos inmediatamente
-            el primer enlace.
-        */
-
         actualizarURL();
 
         return;
@@ -1792,12 +2022,10 @@ function cargarDesdeURL(){
 
         cargandoDatos = true;
 
-
         const json =
             decodificarBase64(
                 token
             );
-
 
         const datos =
             JSON.parse(
@@ -1829,7 +2057,6 @@ function cargarDesdeURL(){
             .value =
             datos.oroPorRC ||
             "";
-
 
         actualizarTitulo();
 
@@ -1868,16 +2095,9 @@ function cargarDesdeURL(){
 
         calcular();
 
-
-        /*
-            Mostrar el enlace actual.
-        */
-
         actualizarCajaEnlace();
 
-
         cargandoDatos = false;
-
 
     }catch(error){
 
@@ -1885,7 +2105,6 @@ function cargarDesdeURL(){
             "Error leyendo el enlace:",
             error
         );
-
 
         cargandoDatos = false;
 
@@ -1901,18 +2120,15 @@ function cargarDesdeURL(){
             )
             .value = "";
 
-
         document
             .getElementById(
                 "oroPorRC"
             )
             .value = "";
 
-
         agregarArticulo(
             true
         );
-
 
         calcular();
 
@@ -1934,7 +2150,6 @@ function actualizarCajaEnlace(){
             "enlaceCompartible"
         );
 
-
     if(caja){
 
         caja.value =
@@ -1954,27 +2169,18 @@ async function copiarEnlace(){
     const enlace =
         window.location.href;
 
-
     try{
 
         await navigator.clipboard.writeText(
             enlace
         );
 
-
     }catch(error){
-
-        /*
-            Método alternativo
-            para navegadores donde
-            clipboard no esté disponible.
-        */
 
         const input =
             document.getElementById(
                 "enlaceCompartible"
             );
-
 
         input.focus();
 
@@ -1986,21 +2192,17 @@ async function copiarEnlace(){
 
     }
 
-
     const estado =
         document.getElementById(
             "estadoLink"
         );
 
-
     estado.textContent =
         "✓ Enlace copiado";
-
 
     clearTimeout(
         copiarEnlace.timer
     );
-
 
     copiarEnlace.timer =
         setTimeout(
@@ -2024,10 +2226,8 @@ function escapeHTML(text){
             "div"
         );
 
-
     div.textContent =
         text;
-
 
     return div.innerHTML;
 
@@ -2049,3 +2249,4 @@ document.addEventListener(
 
 </body>
 </html>
+```
